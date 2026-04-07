@@ -39,7 +39,7 @@
   --purple-50: #F5F0FF; --purple-500: #956BFF; --purple-600: #8355FF;
 
   /* Indigo */
-  --indigo-50: #ECEFFE; --indigo-500: #4B68FF; --indigo-700: #2C46F0;
+  --indigo-50: #ECEFFE; --indigo-500: #4B68FF; --indigo-600: #3554F8; --indigo-700: #2C46F0;
 
   /* Magenta */
   --magenta-50: #FFF0F7; --magenta-500: #FF4397;
@@ -172,4 +172,20 @@
   --color-accent-magenta: var(--accent-magenta);
   --color-accent-cyan: var(--accent-cyan);
   --color-accent-lime: var(--accent-lime);
+  --color-accent-red-orange: var(--accent-red-orange);
+  --color-accent-blue: var(--blue-600);
+
+  /* Tag palette tokens (fill-light / fill-dark 전용) */
+  --color-indigo-600: var(--indigo-600);
+  --color-blue-600: var(--blue-600);
+  --color-red-500: var(--red-500);
+  --color-orange-500: var(--orange-500);
+  --color-green-500: var(--green-500);
+  --color-lightblue-500: var(--lightblue-500);
+  --color-purple-500: var(--purple-500);
+  --color-magenta-500: var(--magenta-500);
+  --color-cyan-500: var(--cyan-500);
+  --color-lime-500: var(--lime-500);
+  --color-redorange-500: var(--redorange-500);
+  --color-gray-500: var(--gray-500);
 }

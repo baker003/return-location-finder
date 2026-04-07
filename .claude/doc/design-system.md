@@ -10,6 +10,8 @@
 | LinkTextButton | `@/components/Button` | 인라인 링크 텍스트 버튼 | size, href, disabled |
 | Chip | `@/components/Chip` | 개별 칩 아이템 (필터, 태그, 선택) | type, size, selected, disabled, label, fontStyle, count, leadingIcon, trailingIcon, showNewBadge |
 | ChipGroup | `@/components/Chip` | 칩 그룹 레이아웃 컨테이너 (Carousel/Multiline) | layout, gap |
+| Tag | `@/components/Tag` | 읽기 전용 라벨 (상태 표시, 카테고리, 속성 강조) | type, size, bold, color, label, leadingIcon, showLeadingIcon |
+| TagGroup | `@/components/Tag` | Tag 그룹 컨테이너 (Divider 포함) | type, showDivider, dividerStyle, gap |
 
 > 새 위젯을 만들기 전에 이 표를 먼저 확인하세요.
 > 새로 만든 재사용 위젯은 반드시 여기에 등록하세요.
