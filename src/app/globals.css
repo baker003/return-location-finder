@@ -155,6 +155,9 @@
   /* Gray (direct palette) */
   --color-gray-100: var(--gray-100);
   --color-gray-200: var(--gray-200);
+  --color-gray-300: var(--gray-300);
+  --color-gray-900: var(--gray-900);
+  --color-gray-1000: var(--gray-1000);
 
   /* Notification */
   --color-notification-red: var(--notification-red);
@@ -188,4 +191,13 @@
   --color-lime-500: var(--lime-500);
   --color-redorange-500: var(--redorange-500);
   --color-gray-500: var(--gray-500);
+
+  /* Animations */
+  --animate-progress-indeterminate: progress-indeterminate 1.5s ease-in-out infinite;
+}
+
+/* ProgressBar indeterminate animation */
+@keyframes progress-indeterminate {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(350%); }
 }

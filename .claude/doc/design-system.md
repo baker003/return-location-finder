@@ -12,6 +12,11 @@
 | ChipGroup | `@/components/Chip` | 칩 그룹 레이아웃 컨테이너 (Carousel/Multiline) | layout, gap |
 | Tag | `@/components/Tag` | 읽기 전용 라벨 (상태 표시, 카테고리, 속성 강조) | type, size, bold, color, label, leadingIcon, showLeadingIcon |
 | TagGroup | `@/components/Tag` | Tag 그룹 컨테이너 (Divider 포함) | type, showDivider, dividerStyle, gap |
+| TopAppbar | `@/components/TopAppbar` | 상단 앱바 컨테이너 (네비게이션 + 타이틀 + 액션) | theme, loading, progress, leading, instant, trailing, sticky |
+| LeadingButton | `@/components/TopAppbar` | 좌측 네비게이션 버튼 (뒤로가기, 닫기, 홈) | variant, onClick, aria-label |
+| TrailingButton | `@/components/TopAppbar` | 우측 액션 영역 (아이콘 버튼 그룹 / 텍스트 버튼) | variant, buttons, label, onClick |
+| TopAppbarInstant | `@/components/TopAppbar` | 중앙 콘텐츠 슬롯 (Heading, Label, TextButton, Input, Image) | variant, title, label, placeholder, src |
+| ProgressBar | `@/components/TopAppbar` | 프로그래스 바 (determinate / indeterminate) | progress |
 
 > 새 위젯을 만들기 전에 이 표를 먼저 확인하세요.
 > 새로 만든 재사용 위젯은 반드시 여기에 등록하세요.
