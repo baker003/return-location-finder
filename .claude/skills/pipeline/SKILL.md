@@ -46,12 +46,27 @@ Agent 도구로 `frontend-dev` 에이전트를 호출하세요.
 ### [6] Reviewer
 Agent 도구로 `reviewer` 에이전트를 호출하세요.
 - Frontend-dev가 구현한 코드를 리뷰합니다
-- **APPROVED** → 파이프라인 완료
+- **APPROVED** → [7]로 진행
 - **CHANGES_REQUESTED** → frontend-dev에게 수정 요청 후 재리뷰 (최대 3라운드)
-- 완료 후 보고: `"[6/6] Reviewer 완료 -- {리뷰 결과}"`
+- 완료 후 보고: `"[6/8] Reviewer 완료 -- {리뷰 결과}"`
+
+### [7] Figma 반영
+Agent 도구로 `figma-sync` 에이전트를 호출하세요.
+- 코드를 분석하여 Figma 반영 계획을 작성합니다
+- figma-sync가 반환한 계획과 코드를 바탕으로 Figma MCP를 실행합니다
+- **기존 컴포넌트**: 해당 페이지의 기존 Component Set에 variant 추가
+- **새로운 컴포넌트**: 새 페이지 생성 → Component Set 생성 (수동 좌표, 패딩 24, gap 24)
+- 컬러 Variable + Text Style 바인딩
+- 완료 후 보고: `"[7/8] Figma 반영 완료 -- {반영 내용}"`
+
+### [8] Figma 승인 게이트
+Figma 반영 결과를 사용자에게 보여주고 승인을 요청하세요.
+- **승인** → 파이프라인 완료
+- **수정 요청** → Figma 수정 후 재승인
 
 ## 완료 보고
 모든 단계 완료 후 사용자에게 최종 요약:
 - 구현된 컴포넌트/기능 요약
 - 생성/변경된 파일 목록
+- Figma 반영 내용
 - `npm run dev`로 확인 가능함을 안내
