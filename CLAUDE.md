@@ -1,7 +1,7 @@
-# SOCAR FRAME_2
+# DS_2
 
 ## Project Overview
-SOCAR FRAME 2.0 디자인 시스템을 Next.js + Tailwind CSS 기반 웹 컴포넌트로 구현한 디자인 시스템 라이브러리.
+DS_2 디자인 시스템을 Next.js + Tailwind CSS 기반 웹 컴포넌트로 구현한 디자인 시스템 라이브러리.
 디자인 시스템이 필요한 누구나 사용할 수 있다.
 
 ## Default Workflow
@@ -12,7 +12,7 @@ PM -> (승인) -> Designer -> (승인) -> Frontend -> Reviewer
 - Framework: Next.js (App Router)
 - Styling: Tailwind CSS (v4)
 - Language: TypeScript
-- Design System: SOCAR FRAME 2.0 기반
+- Design System: DS_2 기반
 - Font: Inter (Pretendard Variable fallback)
 
 ## Architecture
@@ -39,7 +39,7 @@ PM -> (승인) -> Designer -> (승인) -> Frontend -> Reviewer
 - Server Component에서 데이터 fetching, Client Component는 인터랙션만
 
 ### Tailwind CSS (v4)
-- SOCAR FRAME 2.0 시맨틱 토큰만 사용
+- DS_2 시맨틱 토큰만 사용
 - 색상 하드코딩 금지 (bg-[#xxx] 등 금지)
 - tailwind.config.ts 생성 금지 -- Tailwind v4는 globals.css의 @theme inline으로 설정
 
@@ -65,7 +65,7 @@ PM -> (승인) -> Designer -> (승인) -> Frontend -> Reviewer
 - Figma MCP 호출을 최소화하여 rate limit을 절약한다
 
 ## Figma Reference
-- SOCAR FRAME 2.0: https://www.figma.com/design/9BojhdnvhQSi1wpWpLwPnH/SOCAR-FRAME-2.0-V.0.0.21~/
+- DS_2: https://www.figma.com/design/9BojhdnvhQSi1wpWpLwPnH/SOCAR-FRAME-2.0-V.0.0.21~/
 - 디자인 시스템 프리뷰: https://www.figma.com/design/NBWB7adDg8Bz38tcZLpHok/
 
 ## Font Policy

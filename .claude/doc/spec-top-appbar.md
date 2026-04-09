@@ -1,8 +1,8 @@
-# Top Appbar Component Spec -- SOCAR FRAME 2.0
+# Top Appbar Component Spec -- DS_2
 
 ## Summary
 
-SOCAR FRAME 2.0 디자인 시스템의 Top Appbar 컴포넌트를 Next.js + Tailwind CSS 웹 컴포넌트로 구현한다. Top Appbar는 화면 최상단에 위치하여 네비게이션, 타이틀, 액션 버튼을 제공하는 핵심 내비게이션 컴포넌트다. 총 5개의 하위 컴포넌트로 구성된다:
+DS_2 디자인 시스템의 Top Appbar 컴포넌트를 Next.js + Tailwind CSS 웹 컴포넌트로 구현한다. Top Appbar는 화면 최상단에 위치하여 네비게이션, 타이틀, 액션 버튼을 제공하는 핵심 내비게이션 컴포넌트다. 총 5개의 하위 컴포넌트로 구성된다:
 
 1. **TopAppbar** -- 전체 컨테이너 (Leading + Instant + Trailing 영역 배치, 배경색/로딩 상태 관리)
 2. **LeadingButton** -- 좌측 네비게이션 버튼 (Back, Close, Home)
@@ -10,13 +10,13 @@ SOCAR FRAME 2.0 디자인 시스템의 Top Appbar 컴포넌트를 Next.js + Tail
 4. **TopAppbarInstant** -- 중앙 콘텐츠 슬롯 (Heading, Label, TextButton, Input, Image 5가지 variant)
 5. **ProgressBar** -- 하단 로딩 프로그래스 바
 
-모든 컴포넌트는 SOCAR 시맨틱 토큰 기반으로 색상을 적용하며, 다크/라이트 테마를 지원하고, 접근성(WCAG 2.1 AA)을 준수한다.
+모든 컴포넌트는 DS_2 시맨틱 토큰 기반으로 색상을 적용하며, 다크/라이트 테마를 지원하고, 접근성(WCAG 2.1 AA)을 준수한다.
 
 ---
 
 ## Figma Reference
 
-- **파일**: [SOCAR FRAME 2.0](https://www.figma.com/design/9BojhdnvhQSi1wpWpLwPnH/SOCAR-FRAME-2.0-V.0.0.21~/)
+- **파일**: [DS_2](https://www.figma.com/design/9BojhdnvhQSi1wpWpLwPnH/SOCAR-FRAME-2.0-V.0.0.21~/)
 - **Top Appbar 페이지**: Node ID `690:6564`
 - **Master 섹션**: Node ID `9625:8833` > `30038:57640`
 - **하위 컴포넌트 Node ID**:
@@ -319,7 +319,7 @@ interface ProgressBarProps {
 - [ ] Leading/Trailing 영역은 Optional이며, 미전달 시 영역이 차지하는 공간이 사라진다
 
 ### 스타일 요구사항
-- [ ] 모든 색상은 SOCAR 시맨틱 토큰 (CSS 변수 / Tailwind 유틸리티)으로 적용된다 -- 하드코딩 금지
+- [ ] 모든 색상은 DS_2 시맨틱 토큰 (CSS 변수 / Tailwind 유틸리티)으로 적용된다 -- 하드코딩 금지
 - [ ] Tailwind v4 방식 준수 (tailwind.config.ts 미사용, @theme inline 활용)
 - [ ] 다크모드 대응 가능한 구조 (theme prop + 시맨틱 토큰 기반)
 - [ ] 헤딩/레이블 텍스트는 Title/Title1 (Pretendard Variable, SemiBold 600, 18px/26px) 적용

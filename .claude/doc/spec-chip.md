@@ -1,21 +1,21 @@
-# Chip Component Spec -- SOCAR FRAME 2.0
+# Chip Component Spec -- DS_2
 
 ## Summary
 
-SOCAR FRAME 2.0 디자인 시스템의 Chip / Chip Group 컴포넌트를 Next.js + Tailwind CSS 웹 컴포넌트로 구현한다. 총 2개의 하위 컴포넌트로 구성된다:
+DS_2 디자인 시스템의 Chip / Chip Group 컴포넌트를 Next.js + Tailwind CSS 웹 컴포넌트로 구현한다. 총 2개의 하위 컴포넌트로 구성된다:
 
 1. **Chip** -- 선택/필터/입력 결과를 표현하는 개별 칩 아이템
 2. **ChipGroup** -- 여러 Chip을 Carousel(가로 스크롤) 또는 Multiline(줄바꿈) 레이아웃으로 배치하는 컨테이너
 
 Chip은 사용자의 선택 또는 입력 상태를 시각적으로 표현하는 UI 요소로, 주로 필터(filter), 선택 상태(selection), 입력 결과(input result) 등을 나타낸다. 공간을 적게 차지하면서도 의미 있는 정보를 전달한다.
 
-모든 컴포넌트는 SOCAR 시맨틱 토큰 기반으로 색상을 적용하며, 접근성(WCAG 2.1 AA)을 준수한다.
+모든 컴포넌트는 DS_2 시맨틱 토큰 기반으로 색상을 적용하며, 접근성(WCAG 2.1 AA)을 준수한다.
 
 ---
 
 ## Figma Reference
 
-- **파일**: [SOCAR FRAME 2.0](https://www.figma.com/design/9BojhdnvhQSi1wpWpLwPnH/SOCAR-FRAME-2.0-V.0.0.21~/)
+- **파일**: [DS_2](https://www.figma.com/design/9BojhdnvhQSi1wpWpLwPnH/SOCAR-FRAME-2.0-V.0.0.21~/)
 - **Chip/Chip Group 페이지**: Node ID `698:69186`
 - **하위 섹션**:
   - Master Component (Chip item): Section `34623:371614`
@@ -191,7 +191,7 @@ interface ChipGroupProps {
 - [ ] min-width: 56px 이 Chip에 적용된다
 
 ### 스타일 요구사항
-- [ ] 모든 색상은 SOCAR 시맨틱 토큰 (CSS 변수 / Tailwind 유틸리티)으로 적용된다 -- 하드코딩 금지
+- [ ] 모든 색상은 DS_2 시맨틱 토큰 (CSS 변수 / Tailwind 유틸리티)으로 적용된다 -- 하드코딩 금지
 - [ ] Tailwind v4 방식 준수 (tailwind.config.ts 미사용, @theme inline 활용)
 - [ ] 다크모드 대응 가능한 구조 (시맨틱 토큰 기반이므로 토큰 값만 변경하면 대응됨)
 - [ ] pill 형태 border-radius: 9999px 적용 (`rounded-full`)
@@ -311,7 +311,7 @@ interface ChipGroupProps {
 | **포커스 표시** | `focus-visible:ring-2 focus-visible:ring-primary-strong focus-visible:ring-offset-2` |
 | **선택 상태** | `aria-pressed="true/false"` 로 선택 여부 전달 |
 | **비활성 상태** | `disabled` 속성 + `aria-disabled="true"` 동시 적용 |
-| **색상 대비** | SOCAR 시맨틱 토큰은 WCAG AA 대비율 충족 (blue-600 on white = 4.75:1, gray-800 on white = 9.73:1) |
+| **색상 대비** | DS_2 시맨틱 토큰은 WCAG AA 대비율 충족 (blue-600 on white = 4.75:1, gray-800 on white = 9.73:1) |
 | **터치 타겟** | 최소 크기 32px (xs) -- WCAG 2.5.8 권장 24px 이상 충족 |
 | **Carousel 탐색** | ChipGroup carousel 모드에서 `role="tablist"` + 방향키 탐색 지원, 또는 자연스러운 Tab 순서 유지 |
 | **스크린리더** | selected 상태의 count 값은 `aria-label`에 포함 (예: "Chip 3개 선택됨") |

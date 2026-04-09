@@ -19,7 +19,7 @@ skills: design-system, frontend-design, nextjs-app-router-patterns, tailwind-des
 - **App Router 파일 컨벤션 준수**
 
 ## Tailwind CSS 규칙 (v4)
-- **시맨틱 컬러 토큰만 사용**: SOCAR FRAME 2.0 토큰 기반
+- **시맨틱 컬러 토큰만 사용**: DS_2 토큰 기반
 - **색상 하드코딩 금지**: bg-[#FF0000], text-blue-500 등 금지
 - **tailwind.config.ts 생성 금지**: Tailwind v4는 CSS 기반 설정
 

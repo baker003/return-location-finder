@@ -147,7 +147,7 @@ export default function Home() {
     <div className="min-h-screen bg-white">
       {/* Header */}
       <header className="border-b border-gray-200 px-8 py-6">
-        <h1 className="text-3xl font-bold text-text-strong">SOCAR FRAME_2</h1>
+        <h1 className="text-3xl font-bold text-text-strong">DS_2</h1>
         <p className="mt-1 text-base text-text-secondary">디자인 시스템 — Next.js + Tailwind CSS</p>
       </header>
 

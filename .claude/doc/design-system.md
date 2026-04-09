@@ -1,4 +1,4 @@
-# SOCAR FRAME_2 Design System Reference
+# DS_2 Design System Reference
 
 ## 1. Core Widgets Inventory
 
@@ -25,7 +25,7 @@
 
 ### Palette
 
-SOCAR FRAME 2.0 Figma에서 추출한 팔레트:
+DS_2 Figma에서 추출한 팔레트:
 
 ```css
 :root {
@@ -163,7 +163,7 @@ Figma에서 추출한 Semantic 토큰:
   --notification-red: var(--red-500);
 
   /* Service */
-  --service-socar: var(--blue-500);
+  --service-primary: var(--blue-500);
   --service-business: var(--blue-900);
 
   /* Location */
@@ -192,7 +192,7 @@ Figma에서 추출한 Semantic 토큰:
 
 ### Apple HIG 시맨틱 토큰 (추가 레이어)
 
-Apple Human Interface Guidelines 컬러 시스템의 시맨틱 구조를 SOCAR FRAME_2에 매핑한 추가 토큰입니다.
+Apple Human Interface Guidelines 컬러 시스템의 시맨틱 구조를 DS_2에 매핑한 추가 토큰입니다.
 
 | CSS 변수 | Tailwind 클래스 | 값 | 용도 |
 |----------|-----------------|------|------|
@@ -207,7 +207,7 @@ Apple Human Interface Guidelines 컬러 시스템의 시맨틱 구조를 SOCAR F
 | --separator | `border-separator` | gray-200 (#E5E8EF) | 기본 구분선 |
 | --separator-opaque | `border-separator-opaque` | gray-300 (#CBD1DC) | 불투명 구분선 |
 
-> 기존 SOCAR Semantic 토큰은 그대로 유지됩니다. Apple HIG 토큰은 추가 레이어로만 존재합니다.
+> 기존 DS_2 Semantic 토큰은 그대로 유지됩니다. Apple HIG 토큰은 추가 레이어로만 존재합니다.
 
 ### 접근성 대비 기준 (WCAG AA)
 
@@ -241,7 +241,7 @@ Apple Human Interface Guidelines 컬러 시스템의 시맨틱 구조를 SOCAR F
 
 Pretendard Variable 폰트를 사용합니다. (사용 불가 시 대체 폰트 확인 후 진행)
 
-SOCAR FRAME 2.0 타이포그래피 시스템:
+DS_2 타이포그래피 시스템:
 
 | Token | Tailwind 클래스 | Size | Line Height | Letter Spacing |
 |-------|-----------------|------|-------------|----------------|
@@ -342,7 +342,7 @@ SOCAR FRAME 2.0 타이포그래피 시스템:
 ## 7. Figma 참조
 
 ### 디자인 시스템
-- SOCAR FRAME 2.0: https://www.figma.com/design/9BojhdnvhQSi1wpWpLwPnH/SOCAR-FRAME-2.0-V.0.0.21~/
+- DS_2: https://www.figma.com/design/9BojhdnvhQSi1wpWpLwPnH/SOCAR-FRAME-2.0-V.0.0.21~/
 
 ### 주요 페이지
 | 페이지 | Node ID | 내용 |

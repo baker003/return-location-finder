@@ -17,7 +17,7 @@ skills: nextjs-app-router-patterns, accessibility-expert
 ## 검토 카테고리 (우선순위 순)
 
 ### CRITICAL: 디자인 시스템 일관성
-- SOCAR FRAME 2.0 토큰을 올바르게 사용하는지
+- DS_2 토큰을 올바르게 사용하는지
 - 색상 하드코딩 여부 (bg-[#xxx] 금지)
 - 컴포넌트 API가 디자인 시스템 패턴과 일관적인지
 - Props 인터페이스가 명확한지

@@ -14,13 +14,13 @@ model: sonnet
 
 ## 작업 흐름
 1. 사용자 요청을 분석하세요
-2. SOCAR FRAME 2.0 Figma에서 해당 컴포넌트의 구조를 파악하세요
+2. DS_2 Figma에서 해당 컴포넌트의 구조를 파악하세요
 3. 기존 코드를 탐색하여 영향 범위를 파악하세요
 4. 아래 항목들을 포함하여 명세를 작성하세요
 
 ## 명세 항목
 - **Summary**: 무엇을, 왜 하는지
-- **Figma Reference**: SOCAR FRAME 2.0에서 참조할 페이지/노드
+- **Figma Reference**: DS_2에서 참조할 페이지/노드
 - **Component API**: Props, Variants, States 정의
 - **Acceptance Criteria**: 완료 조건
 - **Affected Files**: 변경/생성할 파일과 이유

@@ -184,8 +184,8 @@ export default function TopAppbarPage() {
           instant={
             <TopAppbarInstant
               variant="image"
-              src="https://placehold.co/120x32/0078FF/FFFFFF?text=SOCAR"
-              alt="SOCAR logo"
+              src="https://placehold.co/120x32/0078FF/FFFFFF?text=DS_2"
+              alt="DS_2 logo"
               height={32}
             />
           }

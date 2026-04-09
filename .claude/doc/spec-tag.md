@@ -1,21 +1,21 @@
-# Tag Component Spec -- SOCAR FRAME 2.0
+# Tag Component Spec -- DS_2
 
 ## Summary
 
-SOCAR FRAME 2.0 디자인 시스템의 Tag / Tag Group 컴포넌트를 Next.js + Tailwind CSS 웹 컴포넌트로 구현한다. 총 2개의 하위 컴포넌트로 구성된다:
+DS_2 디자인 시스템의 Tag / Tag Group 컴포넌트를 Next.js + Tailwind CSS 웹 컴포넌트로 구현한다. 총 2개의 하위 컴포넌트로 구성된다:
 
 1. **Tag** -- 읽기 전용 라벨로, 상품이나 콘텐츠의 특성을 강조하여 식별할 때 사용한다
 2. **TagGroup** -- 여러 Tag를 나열하고 선택적으로 Divider(구분자)를 포함하는 컨테이너
 
 Tag는 Chip과 달리 **읽기 전용(non-interactive)**이다. 사용자가 선택/해제할 수 없으며, 상태 표시, 카테고리 분류, 속성 강조 등 정보 전달 목적으로만 사용한다.
 
-모든 컴포넌트는 SOCAR 시맨틱 토큰 기반으로 색상을 적용하며, 접근성(WCAG 2.1 AA)을 준수한다.
+모든 컴포넌트는 DS_2 시맨틱 토큰 기반으로 색상을 적용하며, 접근성(WCAG 2.1 AA)을 준수한다.
 
 ---
 
 ## Figma Reference
 
-- **파일**: [SOCAR FRAME 2.0](https://www.figma.com/design/9BojhdnvhQSi1wpWpLwPnH/SOCAR-FRAME-2.0-V.0.0.21~/)
+- **파일**: [DS_2](https://www.figma.com/design/9BojhdnvhQSi1wpWpLwPnH/SOCAR-FRAME-2.0-V.0.0.21~/)
 - **Tag/Tag Group 페이지**: Node ID `698:69184`
 - **하위 섹션**:
   - Master Component: Section `38266:18285`
@@ -146,7 +146,7 @@ interface TagProps {
 > 참고:
 > - Fill-Light: 배경 하양 + 텍스트/아이콘 accent color (진한 텍스트)
 > - Fill-Dark: 배경 accent color + 텍스트/아이콘 흰색 (밝은 텍스트)
-> - Fill: 기존 SOCAR 패턴, gray-100 배경
+> - Fill: 기존 DS_2 패턴, gray-100 배경
 > - Outlined/Text: 텍스트는 `--text-primary`, 아이콘만 accent color
 
 **State** (읽기 전용 -- interactive state 없음):
@@ -219,7 +219,7 @@ interface TagGroupProps {
 - [ ] label은 single line으로만 렌더링되며, 줄바꿈/말줄임이 발생하지 않는다
 
 ### 스타일 요구사항
-- [ ] 모든 색상은 SOCAR 시맨틱 토큰 (CSS 변수 / Tailwind 유틸리티)으로 적용된다 -- 하드코딩 금지
+- [ ] 모든 색상은 DS_2 시맨틱 토큰 (CSS 변수 / Tailwind 유틸리티)으로 적용된다 -- 하드코딩 금지
 - [ ] Tailwind v4 방식 준수 (tailwind.config.ts 미사용, @theme inline 활용)
 - [ ] 다크모드 대응 가능한 구조 (시맨틱 토큰 기반이므로 토큰 값만 변경하면 대응됨)
 - [ ] Corner Radius 6px 적용 (`rounded-[6px]` 또는 커스텀 토큰)

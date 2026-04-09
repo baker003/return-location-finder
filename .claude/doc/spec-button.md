@@ -1,21 +1,21 @@
-# Button Component Spec -- SOCAR FRAME 2.0
+# Button Component Spec -- DS_2
 
 ## Summary
 
-SOCAR FRAME 2.0 디자인 시스템의 Button 컴포넌트 군을 Next.js + Tailwind CSS 웹 컴포넌트로 구현한다. 총 4개의 하위 컴포넌트로 구성된다:
+DS_2 디자인 시스템의 Button 컴포넌트 군을 Next.js + Tailwind CSS 웹 컴포넌트로 구현한다. 총 4개의 하위 컴포넌트로 구성된다:
 
 1. **ActionButton** -- 주요 액션 버튼 (Fill / Outline / Ghost 타입)
 2. **TextButton** -- 텍스트 전용 버튼
 3. **IconButton** -- 아이콘 전용 버튼
 4. **LinkTextButton** -- 링크 스타일 텍스트 버튼
 
-모든 버튼은 SOCAR 시맨틱 토큰 기반으로 색상을 적용하며, 접근성(WCAG 2.1 AA)을 준수한다.
+모든 버튼은 DS_2 시맨틱 토큰 기반으로 색상을 적용하며, 접근성(WCAG 2.1 AA)을 준수한다.
 
 ---
 
 ## Figma Reference
 
-- **파일**: [SOCAR FRAME 2.0](https://www.figma.com/design/9BojhdnvhQSi1wpWpLwPnH/SOCAR-FRAME-2.0-V.0.0.21~/)
+- **파일**: [DS_2](https://www.figma.com/design/9BojhdnvhQSi1wpWpLwPnH/SOCAR-FRAME-2.0-V.0.0.21~/)
 - **Button 페이지**: Node ID `698:35982`
 - **하위 섹션**:
   - (New) Button/Action
@@ -221,7 +221,7 @@ interface LinkTextButtonProps {
 - [ ] fullWidth prop 적용 시 버튼이 부모 너비 100%를 차지한다
 
 ### 스타일 요구사항
-- [ ] 모든 색상은 SOCAR 시맨틱 토큰 (CSS 변수 / Tailwind 유틸리티)으로 적용된다 -- 하드코딩 금지
+- [ ] 모든 색상은 DS_2 시맨틱 토큰 (CSS 변수 / Tailwind 유틸리티)으로 적용된다 -- 하드코딩 금지
 - [ ] Tailwind v4 방식 준수 (tailwind.config.ts 미사용, @theme inline 활용)
 - [ ] 다크모드 대응 가능한 구조 (시맨틱 토큰 기반이므로 토큰 값만 변경하면 대응됨)
 
@@ -340,7 +340,7 @@ interface LinkTextButtonProps {
 | **포커스 표시** | `focus-visible:ring-2 focus-visible:ring-primary-strong focus-visible:ring-offset-2` |
 | **비활성 상태** | `disabled` 속성 + `aria-disabled="true"` 동시 적용 |
 | **아이콘 버튼 라벨** | `aria-label` 필수 prop으로 강제 (TypeScript 레벨) |
-| **색상 대비** | SOCAR 시맨틱 토큰은 WCAG AA 대비율 충족 (blue-600 on white = 4.75:1) |
+| **색상 대비** | DS_2 시맨틱 토큰은 WCAG AA 대비율 충족 (blue-600 on white = 4.75:1) |
 | **터치 타겟** | 최소 크기 32px (xs) -- WCAG 2.5.8 권장 24px 이상 충족 |
 | **링크 버튼** | href 제공 시 `<a>` 태그 사용하여 네이티브 링크 시맨틱 유지 |
 

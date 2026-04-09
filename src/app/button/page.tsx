@@ -74,7 +74,7 @@ export default function ButtonPage() {
   return (
     <div className="min-h-screen bg-white p-8 max-w-6xl mx-auto">
       <h1 className="text-2xl font-bold text-text-strong mb-2">
-        SOCAR FRAME 2.0 -- Button 컴포넌트
+        DS_2 -- Button 컴포넌트
       </h1>
       <p className="text-text-secondary mb-10">
         Button 컴포넌트 패밀리의 모든 variant / 사이즈 / 상태 조합입니다.
@@ -223,7 +223,7 @@ export default function ButtonPage() {
         </SubSection>
 
         <SubSection title="앵커 태그 (<a>)">
-          <LinkTextButton href="https://socar.kr">SOCAR 방문</LinkTextButton>
+          <LinkTextButton href="https://socar.kr">사이트 방문</LinkTextButton>
         </SubSection>
 
         <SubSection title="비활성">

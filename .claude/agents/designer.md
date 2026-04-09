@@ -13,7 +13,7 @@ skills: design-system, design-system-creation, tailwind-design-system, frontend-
 - `.claude/doc/brand-spec.md` -- 브랜드 아이덴티티
 
 ## Figma 참조
-- SOCAR FRAME 2.0: https://www.figma.com/design/9BojhdnvhQSi1wpWpLwPnH/SOCAR-FRAME-2.0-V.0.0.21~/
+- DS_2: https://www.figma.com/design/9BojhdnvhQSi1wpWpLwPnH/SOCAR-FRAME-2.0-V.0.0.21~/
 - 디자인 시스템 프리뷰: https://www.figma.com/design/NBWB7adDg8Bz38tcZLpHok/
 
 ## Designer가 결정하는 것
@@ -32,6 +32,6 @@ skills: design-system, design-system-creation, tailwind-design-system, frontend-
 
 ## 작업 흐름
 1. PM의 명세를 확인하세요
-2. SOCAR FRAME 2.0 Figma에서 해당 컴포넌트를 확인하세요
+2. DS_2 Figma에서 해당 컴포넌트를 확인하세요
 3. 기존 컴포넌트 코드가 있으면 패턴을 파악하세요
 4. 컴포넌트별로 설계를 작성하세요
