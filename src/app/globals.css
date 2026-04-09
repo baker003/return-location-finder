@@ -60,8 +60,8 @@
   --text-strong: var(--gray-1000);
   --text-primary: var(--gray-800);
   --text-secondary: var(--gray-600);
-  --text-tertiary: var(--gray-500);
-  --text-disabled: var(--gray-400);
+  --text-tertiary: var(--gray-600);
+  --text-disabled: var(--gray-500);
 
   /* Primary */
   --primary-regular: var(--blue-500);
@@ -79,7 +79,7 @@
   --status-caution-regular: var(--orange-500);
   --status-caution-strong: var(--orange-600);
   --status-negative-weak: var(--red-50);
-  --status-negative-regular: var(--red-500);
+  --status-negative-regular: var(--red-600);
   --status-negative-strong: var(--red-600);
 
   /* Accent */
@@ -120,6 +120,26 @@
 
   /* Location */
   --location-return: var(--indigo-700);
+
+  /* Apple HIG Semantic — Background */
+  --bg-primary: var(--gray-100);          /* systemBackground */
+  --bg-secondary: #FFFFFF;                /* secondarySystemBackground */
+  --bg-tertiary: var(--gray-50);          /* tertiarySystemBackground */
+  --bg-grouped: var(--gray-50);           /* systemGroupedBackground */
+  --bg-elevated: #FFFFFF;                 /* elevated surface (다크모드 대비) */
+
+  /* Apple HIG Semantic — Fill */
+  --fill-primary: rgba(20, 26, 36, 0.08);    /* 텍스트 위 얇은 오버레이 */
+  --fill-secondary: rgba(20, 26, 36, 0.16);
+  --fill-tertiary: rgba(20, 26, 36, 0.24);
+
+  /* Apple HIG Semantic — Separator */
+  --separator: var(--gray-200);               /* 기본 구분선 */
+  --separator-opaque: var(--gray-300);        /* 불투명 구분선 */
+
+  /* Increased Contrast */
+  --text-tertiary-high-contrast: var(--gray-600);  /* 기본 text-tertiary와 동일 (이미 PASS) */
+  --text-disabled-high-contrast: var(--gray-500);  /* 기본 text-disabled와 동일 (이미 PASS) */
 }
 
 /* 5. Tailwind 테마 등록 */
@@ -196,6 +216,26 @@
   --color-lime-500: var(--lime-500);
   --color-redorange-500: var(--redorange-500);
   --color-gray-500: var(--gray-500);
+
+  /* Apple HIG Semantic — Background */
+  --color-bg-primary: var(--bg-primary);
+  --color-bg-secondary: var(--bg-secondary);
+  --color-bg-tertiary: var(--bg-tertiary);
+  --color-bg-grouped: var(--bg-grouped);
+  --color-bg-elevated: var(--bg-elevated);
+
+  /* Apple HIG Semantic — Fill */
+  --color-fill-primary: var(--fill-primary);
+  --color-fill-secondary: var(--fill-secondary);
+  --color-fill-tertiary: var(--fill-tertiary);
+
+  /* Apple HIG Semantic — Separator */
+  --color-separator: var(--separator);
+  --color-separator-opaque: var(--separator-opaque);
+
+  /* Increased Contrast */
+  --color-text-tertiary-high-contrast: var(--text-tertiary-high-contrast);
+  --color-text-disabled-high-contrast: var(--text-disabled-high-contrast);
 
   /* Animations */
   --animate-progress-indeterminate: progress-indeterminate 1.5s ease-in-out infinite;

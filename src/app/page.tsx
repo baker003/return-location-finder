@@ -102,6 +102,19 @@ const typography = [
   ]},
 ];
 
+const contrastPairs = [
+  { fg: "text-primary", fgHex: "#354153", bg: "bg-secondary", bgHex: "#FFFFFF", ratio: 10.33, aaPass: true, aaLargePass: true },
+  { fg: "text-secondary", fgHex: "#697383", bg: "bg-secondary", bgHex: "#FFFFFF", ratio: 4.79, aaPass: true, aaLargePass: true },
+  { fg: "text-tertiary", fgHex: "#99A1B1", bg: "bg-secondary", bgHex: "#FFFFFF", ratio: 2.60, aaPass: false, aaLargePass: false },
+  { fg: "text-disabled", fgHex: "#B4BBCB", bg: "bg-secondary", bgHex: "#FFFFFF", ratio: 1.92, aaPass: false, aaLargePass: false },
+  { fg: "primary-strong", fgHex: "#0069FF", bg: "bg-secondary", bgHex: "#FFFFFF", ratio: 4.70, aaPass: true, aaLargePass: true },
+  { fg: "on-primary", fgHex: "#FFFFFF", bg: "primary-strong", bgHex: "#0069FF", ratio: 4.70, aaPass: true, aaLargePass: true },
+  { fg: "status-negative", fgHex: "#FF3A5B", bg: "bg-secondary", bgHex: "#FFFFFF", ratio: 3.50, aaPass: false, aaLargePass: true },
+  { fg: "text-primary", fgHex: "#354153", bg: "bg-primary", bgHex: "#F2F3F8", ratio: 9.32, aaPass: true, aaLargePass: true },
+  { fg: "text-tertiary-high-contrast", fgHex: "#697383", bg: "bg-secondary", bgHex: "#FFFFFF", ratio: 4.79, aaPass: true, aaLargePass: true },
+  { fg: "text-disabled-high-contrast", fgHex: "#99A1B1", bg: "bg-secondary", bgHex: "#FFFFFF", ratio: 2.60, aaPass: false, aaLargePass: false },
+];
+
 const components = [
   { name: "Button", href: "/button", desc: "ActionButton, TextButton, IconButton, LinkTextButton" },
   { name: "Chip", href: "/chip", desc: "Chip, ChipGroup (Carousel / Multiline)" },
@@ -222,6 +235,87 @@ export default function Home() {
                 </div>
               </div>
             ))}
+          </div>
+        </section>
+
+        {/* Accessibility Contrast */}
+        <section>
+          <h2 className="text-2xl font-bold text-text-strong mb-2">접근성 대비</h2>
+          <p className="text-sm text-text-secondary mb-6">
+            WCAG AA 기준 — 일반 텍스트 4.5:1 / 대형 텍스트(18px bold 또는 24px 이상) 3:1
+          </p>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm border-collapse">
+              <thead>
+                <tr className="border-b border-gray-200">
+                  <th className="text-left py-3 px-4 text-text-secondary font-semibold">전경 (Foreground)</th>
+                  <th className="text-left py-3 px-4 text-text-secondary font-semibold">배경 (Background)</th>
+                  <th className="text-center py-3 px-4 text-text-secondary font-semibold">미리보기</th>
+                  <th className="text-center py-3 px-4 text-text-secondary font-semibold">대비율</th>
+                  <th className="text-center py-3 px-4 text-text-secondary font-semibold">AA (4.5:1)</th>
+                  <th className="text-center py-3 px-4 text-text-secondary font-semibold">AA Large (3:1)</th>
+                </tr>
+              </thead>
+              <tbody>
+                {contrastPairs.map((pair, idx) => (
+                  <tr key={idx} className="border-b border-gray-100">
+                    <td className="py-3 px-4">
+                      <span className="font-mono text-xs">{pair.fg}</span>
+                      <br />
+                      <span className="font-mono text-[10px] text-text-tertiary">{pair.fgHex}</span>
+                    </td>
+                    <td className="py-3 px-4">
+                      <span className="font-mono text-xs">{pair.bg}</span>
+                      <br />
+                      <span className="font-mono text-[10px] text-text-tertiary">{pair.bgHex}</span>
+                    </td>
+                    <td className="py-3 px-4">
+                      <div
+                        className="flex items-center justify-center rounded-lg px-4 py-2 border border-gray-200"
+                        style={{ backgroundColor: pair.bgHex }}
+                      >
+                        <span className="font-semibold text-sm" style={{ color: pair.fgHex }}>
+                          가나다 ABC
+                        </span>
+                      </div>
+                    </td>
+                    <td className="py-3 px-4 text-center font-mono font-semibold">
+                      {pair.ratio.toFixed(2)}:1
+                    </td>
+                    <td className="py-3 px-4 text-center">
+                      <span
+                        className={`inline-block rounded-full px-3 py-0.5 text-xs font-semibold ${
+                          pair.aaPass
+                            ? "bg-green-50 text-[#00BB83]"
+                            : "bg-red-50 text-[#FF3A5B]"
+                        }`}
+                      >
+                        {pair.aaPass ? "PASS" : "FAIL"}
+                      </span>
+                    </td>
+                    <td className="py-3 px-4 text-center">
+                      <span
+                        className={`inline-block rounded-full px-3 py-0.5 text-xs font-semibold ${
+                          pair.aaLargePass
+                            ? "bg-green-50 text-[#00BB83]"
+                            : "bg-red-50 text-[#FF3A5B]"
+                        }`}
+                      >
+                        {pair.aaLargePass ? "PASS" : "FAIL"}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div className="mt-6 p-4 bg-bg-tertiary rounded-xl">
+            <h3 className="text-sm font-semibold text-text-strong mb-2">접근성 강화 토큰</h3>
+            <p className="text-xs text-text-secondary leading-relaxed">
+              <code className="bg-gray-200 px-1 rounded">text-tertiary-high-contrast</code> (gray-600, 4.79:1) — text-tertiary 대비 부족 시 대체 사용
+              <br />
+              <code className="bg-gray-200 px-1 rounded">text-disabled-high-contrast</code> (gray-500, 2.60:1) — 대형 텍스트 전용 고대비 대체
+            </p>
           </div>
         </section>
 

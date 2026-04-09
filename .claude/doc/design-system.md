@@ -190,6 +190,45 @@ Figma에서 추출한 Semantic 토큰:
 | --status-positive-regular | 성공 (green-500) |
 | --dimmed-regular | 딤 배경 (black 44%) |
 
+### Apple HIG 시맨틱 토큰 (추가 레이어)
+
+Apple Human Interface Guidelines 컬러 시스템의 시맨틱 구조를 SOCAR FRAME_2에 매핑한 추가 토큰입니다.
+
+| CSS 변수 | Tailwind 클래스 | 값 | 용도 |
+|----------|-----------------|------|------|
+| --bg-primary | `bg-bg-primary` | gray-100 (#F2F3F8) | systemBackground — 기본 페이지 배경 |
+| --bg-secondary | `bg-bg-secondary` | #FFFFFF | secondarySystemBackground — 카드/시트 배경 |
+| --bg-tertiary | `bg-bg-tertiary` | gray-50 (#F9F9FB) | tertiarySystemBackground — 3차 배경 |
+| --bg-grouped | `bg-bg-grouped` | gray-50 (#F9F9FB) | systemGroupedBackground — 그룹형 테이블 배경 |
+| --bg-elevated | `bg-bg-elevated` | #FFFFFF | 다크모드 대비 elevated surface |
+| --fill-primary | `bg-fill-primary` | rgba(20,26,36,0.08) | 텍스트 위 얇은 오버레이 |
+| --fill-secondary | `bg-fill-secondary` | rgba(20,26,36,0.16) | 중간 오버레이 |
+| --fill-tertiary | `bg-fill-tertiary` | rgba(20,26,36,0.24) | 강한 오버레이 |
+| --separator | `border-separator` | gray-200 (#E5E8EF) | 기본 구분선 |
+| --separator-opaque | `border-separator-opaque` | gray-300 (#CBD1DC) | 불투명 구분선 |
+
+> 기존 SOCAR Semantic 토큰은 그대로 유지됩니다. Apple HIG 토큰은 추가 레이어로만 존재합니다.
+
+### 접근성 대비 기준 (WCAG AA)
+
+- **일반 텍스트** (14px 미만): 최소 4.5:1 대비
+- **대형 텍스트** (18px bold 또는 24px 이상): 최소 3:1 대비
+
+#### 대비 검증 결과
+
+| 전경 | 배경 | 대비율 | AA (4.5:1) | AA Large (3:1) |
+|------|------|--------|------------|----------------|
+| text-primary (#354153) | bg-secondary (#FFFFFF) | 10.33:1 | PASS | PASS |
+| text-secondary (#697383) | bg-secondary (#FFFFFF) | 4.79:1 | PASS | PASS |
+| text-tertiary (#697383) | bg-secondary (#FFFFFF) | 4.79:1 | PASS | PASS |
+| text-disabled (#99A1B1) | bg-secondary (#FFFFFF) | 2.60:1 | FAIL | FAIL |
+| primary-strong (#0069FF) | bg-secondary (#FFFFFF) | 4.70:1 | PASS | PASS |
+| on-primary (#FFFFFF) | primary-strong (#0069FF) | 4.70:1 | PASS | PASS |
+| status-negative (#F51441) | bg-secondary (#FFFFFF) | 4.63:1 | PASS | PASS |
+| text-primary (#354153) | bg-primary (#F2F3F8) | 9.32:1 | PASS | PASS |
+
+> **참고**: text-disabled(gray-500)은 WCAG AA 일반 텍스트 기준(4.5:1)에 미달하지만, 비활성 요소는 WCAG에서 대비 요구사항이 면제됩니다. (WCAG 1.4.3 예외: "비활성 UI 컴포넌트")
+
 ### Surface / On-Surface 토큰
 
 | Tailwind 클래스 | CSS 변수 | 값 | 용도 |
