@@ -1,10 +1,10 @@
-import { IconProps } from './types';
+import { IconProps, IconLayer } from './types';
+import IconBase from './IconBase';
 
-export default function User({ size = 24, color = 'currentColor', strokeWidth = 2, className }: IconProps) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
-      <circle cx="12" cy="8" r="4" stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M5 21C5 17.13 8.13 14 12 14C15.87 14 19 17.13 19 21" stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
+const lineLayers: IconLayer[] = [
+  { path: 'M372-523q-42-42-42-108t42-108q42-42 108-42t108 42q42 42 42 108t-42 108q-42 42-108 42t-108-42ZM160-220v-34q0-38 19-65t49-41q67-30 128.5-45T480-420q62 0 123 15.5T731-360q31 14 50 41t19 65v34q0 25-17.5 42.5T740-160H220q-25 0-42.5-17.5T160-220Zm60 0h520v-34q0-16-9.5-30.5T707-306q-64-31-117-42.5T480-360q-57 0-111 11.5T252-306q-14 7-23 21.5t-9 30.5v34Zm324.5-346.5Q570-592 570-631t-25.5-64.5Q519-721 480-721t-64.5 25.5Q390-670 390-631t25.5 64.5Q441-541 480-541t64.5-25.5ZM480-631Zm0 411Z', level: 'primary' },
+];
+
+export default function User(props: IconProps) {
+  return <IconBase {...props} lineLayers={lineLayers} variant="line" />;
 }

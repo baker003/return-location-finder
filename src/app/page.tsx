@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, type ComponentProps } from 'react';
 import Sidebar from '@/components/Sidebar';
 import {
   ActionButton,
@@ -53,6 +53,7 @@ import {
   HomeFill as IconHomeFill, BookmarkFill as IconBookmarkFill, HeartFill as IconHeartFill,
   StarFill as IconStarFill, FilterFill as IconFilterFill, EyeFill as IconEyeFill,
 } from '@/components/Icons';
+import type { RenderingMode, IconWeight, IconScale, IconAnimation } from '@/components/Icons';
 
 /* ────────────────────────────────────────
    Foundation Data
@@ -1386,6 +1387,220 @@ export default function Home() {
                   <span className="text-[10px] text-text-tertiary">{s}px</span>
                 </div>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ═══════════ SF Symbols 기능 ═══════════ */}
+        <section id="icons-sf-symbols" className="scroll-mt-6">
+          <h2 className="text-2xl font-bold text-text-strong mb-2">SF Symbols 기능</h2>
+          <p className="text-sm text-text-secondary mb-8">
+            렌더링 모드 4종 &middot; Weight 9단계 &middot; Scale 3단계 &middot; Variable Color &middot; 애니메이션 6종
+          </p>
+
+          {/* 1. Rendering Modes */}
+          <div className="mb-10">
+            <h3 className="text-sm font-semibold text-text-secondary mb-4">1. 렌더링 모드</h3>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
+              {/* Monochrome */}
+              <div className="flex flex-col items-center gap-3 p-4 rounded-xl bg-background border border-border">
+                <span className="typo-caption-1 font-semibold text-text-secondary">Monochrome</span>
+                <div className="flex gap-3">
+                  <IconNotification size={32} renderingMode="monochrome" color="#0069FF" />
+                  <IconError size={32} renderingMode="monochrome" color="#0069FF" />
+                  <IconHome size={32} renderingMode="monochrome" color="#0069FF" />
+                </div>
+                <span className="typo-caption-2 text-text-tertiary">단일 색상</span>
+              </div>
+              {/* Hierarchical */}
+              <div className="flex flex-col items-center gap-3 p-4 rounded-xl bg-background border border-border">
+                <span className="typo-caption-1 font-semibold text-text-secondary">Hierarchical</span>
+                <div className="flex gap-3">
+                  <IconNotification size={32} renderingMode="hierarchical" color="#0069FF" />
+                  <IconError size={32} renderingMode="hierarchical" color="#0069FF" />
+                  <IconHome size={32} renderingMode="hierarchical" color="#0069FF" />
+                </div>
+                <span className="typo-caption-2 text-text-tertiary">단일 색상 + 계층 투명도</span>
+              </div>
+              {/* Palette */}
+              <div className="flex flex-col items-center gap-3 p-4 rounded-xl bg-background border border-border">
+                <span className="typo-caption-1 font-semibold text-text-secondary">Palette</span>
+                <div className="flex gap-3">
+                  <IconNotification size={32} renderingMode="palette" paletteColors={['#0069FF', '#FF3A5B']} />
+                  <IconError size={32} renderingMode="palette" paletteColors={['#0069FF', '#FF3A5B']} />
+                  <IconHome size={32} renderingMode="palette" paletteColors={['#0069FF', '#FF3A5B']} />
+                </div>
+                <span className="typo-caption-2 text-text-tertiary">레이어별 사용자 색상</span>
+              </div>
+              {/* Multicolor */}
+              <div className="flex flex-col items-center gap-3 p-4 rounded-xl bg-background border border-border">
+                <span className="typo-caption-1 font-semibold text-text-secondary">Multicolor</span>
+                <div className="flex gap-3">
+                  <IconWarning size={32} renderingMode="multicolor" multicolorMap={{ primary: '#FF8800', secondary: '#FFFFFF' }} />
+                  <IconError size={32} renderingMode="multicolor" multicolorMap={{ primary: '#F51441', secondary: '#FFFFFF' }} />
+                  <IconSuccess size={32} renderingMode="multicolor" multicolorMap={{ primary: '#04CA81', secondary: '#FFFFFF' }} />
+                </div>
+                <span className="typo-caption-2 text-text-tertiary">고유 색상 매핑</span>
+              </div>
+            </div>
+
+            {/* Fill 렌더링 모드 */}
+            <h4 className="text-xs font-semibold text-text-tertiary mt-6 mb-3">Fill 변형 렌더링 모드</h4>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
+              <div className="flex flex-col items-center gap-3 p-4 rounded-xl bg-background border border-border">
+                <span className="typo-caption-1 font-semibold text-text-secondary">Monochrome</span>
+                <div className="flex gap-3">
+                  <IconErrorFill size={32} renderingMode="monochrome" color="#F51441" />
+                  <IconSuccessFill size={32} renderingMode="monochrome" color="#04CA81" />
+                  <IconWarningFill size={32} renderingMode="monochrome" color="#FF8800" />
+                </div>
+              </div>
+              <div className="flex flex-col items-center gap-3 p-4 rounded-xl bg-background border border-border">
+                <span className="typo-caption-1 font-semibold text-text-secondary">Hierarchical</span>
+                <div className="flex gap-3">
+                  <IconErrorFill size={32} renderingMode="hierarchical" color="#F51441" />
+                  <IconSuccessFill size={32} renderingMode="hierarchical" color="#04CA81" />
+                  <IconWarningFill size={32} renderingMode="hierarchical" color="#FF8800" />
+                </div>
+              </div>
+              <div className="flex flex-col items-center gap-3 p-4 rounded-xl bg-background border border-border">
+                <span className="typo-caption-1 font-semibold text-text-secondary">Palette</span>
+                <div className="flex gap-3">
+                  <IconErrorFill size={32} renderingMode="palette" paletteColors={['#F51441', '#FFFFFF']} />
+                  <IconSuccessFill size={32} renderingMode="palette" paletteColors={['#04CA81', '#FFFFFF']} />
+                  <IconWarningFill size={32} renderingMode="palette" paletteColors={['#FF8800', '#141A24']} />
+                </div>
+              </div>
+              <div className="flex flex-col items-center gap-3 p-4 rounded-xl bg-background border border-border">
+                <span className="typo-caption-1 font-semibold text-text-secondary">Multicolor</span>
+                <div className="flex gap-3">
+                  <IconErrorFill size={32} renderingMode="multicolor" multicolorMap={{ primary: '#F51441', secondary: '#FFFFFF' }} />
+                  <IconSuccessFill size={32} renderingMode="multicolor" multicolorMap={{ primary: '#04CA81', secondary: '#FFFFFF' }} />
+                  <IconWarningFill size={32} renderingMode="multicolor" multicolorMap={{ primary: '#FF8800', secondary: '#141A24' }} />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* 2. Weights */}
+          <div className="mb-10">
+            <h3 className="text-sm font-semibold text-text-secondary mb-4">2. Weight</h3>
+            <div className="flex flex-wrap gap-4">
+              {(['ultralight', 'thin', 'light', 'regular', 'medium', 'semibold', 'bold', 'heavy', 'black'] as IconWeight[]).map((w) => (
+                <div key={w} className="flex flex-col items-center gap-2">
+                  <div className="w-14 h-14 flex items-center justify-center rounded-lg bg-background border border-border">
+                    <IconHeart size={28} weight={w} />
+                  </div>
+                  <span className="text-[10px] text-text-tertiary capitalize">{w}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* 3. Scales */}
+          <div className="mb-10">
+            <h3 className="text-sm font-semibold text-text-secondary mb-4">3. Scale</h3>
+            <div className="flex items-end gap-8">
+              {(['small', 'medium', 'large'] as IconScale[]).map((s) => (
+                <div key={s} className="flex flex-col items-center gap-2">
+                  <div className="flex items-center justify-center rounded-lg bg-background border border-border p-3">
+                    <IconStar size={24} scale={s} />
+                  </div>
+                  <span className="text-[10px] text-text-tertiary capitalize">{s}</span>
+                </div>
+              ))}
+            </div>
+            <p className="typo-caption-2 text-text-tertiary mt-2">
+              Small: 1x &middot; Medium: 1.15x &middot; Large: 1.3x (텍스트 대비 자동 스케일)
+            </p>
+          </div>
+
+          {/* 4. Design Variants */}
+          <div className="mb-10">
+            <h3 className="text-sm font-semibold text-text-secondary mb-4">4. 디자인 변형 (Line ↔ Fill)</h3>
+            <div className="flex flex-wrap gap-6">
+              {([
+                ['Heart', IconHeart, IconHeartFill],
+                ['Star', IconStar, IconStarFill],
+                ['Home', IconHome, IconHomeFill],
+                ['Bookmark', IconBookmark, IconBookmarkFill],
+                ['Notification', IconNotification, IconNotificationFill],
+                ['Error', IconError, IconErrorFill],
+              ] as [string, React.FC<ComponentProps<typeof IconHeart>>, React.FC<ComponentProps<typeof IconHeartFill>>][]).map(([name, Line, Fill]) => (
+                <div key={name} className="flex flex-col items-center gap-2">
+                  <div className="flex gap-2">
+                    <div className="w-12 h-12 flex items-center justify-center rounded-lg bg-background border border-border">
+                      <Line size={24} />
+                    </div>
+                    <div className="w-12 h-12 flex items-center justify-center rounded-lg bg-background border border-border">
+                      <Fill size={24} />
+                    </div>
+                  </div>
+                  <span className="text-[10px] text-text-tertiary">{name}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* 5. Variable Color */}
+          <div className="mb-10">
+            <h3 className="text-sm font-semibold text-text-secondary mb-4">5. Variable Color</h3>
+            <p className="typo-caption-2 text-text-tertiary mb-3">값(0~100)에 따라 레이어별 활성화 임계치 적용</p>
+            <div className="flex flex-wrap gap-4">
+              {[0, 25, 50, 75, 100].map((v) => (
+                <div key={v} className="flex flex-col items-center gap-2">
+                  <div className="w-14 h-14 flex items-center justify-center rounded-lg bg-background border border-border">
+                    <IconNotification
+                      size={28}
+                      color="#0069FF"
+                      variableColor={{ value: v, layers: ['secondary', 'primary'] }}
+                    />
+                  </div>
+                  <span className="text-[10px] text-text-tertiary">{v}%</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* 6. Animations */}
+          <div className="mb-10">
+            <h3 className="text-sm font-semibold text-text-secondary mb-4">6. 애니메이션</h3>
+            <div className="flex flex-wrap gap-6">
+              {(['none', 'bounce', 'scale', 'pulse', 'rotate', 'wiggle', 'breathe'] as IconAnimation[]).map((a) => (
+                <div key={a} className="flex flex-col items-center gap-2">
+                  <div className="w-14 h-14 flex items-center justify-center rounded-lg bg-background border border-border">
+                    <IconNotification size={28} animation={a} color="#0069FF" />
+                  </div>
+                  <span className="text-[10px] text-text-tertiary capitalize">{a}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* 7. 조합 예시 */}
+          <div>
+            <h3 className="text-sm font-semibold text-text-secondary mb-4">7. 조합 예시</h3>
+            <div className="flex flex-wrap gap-6">
+              <div className="flex flex-col items-center gap-2 p-4 rounded-xl bg-background border border-border">
+                <IconErrorFill size={32} renderingMode="palette" paletteColors={['#F51441', '#FFFFFF']} weight="bold" scale="large" />
+                <span className="text-[10px] text-text-tertiary text-center">Palette + Bold<br/>+ Large</span>
+              </div>
+              <div className="flex flex-col items-center gap-2 p-4 rounded-xl bg-background border border-border">
+                <IconNotification size={32} renderingMode="hierarchical" color="#0069FF" weight="semibold" animation="wiggle" />
+                <span className="text-[10px] text-text-tertiary text-center">Hierarchical<br/>+ Wiggle</span>
+              </div>
+              <div className="flex flex-col items-center gap-2 p-4 rounded-xl bg-background border border-border">
+                <IconHeartFill size={32} renderingMode="monochrome" color="#F51441" animation="pulse" scale="large" />
+                <span className="text-[10px] text-text-tertiary text-center">Monochrome + Pulse<br/>+ Large</span>
+              </div>
+              <div className="flex flex-col items-center gap-2 p-4 rounded-xl bg-background border border-border">
+                <IconHome size={32} renderingMode="palette" paletteColors={['#0069FF', '#FF8800']} weight="light" />
+                <span className="text-[10px] text-text-tertiary text-center">Palette + Light<br/>Weight</span>
+              </div>
+              <div className="flex flex-col items-center gap-2 p-4 rounded-xl bg-background border border-border">
+                <IconSuccessFill size={32} renderingMode="multicolor" multicolorMap={{ primary: '#04CA81', secondary: '#FFFFFF' }} animation="bounce" />
+                <span className="text-[10px] text-text-tertiary text-center">Multicolor<br/>+ Bounce</span>
+              </div>
             </div>
           </div>
         </section>

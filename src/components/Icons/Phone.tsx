@@ -1,9 +1,10 @@
-import { IconProps } from './types';
+import { IconProps, IconLayer } from './types';
+import IconBase from './IconBase';
 
-export default function Phone({ size = 24, color = 'currentColor', strokeWidth = 2, className }: IconProps) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
-      <path d="M5 4H9L11 9L8.5 10.5C9.57 12.57 11.43 14.43 13.5 15.5L15 13L20 15V19C20 20.1 19.1 21 18 21C9.72 21 3 14.28 3 6C3 4.9 3.9 4 5 4Z" stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
+const lineLayers: IconLayer[] = [
+  { path: 'M795-120q-116 0-236.5-56T335-335Q232-438 176-558.5T120-795q0-19.29 12.86-32.14Q145.71-840 165-840h140q14 0 24 10t14 25l26.93 125.64Q372-665 369.5-653.5t-10.73 19.73L259-533q26 44 55 82t64 72q37 38 78 69.5t86 55.5l95-98q10-11 23.15-15 13.15-4 25.85-2l119 26q15 4 25 16.04 10 12.05 10 26.96v135q0 19.29-12.86 32.14Q814.29-120 795-120ZM229-588l81-82-23-110H180q2 42 13.5 88.5T229-588Zm369 363q41 19 89 31t93 14v-107l-103-21-79 83ZM229-588Zm369 363Z', level: 'primary' },
+];
+
+export default function Phone(props: IconProps) {
+  return <IconBase {...props} lineLayers={lineLayers} variant="line" />;
 }

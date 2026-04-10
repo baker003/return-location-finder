@@ -33,6 +33,11 @@ PM -> (승인) -> Designer -> (승인) -> Frontend -> Reviewer -> Figma 반영
 - 색상 하드코딩 금지 -- 시맨틱 토큰만 사용
 - tailwind.config.ts 생성 금지 -- Tailwind v4는 globals.css의 @theme inline으로 설정
 
+## 에이전트 사용 규칙
+- 아이콘 그리기/수정 → 반드시 `icon-designer` 에이전트 사용 (`.claude/agents/icon-designer.md`)
+- Figma 반영 → 반드시 `figma-sync` 에이전트 사용 (`.claude/agents/figma-sync.md`)
+- general-purpose 에이전트로 아이콘을 직접 그리거나 Figma MCP를 직접 호출하지 않는다
+
 ## 참조
 - 디자인 토큰 규칙: `.claude/shared/design-tokens.md`
 - 디자인 시스템 상세: `.claude/doc/design-system.md`

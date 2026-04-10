@@ -1,12 +1,10 @@
-import { IconProps } from './types';
+import { IconProps, IconLayer } from './types';
+import IconBase from './IconBase';
 
-export default function Refresh({ size = 24, color = 'currentColor', strokeWidth = 2, className }: IconProps) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
-      <path d="M4 12C4 7.58 7.58 4 12 4C15.15 4 17.84 5.95 19 8.71" stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M20 12C20 16.42 16.42 20 12 20C8.85 20 6.16 18.05 5 15.29" stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M15 4H20V9" stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M9 20H4V15" stroke={color} strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
+const lineLayers: IconLayer[] = [
+  { path: 'M480-160q-133 0-226.5-93.5T160-480q0-133 93.5-226.5T480-800q85 0 149 34.5T740-671v-99q0-13 8.5-21.5T770-800q13 0 21.5 8.5T800-770v194q0 13-8.5 21.5T770-546H576q-13 0-21.5-8.5T546-576q0-13 8.5-21.5T576-606h138q-38-60-97-97t-137-37q-109 0-184.5 75.5T220-480q0 109 75.5 184.5T480-220q75 0 140-39.5T717-366q5-11 16.5-16.5t22.5-.5q12 5 16 16.5t-1 23.5q-39 84-117.5 133.5T480-160Z', level: 'primary' },
+];
+
+export default function Refresh(props: IconProps) {
+  return <IconBase {...props} lineLayers={lineLayers} variant="line" />;
 }

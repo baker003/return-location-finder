@@ -1,9 +1,10 @@
-import { IconProps } from './types';
+import { IconProps, IconLayer } from './types';
+import IconBase from './IconBase';
 
-export default function HeartFill({ size = 24, color = 'currentColor', className }: IconProps) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
-      <path d="M12 21C12 21 4 15 4 9.5C4 6.46 6.46 4 9.5 4C10.96 4 12 5 12 5C12 5 13.04 4 14.5 4C17.54 4 20 6.46 20 9.5C20 15 12 21 12 21Z" fill={color} />
-    </svg>
-  );
+const fillLayers: IconLayer[] = [
+  { path: 'M458-144q-11-4-19-12l-53-49Q262-320 171-424.5T80-643q0-90 60.5-150.5T290-854q51 0 101 24.5t89 80.5q44-56 91-80.5t99-24.5q89 0 149.5 60.5T880-643q0 114-91 218.5T574-205l-53 49q-8 8-19 12t-22 4q-11 0-22-4Z', level: 'primary' },
+];
+
+export default function HeartFill(props: IconProps) {
+  return <IconBase {...props} fillLayers={fillLayers} variant="fill" />;
 }

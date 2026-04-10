@@ -1,4 +1,4 @@
-export type { IconProps } from './types';
+export type { IconProps, RenderingMode, IconWeight, IconScale, IconAnimation } from './types';
 
 // Navigation - Line
 export { default as ArrowLeft } from './ArrowLeft';

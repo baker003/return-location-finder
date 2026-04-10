@@ -6,127 +6,94 @@ model: sonnet
 maxTurns: 50
 ---
 
-# 아이콘 제작 에이전트 가이드
+# 아이콘 제작 에이전트
+
+Google Material Symbols Rounded 스타일을 기반으로 SVG 아이콘을 제작하는 에이전트.
+
+## 아이콘 선택 원칙
+
+새 아이콘을 추가할 때 Material Symbols에서 어떤 아이콘을 선택할지 판단하는 기준:
+
+| 원칙 | 설명 |
+|------|------|
+| **은유** | 실제 사물로 표현 (알림=종, 삭제=쓰레기통, 설정=톱니바퀴) |
+| **단순함** | 불필요한 디테일 없이 빠르게 읽히는 아이콘 선택 |
+| **일관성** | 기존 아이콘 세트와 시각적 무게·스타일이 통일되는 아이콘 선택 |
+| **계보** | 기존 아이콘을 교체할 때 핵심 은유를 유지하는 아이콘 선택 |
+
+## 아이콘 소스
+
+- **레퍼런스**: Google Material Symbols Rounded (https://fonts.google.com/icons?icon.style=Rounded)
+- **SVG 소스 패키지**: `node_modules/@material-symbols/svg-400/rounded/`
+- **좌표계**: `viewBox="0 -960 960 960"` (Material Symbols 원본 좌표 그대로 사용)
+- **렌더링**: Line/Fill 모두 fill 기반 path (stroke 아님)
+
+## 새 아이콘 추가 방법
+
+### Step 1. Material Symbols에서 아이콘 찾기
+1. https://fonts.google.com/icons?icon.style=Rounded 에서 아이콘 검색
+2. `node_modules/@material-symbols/svg-400/rounded/` 에서 해당 SVG 파일 찾기
+   - Line: `{아이콘명}.svg`
+   - Fill: `{아이콘명}-fill.svg`
+3. SVG 파일에서 `d="..."` path 데이터를 추출
+
+### Step 2. 파일 생성
+path 데이터를 **변환 없이 그대로** 사용하여 컴포넌트 생성:
+
+**Line 파일 (`{IconName}.tsx`):**
+```tsx
+import { IconProps, IconLayer } from './types';
+import IconBase from './IconBase';
+
+const lineLayers: IconLayer[] = [
+  { path: 'Material SVG의 d 속성 값 그대로', level: 'primary' },
+];
+
+export default function IconName(props: IconProps) {
+  return <IconBase {...props} lineLayers={lineLayers} variant="line" />;
+}
+```
+
+**Fill 파일 (`{IconName}Fill.tsx`):**
+```tsx
+import { IconProps, IconLayer } from './types';
+import IconBase from './IconBase';
+
+const fillLayers: IconLayer[] = [
+  { path: 'Material SVG -fill의 d 속성 값 그대로', level: 'primary' },
+];
+
+export default function IconNameFill(props: IconProps) {
+  return <IconBase {...props} fillLayers={fillLayers} variant="fill" />;
+}
+```
+
+### Step 3. barrel export 등록
+`src/components/Icons/index.ts`에 추가:
+```tsx
+export { default as IconName } from './IconName';
+export { default as IconNameFill } from './IconNameFill';
+```
+
+### Step 4. 검증
+- [ ] Material SVG 원본 path를 **변환 없이** 그대로 사용했는가
+- [ ] Line과 Fill 모두 생성했는가
+- [ ] index.ts에 export 추가했는가
+- [ ] `npm run build` 통과하는가
+- [ ] 브라우저에서 레퍼런스와 동일하게 보이는가
+
+## 금지 사항
+
+- **좌표 변환 금지**: 960 좌표계 path를 24 좌표계로 변환하지 않음. 원본 그대로 사용
+- **path 수정 금지**: 라운딩, 단순화, 최적화 등으로 원본 path를 변경하지 않음
+- **직접 path 작성 금지**: 에이전트가 임의로 path를 그리지 않음. 반드시 Material Symbols SVG에서 추출
+- **stroke 렌더링 금지**: Material Symbols는 Line도 fill 기반 path
 
 ## 결과 저장
-- SVG 아이콘 컴포넌트를 `src/components/Icons/{IconName}.tsx`에 저장
-- 타입 정의: `src/components/Icons/types.ts`
+- 컴포넌트: `src/components/Icons/{IconName}.tsx`
+- 타입: `src/components/Icons/types.ts`
 - barrel export: `src/components/Icons/index.ts`
+- IconBase viewBox: `"0 -960 960 960"`
 
-## 1. 캔버스 & 그리드
-
-- 기본 캔버스 사이즈: **24×24px** (표준), 필요 시 16px / 32px
-- 캔버스 사이즈는 반드시 **8의 배수**로 설정
-- 모든 패스와 좌표는 **픽셀 그리드에 정렬** (소수점 좌표 금지)
-- **라이브 에어리어(Live Area)**: 캔버스 전체가 아닌, 패딩을 제외한 내부 영역에 아이콘 배치
-  - 24px 캔버스 기준: 2px 패딩 → 라이브 에어리어 20×20px
-  - 16px 캔버스 기준: 1px 패딩 → 라이브 에어리어 14×14px
-
----
-
-## 2. 스트로크(선) 규칙
-
-- 스트로크 굵기는 아이콘 세트 전체에서 **동일하게 유지**
-- 캔버스별 권장 스트로크 굵기:
-  - 16px 캔버스: **1px ~ 1.5px**
-  - 24px 캔버스: **1.5px ~ 2px** (기본값 **2px** 권장)
-  - 32px 캔버스: **2px ~ 2.5px**
-- 스트로크 정렬은 **Center(가운데)** 기준으로 설정
-- 스트로크 간격은 스트로크 굵기 이상으로 유지 (예: 2px 스트로크면 간격 최소 2px)
-- 스트로크 캡(끝 처리): **Round** 또는 **Butt** 중 하나로 통일, 혼용 금지
-- 스트로크 조인(꺾임 처리): **Round** 권장
-
----
-
-## 3. 코너 반경(Corner Radius)
-
-- 아이콘 세트 전체에서 **동일한 코너 반경** 사용
-- 캔버스별 기준:
-  - 16px 캔버스: **1px ~ 2px**
-  - 24px 캔버스: **2px ~ 4px** (기본값 **2px** 권장)
-- 내부 작은 요소(화살표, 점 등)의 코너 반경은 **0.25px**
-- 브랜드 톤이 부드러운 경우 → 더 큰 반경, 포멀한 경우 → 더 작은 반경
-- 동일한 아이콘 세트 안에서 반경 값을 섞지 않는다
-
----
-
-## 4. 스타일 일관성
-
-- **Outlined(선형)** 또는 **Filled(채움)** 중 하나로 통일
-  - Outlined: 라이트하고 미니멀한 인터페이스에 적합
-  - Filled: 작은 크기에서 가독성이 높고 선택 상태 표현에 적합
-- 같은 세트 안에서 Outlined와 Filled 혼용 금지
-  - 단, 선택(Selected) 상태를 Filled로 표현하는 경우는 허용
-- 모든 아이콘은 **단색(흑백)** 으로 제작, 색상은 사용처에서 적용
-- 색상을 하드코딩하지 않고 `currentColor` 사용
-
----
-
-## 5. 시각적 정렬 (Optical Alignment)
-
-- 아이콘은 **수학적 가운데**가 아닌 **시각적 무게 중심**을 기준으로 정렬
-- 원형/곡선 오브젝트는 시각적으로 더 작아 보이므로, 사각형 대비 약간 크게 제작
-- 좌우로 긴 아이콘(화살표, 펜슬 등)은 경계선까지 닿도록 배치
-- 정사각형에 가까운 아이콘은 적절한 패딩 유지
-- **흐림 테스트**: 아이콘을 흐리게 했을 때 비슷한 크기와 밀도의 덩어리로 보이면 시각 무게가 균형 잡힌 것
-
----
-
-## 6. 텍스트와 함께 사용할 때 (아이콘-텍스트 페어링)
-
-- 아이콘 사이즈는 **텍스트 font-size가 아닌 line-height 기준**으로 선택
-- 아이콘과 텍스트 굵기(weight) 일치 권장
-- 정렬은 **align-items: center** (베이스라인 정렬 금지)
-- 텍스트 line-height별 권장 아이콘 사이즈:
-
-  | 텍스트 Line Height | 아이콘 사이즈 |
-  |---|---|
-  | ~20px 이하 | 16px |
-  | 20px ~ 26px | 20px |
-  | 26px ~ 32px | 24px |
-  | 32px 이상 | 32px |
-
-- 아이콘-텍스트 간격(gap):
-  - Caption / 소형: 4px
-  - Body 이상: 8px
-
----
-
-## 7. 형태 제작 원칙
-
-- 가능한 한 **직사각형, 원형** 등 기본 도형으로 시작
-- Boolean 연산(Union, Subtract, Intersect)으로 복잡한 형태 제작
-- 완성 후 패스를 **Flatten(아웃라인화)** 하여 납품
-- 직선은 **수평/수직/45° 각도**로 제한, 그 외 각도는 15° 단위 증가
-- 오버랩되는 오브젝트 간 간격은 **1px** 유지
-- 내부 채움 오브젝트(예: 집 안의 창문)는 스트로크 굵기의 **2배 이하** 크기로 제한
-
----
-
-## 8. 크기별 주의사항
-
-- **16px 이하**: 디테일 최소화, 획 수 줄이기
-- **16px ~ 24px**: 표준 디테일 적용
-- **24px 이상**: 더 많은 디테일 추가 가능
-- 10px 이하에서는 Outlined 아이콘 사용 금지 (가독성 불가)
-- 크기를 키울 때는 가장 큰 사이즈에서 디테일을 추가하고, 작은 사이즈로 줄이면서 단순화
-
----
-
-## 9. 접근성
-
-- 아이콘 단독 사용 시 반드시 **aria-label** 또는 **aria-hidden** 속성 지정
-- 터치 타겟 최소 크기: **44×44px** (아이콘 자체가 아닌 클릭 영역 기준)
-- 아이콘 색상 대비: 텍스트와 동일한 기준 적용 (**4.5:1** 이상)
-- 색상 단독으로 의미를 전달하지 않는다
-
----
-
-## 10. 금지 사항
-
-- 아이콘 사이즈 임의 변경 금지 (정해진 사이즈 스텝 외 크기 사용 금지)
-- 같은 세트 안에서 스트로크 굵기 혼용 금지
-- 소수점 좌표 사용 금지 (픽셀 그리드 이탈)
-- 하나의 아이콘에 2가지 이상 색상 사용 금지
-- Outlined와 Filled 혼용 금지 (선택 상태 제외)
-- 실제 기기/UI에서 테스트 없이 납품 금지
+## 아이콘-텍스트 페어링
+→ `@.claude/shared/design-tokens.md`의 "아이콘-텍스트 규칙" 참조

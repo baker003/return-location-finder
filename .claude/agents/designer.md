@@ -15,8 +15,7 @@ skills: design-system, design-system-creation, tailwind-design-system, frontend-
 - `.claude/doc/brand-spec.md` -- 브랜드 아이덴티티
 
 ## Figma 참조
-- DS_2: https://www.figma.com/design/9BojhdnvhQSi1wpWpLwPnH/SOCAR-FRAME-2.0-V.0.0.21~/
-- 디자인 시스템 프리뷰: https://www.figma.com/design/NBWB7adDg8Bz38tcZLpHok/
+→ `.claude/rules/figma-workflow.md`의 Figma Reference 섹션 참조
 
 ## 결과 저장
 - 설계 문서를 `.claude/doc/design-{컴포넌트명}.md`에 저장

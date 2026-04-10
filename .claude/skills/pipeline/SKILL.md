@@ -41,6 +41,7 @@ Agent 도구로 `designer` 에이전트를 호출하세요.
 Agent 도구로 `frontend-dev` 에이전트를 호출하세요.
 - Designer의 승인된 설계를 전달하세요
 - Frontend-dev가 코드를 구현합니다
+- **아이콘 작업이 포함된 경우**: `icon-designer` 에이전트를 별도로 호출하여 아이콘을 그리게 하세요 (general-purpose 에이전트로 아이콘을 직접 그리지 않음)
 - 완료 후 보고: `"[5/6] Frontend 완료 -- {구현 요약}"`
 
 ### [6] Reviewer

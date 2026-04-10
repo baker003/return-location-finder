@@ -1,9 +1,10 @@
-import { IconProps } from './types';
+import { IconProps, IconLayer } from './types';
+import IconBase from './IconBase';
 
-export default function SettingsFill({ size = 24, color = 'currentColor', className }: IconProps) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
-      <path fillRule="evenodd" clipRule="evenodd" d="M15 6H9L8.64 7.94C7.99 8.16 7.39 8.48 6.86 8.89L5.06 8.22L3.56 10.78L5.08 12C5.03 12.33 5 12.66 5 13C5 13.34 5.03 13.67 5.08 14L3.56 15.22L5.06 17.78L6.86 17.11C7.39 17.52 7.99 17.84 8.64 18.06L9 20H15L15.36 18.06C16.01 17.84 16.61 17.52 17.14 17.11L18.94 17.78L20.44 15.22L18.92 14C18.97 13.67 19 13.34 19 13C19 12.66 18.97 12.33 18.92 12L20.44 10.78L18.94 8.22L17.14 8.89C16.61 8.48 16.01 8.16 15.36 7.94L15 6ZM12 16C14.21 16 16 14.21 16 12C16 9.79 14.21 8 12 8C9.79 8 8 9.79 8 12C8 14.21 9.79 16 12 16Z" fill={color} />
-    </svg>
-  );
+const fillLayers: IconLayer[] = [
+  { path: 'M421-80q-14 0-25-9t-13-23l-15-94q-19-7-40-19t-37-25l-86 40q-14 6-28 1.5T155-226L97-330q-8-13-4.5-27t15.5-23l80-59q-2-9-2.5-20.5T185-480q0-9 .5-20.5T188-521l-80-59q-12-9-15.5-23t4.5-27l58-104q8-13 22-17.5t28 1.5l86 40q16-13 37-25t40-18l15-95q2-14 13-23t25-9h118q14 0 25 9t13 23l15 94q19 7 40.5 18.5T669-710l86-40q14-6 27.5-1.5T804-734l59 104q8 13 4.5 27.5T852-580l-80 57q2 10 2.5 21.5t.5 21.5q0 10-.5 21t-2.5 21l80 58q12 8 15.5 22.5T863-330l-58 104q-8 13-22 17.5t-28-1.5l-86-40q-16 13-36.5 25.5T592-206l-15 94q-2 14-13 23t-25 9H421Zm59-270q54 0 92-38t38-92q0-54-38-92t-92-38q-54 0-92 38t-38 92q0 54 38 92t92 38Z', level: 'primary' },
+];
+
+export default function SettingsFill(props: IconProps) {
+  return <IconBase {...props} fillLayers={fillLayers} variant="fill" />;
 }

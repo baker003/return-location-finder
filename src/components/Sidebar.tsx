@@ -26,6 +26,7 @@ const menuItems = [
     items: [
       { label: 'Line', id: 'icons-line' },
       { label: 'Fill', id: 'icons-fill' },
+      { label: 'SF Symbols 기능', id: 'icons-sf-symbols' },
     ],
   },
 ];

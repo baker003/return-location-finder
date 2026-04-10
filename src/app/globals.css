@@ -239,12 +239,27 @@
 
   /* Animations */
   --animate-progress-indeterminate: progress-indeterminate 1.5s ease-in-out infinite;
+  --animate-wiggle: wiggle 0.5s ease-in-out;
+  --animate-breathe: breathe 2s ease-in-out infinite;
 }
 
 /* ProgressBar indeterminate animation */
 @keyframes progress-indeterminate {
   0% { transform: translateX(-100%); }
   100% { transform: translateX(350%); }
+}
+
+/* Icon animations: wiggle & breathe */
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-12deg); }
+  50% { transform: rotate(10deg); }
+  75% { transform: rotate(-6deg); }
+}
+
+@keyframes breathe {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(0.92); }
 }
 
 /* ── Typography Tokens ── */

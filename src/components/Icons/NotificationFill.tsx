@@ -1,10 +1,10 @@
-import { IconProps } from './types';
+import { IconProps, IconLayer } from './types';
+import IconBase from './IconBase';
 
-export default function NotificationFill({ size = 24, color = 'currentColor', className }: IconProps) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
-      <path d="M12 3C8.69 3 6 5.69 6 8C6 14 3 17 3 17H21C21 17 18 14 18 8C18 5.69 15.31 3 12 3Z" fill={color} />
-      <path d="M13.73 21C13.2 21.6 12.64 21.9 12 21.9C11.36 21.9 10.8 21.6 10.27 21" fill={color} />
-    </svg>
-  );
+const fillLayers: IconLayer[] = [
+  { path: 'M190-200q-13 0-21.5-8.5T160-230q0-13 8.5-21.5T190-260h50v-304q0-84 49.5-150.5T420-798v-22q0-25 17.5-42.5T480-880q25 0 42.5 17.5T540-820v22q81 17 130.5 83.5T720-564v304h50q13 0 21.5 8.5T800-230q0 13-8.5 21.5T770-200H190ZM480-80q-33 0-56.5-23.5T400-160h160q0 33-23.5 56.5T480-80Z', level: 'primary' },
+];
+
+export default function NotificationFill(props: IconProps) {
+  return <IconBase {...props} fillLayers={fillLayers} variant="fill" />;
 }
