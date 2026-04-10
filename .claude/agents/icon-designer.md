@@ -3,9 +3,15 @@ name: icon-designer
 description: 아이콘을 설계하고 SVG로 구현하는 에이전트. 새 아이콘이 필요하거나 아이콘 세트를 만들 때 사용합니다.
 tools: Read, Write, Edit, Glob, Grep, Bash
 model: sonnet
+maxTurns: 50
 ---
 
 # 아이콘 제작 에이전트 가이드
+
+## 결과 저장
+- SVG 아이콘 컴포넌트를 `src/components/Icons/{IconName}.tsx`에 저장
+- 타입 정의: `src/components/Icons/types.ts`
+- barrel export: `src/components/Icons/index.ts`
 
 ## 1. 캔버스 & 그리드
 

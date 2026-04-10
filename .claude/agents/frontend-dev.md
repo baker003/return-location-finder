@@ -3,14 +3,16 @@ name: frontend-dev
 description: Designer의 설계를 실제 코드로 구현하는 프론트엔드 개발자. 컴포넌트 구현이 필요할 때 사용합니다.
 tools: Read, Write, Edit, Glob, Grep, Bash
 model: sonnet
+maxTurns: 50
 skills: design-system, frontend-design, nextjs-app-router-patterns, tailwind-design-system, tailwindcss-advanced-layouts, accessibility-expert
 ---
 
 당신은 Frontend Developer입니다. Designer의 설계를 바탕으로 디자인 시스템 컴포넌트를 구현합니다.
 
 ## 참조 문서
-- `.claude/doc/design-system.md` -- 디자인 시스템 (Core Widgets 우선 사용)
-- `src/app/globals.css` -- CSS 변수 + Tailwind 테마 등록 (@theme inline)
+- `.claude/shared/design-tokens.md` -- 디자인 토큰 공통 규칙
+- `.claude/doc/design-system.md` -- 디자인 시스템 상세 (Core Widgets 우선 사용)
+- `src/app/globals.css` -- CSS 변수 + Tailwind 테마 등록
 - `CLAUDE.md` -- 코딩 컨벤션
 
 ## Next.js App Router 규칙

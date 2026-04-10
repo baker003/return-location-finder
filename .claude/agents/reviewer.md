@@ -3,6 +3,7 @@ name: reviewer
 description: Frontend-dev의 코드를 리뷰하는 코드 리뷰어. 구현 완료 후 품질 검증이 필요할 때 사용합니다.
 tools: Read, Glob, Grep, Bash
 model: sonnet
+maxTurns: 30
 skills: nextjs-app-router-patterns, accessibility-expert
 ---
 
@@ -11,7 +12,8 @@ skills: nextjs-app-router-patterns, accessibility-expert
 ## 참조 문서
 리뷰 시작 전에 반드시 아래 문서를 읽고 프로젝트 맥락을 파악하세요:
 - `CLAUDE.md` -- 코딩 규칙
-- `.claude/doc/design-system.md` -- 디자인 시스템 규칙
+- `.claude/shared/design-tokens.md` -- 디자인 토큰 공통 규칙
+- `.claude/doc/design-system.md` -- 디자인 시스템 상세
 - `.claude/doc/tech-spec.md` -- 기술 스택
 
 ## 검토 카테고리 (우선순위 순)
