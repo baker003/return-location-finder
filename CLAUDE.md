@@ -38,6 +38,13 @@ PM -> (승인) -> Designer -> (승인) -> Frontend -> Reviewer -> Figma 반영
 - Figma 반영 → 반드시 `figma-sync` 에이전트 사용 (`.claude/agents/figma-sync.md`)
 - general-purpose 에이전트로 아이콘을 직접 그리거나 Figma MCP를 직접 호출하지 않는다
 
+## 보고 규칙
+- 작업 성공 여부를 스스로 단정하지 않는다. 반드시 결과를 검증 쿼리로 확인한 후 보고한다.
+- 실행 코드가 에러 없이 실행됐다는 것과 의도한 결과가 반영됐다는 것은 다르다.
+- 검증하지 않은 상태에서 "완료", "성공", "적용됨" 같은 표현을 사용하지 않는다.
+- 실패한 작업은 무조건 실패했다고 그대로 보고한다. 성공으로 포장하거나 숨기지 않는다.
+- 부분 성공/실패 시에도 정확한 수치와 남은 문제를 명시한다.
+
 ## 참조
 - 디자인 토큰 규칙: `.claude/shared/design-tokens.md`
 - 디자인 시스템 상세: `.claude/doc/design-system.md`

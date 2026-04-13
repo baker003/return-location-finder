@@ -61,6 +61,24 @@ Figma에 반영하기 전 아래 규칙을 반드시 확인:
 - 하나의 Text Style을 여러 weight에 공유하면 이전 바인딩이 해제됨 — 절대 금지
 - 바인딩 후 미적용 텍스트 0개 확인 필수 (특수 텍스트 제외)
 
+**폰트 토큰 + 컬러 토큰 동시 적용 워크플로우**
+Pretendard Variable Text Style과 Color Variable을 컴포넌트에 적용하는 순서:
+
+1. **컬러 토큰 먼저 바인딩** — 배경(fills), 보더(strokes), 텍스트(fills)에 Color Variable 적용
+   ```js
+   // paint 객체에 직접 boundVariables 설정
+   const paints = JSON.parse(JSON.stringify(node.fills));
+   paints[0].boundVariables = { color: { type: "VARIABLE_ALIAS", id: varId } };
+   node.fills = paints;
+   ```
+2. **폰트 토큰 바인딩** — 텍스트 노드에 Pretendard Text Style 적용
+   ```js
+   node.textStyleId = styleId;
+   ```
+3. **컬러 토큰 재확인** — Text Style 바인딩이 컬러를 덮어씌울 수 있으므로, 바인딩 후 컬러 토큰이 유지되는지 확인. 유실 시 1번 재실행
+
+**핵심 규칙**: 폰트 토큰을 적용할 때 기존 컬러 토큰을 절대 유실하지 않는다. 항상 컬러 → 폰트 순서로 적용하고, 유실 시 복원한다.
+
 **NEW Badge (Chip)**
 - 16x16px, cornerRadius 8, absolute position
 - 칩 오른쪽 상단: x = 칩너비 - 10, y = -6
