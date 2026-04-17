@@ -70,7 +70,7 @@ export default function Sidebar() {
   return (
     <aside className="fixed left-0 top-0 w-[240px] h-full bg-surface border-r border-border overflow-y-auto z-50 py-6 px-4">
       <div className="mb-6 px-2">
-        <h1 className="typo-title-1 font-bold text-text-strong">DS_2</h1>
+        <h1 className="typo-title-3 font-bold text-text-strong">DS_2</h1>
         <p className="typo-caption-1 text-text-secondary mt-1">디자인 시스템</p>
       </div>
 
@@ -87,7 +87,7 @@ export default function Sidebar() {
                   <li key={item.id}>
                     <button
                       onClick={() => handleClick(item.id)}
-                      className={`w-full text-left px-2 py-1.5 rounded-md typo-body-2 transition-colors ${
+                      className={`w-full text-left px-2 py-1.5 rounded-md typo-footnote transition-colors ${
                         isActive
                           ? 'bg-background text-primary-strong font-semibold'
                           : 'text-text-primary hover:text-primary-strong'

@@ -38,7 +38,7 @@ export const TrailingButton = forwardRef<HTMLDivElement, TrailingButtonProps>(
           variant="primary"
           size={16}
           onClick={onClick}
-          className={clsx('h-[40px] typo-title-2', className)}
+          className={clsx('h-[40px] typo-headline', className)}
         >
           {label}
         </TextButton>

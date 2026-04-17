@@ -262,21 +262,16 @@
   50% { opacity: 0.6; transform: scale(0.92); }
 }
 
-/* ── Typography Tokens ── */
-@utility typo-heading-1 { font-size: 28px; line-height: 36px; letter-spacing: 0.38px; }
-@utility typo-heading-2 { font-size: 24px; line-height: 32px; letter-spacing: 0.07px; }
-@utility typo-heading-3 { font-size: 22px; line-height: 28px; letter-spacing: -0.26px; }
-@utility typo-headline { font-size: 17px; line-height: 22px; letter-spacing: -0.43px; }
-@utility typo-title-1 { font-size: 20px; line-height: 26px; letter-spacing: -0.45px; }
-@utility typo-title-2 { font-size: 18px; line-height: 24px; letter-spacing: -0.44px; }
-@utility typo-title-3 { font-size: 16px; line-height: 22px; letter-spacing: -0.31px; }
-@utility typo-subhead { font-size: 15px; line-height: 20px; letter-spacing: -0.23px; }
-@utility typo-subtitle-1 { font-size: 16px; line-height: 22px; letter-spacing: -0.31px; }
-@utility typo-subtitle-2 { font-size: 14px; line-height: 18px; letter-spacing: -0.15px; }
-@utility typo-subtitle-3 { font-size: 13px; line-height: 18px; letter-spacing: -0.08px; }
-@utility typo-body { font-size: 17px; line-height: 22px; letter-spacing: -0.43px; }
-@utility typo-body-1 { font-size: 16px; line-height: 22px; letter-spacing: -0.31px; }
-@utility typo-body-2 { font-size: 14px; line-height: 18px; letter-spacing: -0.15px; }
-@utility typo-body-3 { font-size: 13px; line-height: 18px; letter-spacing: -0.08px; }
-@utility typo-caption-1 { font-size: 12px; line-height: 16px; letter-spacing: 0px; }
-@utility typo-caption-2 { font-size: 11px; line-height: 14px; letter-spacing: 0.06px; }
+/* ── Typography Tokens (Apple HIG + Korean LH) ── */
+@utility typo-large-title { font-size: 34px; line-height: 41px; letter-spacing: 0.37px; }
+@utility typo-title-1     { font-size: 28px; line-height: 34px; letter-spacing: 0.36px; }
+@utility typo-title-2     { font-size: 22px; line-height: 28px; letter-spacing: 0.35px; }
+@utility typo-title-3     { font-size: 20px; line-height: 25px; letter-spacing: 0.38px; }
+@utility typo-headline    { font-size: 17px; line-height: 26px; letter-spacing: -0.43px; }
+@utility typo-body        { font-size: 17px; line-height: 28px; letter-spacing: -0.43px; }
+@utility typo-callout     { font-size: 16px; line-height: 24px; letter-spacing: -0.32px; }
+@utility typo-subhead     { font-size: 15px; line-height: 22px; letter-spacing: -0.23px; }
+@utility typo-body-sm     { font-size: 14px; line-height: 22px; letter-spacing: -0.15px; }
+@utility typo-footnote    { font-size: 13px; line-height: 20px; letter-spacing: -0.08px; }
+@utility typo-caption-1   { font-size: 12px; line-height: 18px; letter-spacing: 0px; }
+@utility typo-caption-2   { font-size: 11px; line-height: 16px; letter-spacing: 0.06px; }

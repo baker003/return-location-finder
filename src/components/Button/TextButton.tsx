@@ -5,10 +5,10 @@ import type { TextButtonProps, TextButtonSize } from './types';
 import { Spinner } from './Spinner';
 
 const sizeClasses: Record<TextButtonSize, { height: string; typo: string; rounded: string }> = {
-  20: { height: 'h-12', typo: 'typo-title-1', rounded: 'rounded-xl' },
-  18: { height: 'h-10', typo: 'typo-title-2', rounded: 'rounded-[10px]' },
-  16: { height: 'h-9',  typo: 'typo-title-3', rounded: 'rounded-lg' },
-  14: { height: 'h-8',  typo: 'typo-body-2',  rounded: 'rounded-lg' },
+  20: { height: 'h-12', typo: 'typo-title-3',  rounded: 'rounded-xl' },
+  18: { height: 'h-10', typo: 'typo-headline', rounded: 'rounded-[10px]' },
+  16: { height: 'h-9',  typo: 'typo-callout',  rounded: 'rounded-lg' },
+  14: { height: 'h-8',  typo: 'typo-footnote', rounded: 'rounded-lg' },
 };
 
 const variantClasses: Record<string, string> = {

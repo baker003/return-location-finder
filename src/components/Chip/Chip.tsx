@@ -5,9 +5,9 @@ import type { ChipProps, ChipSize } from './types';
 
 /* ── Size 클래스 (높이 + 폰트 사이즈) ── */
 const sizeClasses: Record<ChipSize, string> = {
-  lg: 'h-10 typo-body-1',
-  md: 'h-9 typo-body-2',
-  sm: 'h-8 typo-body-3',
+  lg: 'h-10 typo-callout',
+  md: 'h-9 typo-footnote',
+  sm: 'h-8 typo-footnote',
   xs: 'h-7 typo-caption-1',
 };
 
@@ -137,7 +137,7 @@ export function Chip({
             'absolute -top-1.5 -right-1.5',
             'flex items-center justify-center',
             'w-4 h-4 rounded-full',
-            'text-[9px] font-bold text-on-primary leading-none',
+            'typo-caption-2 font-bold text-on-primary',
             'bg-notification-red',
           )}
         >

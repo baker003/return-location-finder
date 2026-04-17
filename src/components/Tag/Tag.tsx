@@ -38,10 +38,10 @@ const accentBg: Record<TagColor, string> = {
 
 /* ── Size 클래스 (height + font-size + line-height + vertical padding) ── */
 const sizeClasses: Record<TagSize, string> = {
-  xs: 'h-5 py-[2px] text-[10px] leading-[16px]',
+  xs: 'h-5 py-[2px] typo-caption-2',
   sm: 'h-6 py-[2px] typo-caption-1',
-  md: 'h-7 py-[2px] typo-body-3',
-  lg: 'h-8 py-[2px] typo-body-2',
+  md: 'h-7 py-[2px] typo-footnote',
+  lg: 'h-8 py-[2px] typo-footnote',
 };
 
 /* ── Font weight: size x bold ── */

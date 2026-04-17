@@ -32,7 +32,7 @@ function CloseIcon() {
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <section className="space-y-3">
-      <h2 className="typo-title-2 font-semibold text-text-strong">{title}</h2>
+      <h2 className="typo-headline font-semibold text-text-strong">{title}</h2>
       {children}
     </section>
   );
@@ -41,7 +41,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 function SubSection({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="space-y-2">
-      <h3 className="typo-body-2 font-medium text-text-secondary">{title}</h3>
+      <h3 className="typo-footnote font-medium text-text-secondary">{title}</h3>
       {children}
     </div>
   );
@@ -53,7 +53,7 @@ const sizes: ChipSize[] = ['lg', 'md', 'sm', 'xs'];
 export default function ChipPage() {
   return (
     <div className="min-h-screen bg-white p-8 space-y-10 max-w-3xl mx-auto">
-      <h1 className="typo-heading-2 font-bold text-text-strong">
+      <h1 className="typo-title-1 font-bold text-text-strong">
         Chip 컴포넌트 프리뷰
       </h1>
 

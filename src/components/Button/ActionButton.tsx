@@ -5,9 +5,9 @@ import type { ActionButtonProps, ActionButtonSize } from './types';
 import { Spinner } from './Spinner';
 
 const sizeClasses: Record<ActionButtonSize, string> = {
-  large:  'h-14 px-6 typo-title-2 rounded-xl',
-  medium: 'h-12 px-5 typo-title-3 rounded-xl',
-  small:  'h-10 px-4 typo-body-2 rounded-[10px]',
+  large:  'h-14 px-3 typo-headline rounded-[14px]',
+  medium: 'h-[46px] px-[10px] typo-callout rounded-xl',
+  small:  'h-[38px] px-2 py-[6px] typo-footnote rounded-lg',
 };
 
 const styleVariantClasses: Record<string, string> = {
@@ -20,9 +20,9 @@ const styleVariantClasses: Record<string, string> = {
 };
 
 const iconSizeClasses: Record<ActionButtonSize, string> = {
-  large:  '[&>svg]:w-6 [&>svg]:h-6',
-  medium: '[&>svg]:w-5 [&>svg]:h-5',
-  small:  '[&>svg]:w-5 [&>svg]:h-5',
+  large:  '[&>svg]:w-5 [&>svg]:h-5',
+  medium: '[&>svg]:w-4 [&>svg]:h-4',
+  small:  '[&>svg]:w-[14px] [&>svg]:h-[14px]',
 };
 
 export function ActionButton({
