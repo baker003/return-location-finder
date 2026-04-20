@@ -8,50 +8,64 @@
 :root {
   /* Gray */
   --gray-50: #F9F9FB; --gray-100: #F2F3F8; --gray-200: #E5E8EF; --gray-300: #CBD1DC;
-  --gray-400: #B4BBCB; --gray-500: #99A1B1; --gray-600: #697383; --gray-700: #4A5667;
+  --gray-400: #B4BBCB; --gray-500: #99A1B1; --gray-550: #818A9A; --gray-600: #637080; --gray-700: #4A5667;
   --gray-800: #354153; --gray-900: #262F3C; --gray-1000: #141A24;
 
   /* Blue (Primary) */
   --blue-50: #EBF5FF; --blue-100: #D6EBFF; --blue-200: #99CEFF; --blue-300: #6BB5FF;
-  --blue-400: #3393FF; --blue-500: #0078FF; --blue-600: #0069FF; --blue-700: #0052E0;
-  --blue-800: #0042C7; --blue-900: #0033A9;
+  --blue-400: #3393FF; --blue-500: #0078FF; --blue-550: #0071FF; --blue-600: #0069FF;
+  --blue-700: #0052E0; --blue-800: #0042C7; --blue-900: #0033A9; --blue-1000: #00248C;
 
   /* Red */
   --red-50: #FFF0F3; --red-100: #FFDBDF; --red-200: #FFA1AC; --red-300: #FF7686;
-  --red-400: #FF576A; --red-500: #FF3A5B; --red-600: #F51441; --red-700: #E60532;
-  --red-800: #D30831; --red-900: #C10027;
+  --red-400: #FF576A; --red-500: #FF3A5B; --red-550: #FA2B4E; --red-600: #F51441;
+  --red-700: #E60532; --red-800: #D30831; --red-900: #C10027; --red-1000: #AF001D;
 
   /* Orange */
   --orange-50: #FFF8E6; --orange-100: #FFF3CC; --orange-200: #FFDD99; --orange-300: #FFC566;
-  --orange-400: #FFA940; --orange-500: #FF8800; --orange-600: #FA7900; --orange-700: #F56A00;
-  --orange-800: #EC5704; --orange-900: #DD4600;
+  --orange-400: #FFA940; --orange-500: #FF8800; --orange-550: #FD8100; --orange-600: #FA7900;
+  --orange-700: #F56A00; --orange-800: #EC5704; --orange-900: #DD4600; --orange-1000: #CE3400;
 
   /* Green */
-  --green-50: #E6FEF0; --green-500: #04CA81; --green-600: #00BB83;
+  --green-50: #E6FEF0; --green-100: #C7F4D9; --green-200: #A6EAC3; --green-300: #83E0AD;
+  --green-400: #59D597; --green-500: #04CA81; --green-550: #02C282; --green-600: #00BB83;
+  --green-700: #00AC84; --green-800: #009D85; --green-900: #008F85; --green-1000: #018084;
 
   /* LightBlue */
   --lightblue-50: #EBFAFF; --lightblue-100: #D6F4FF; --lightblue-200: #8FDFFF;
   --lightblue-300: #54C9FF; --lightblue-400: #33BEFF; --lightblue-500: #00AEFF;
-  --lightblue-600: #00A2FA; --lightblue-700: #0094F7; --lightblue-800: #0086EC;
-  --lightblue-900: #006DDF;
+  --lightblue-550: #00A8FD; --lightblue-600: #00A2FA; --lightblue-700: #0094F7;
+  --lightblue-800: #0086EC; --lightblue-900: #006DDF; --lightblue-1000: #0853D2;
 
   /* Purple */
-  --purple-50: #F5F0FF; --purple-500: #956BFF; --purple-600: #8355FF;
+  --purple-50: #F5F0FF; --purple-100: #E0D7FF; --purple-200: #CCBDFF; --purple-300: #B8A3FF;
+  --purple-400: #A688FF; --purple-500: #956BFF; --purple-550: #8C60FF; --purple-600: #8355FF;
+  --purple-700: #7339FE; --purple-800: #6500FD; --purple-900: #5A00FC; --purple-1000: #5300FA;
 
   /* Indigo */
-  --indigo-50: #ECEFFE; --indigo-500: #4B68FF; --indigo-600: #3554F8; --indigo-700: #2C46F0;
+  --indigo-50: #ECEFFE; --indigo-100: #C9D6FF; --indigo-200: #A7BDFF; --indigo-300: #86A3FF;
+  --indigo-400: #6787FF; --indigo-500: #4B68FF; --indigo-550: #405EFC; --indigo-600: #3554F8;
+  --indigo-700: #2C46F0; --indigo-800: #2436E8; --indigo-900: #1E23E0; --indigo-1000: #1B00D8;
 
   /* Magenta */
-  --magenta-50: #FFF0F7; --magenta-500: #FF4397;
+  --magenta-50: #FFF0F7; --magenta-100: #FFD2E3; --magenta-200: #FFB3D0; --magenta-300: #FF92BC;
+  --magenta-400: #FF6FA9; --magenta-500: #FF4397; --magenta-550: #FC208E; --magenta-600: #F80085;
+  --magenta-700: #F00073; --magenta-800: #E60062; --magenta-900: #DB0051; --magenta-1000: #CE0041;
 
   /* Cyan */
-  --cyan-50: #E5FFFC; --cyan-500: #01C9D7;
+  --cyan-50: #E5FFFC; --cyan-100: #C6F5F5; --cyan-200: #A6EAED; --cyan-300: #83DFE6;
+  --cyan-400: #59D4DF; --cyan-500: #01C9D7; --cyan-550: #00C3D3; --cyan-600: #00BECF;
+  --cyan-700: #00B2C8; --cyan-800: #00A6C0; --cyan-900: #009AB8; --cyan-1000: #008EB0;
 
   /* Lime */
-  --lime-50: #F2FFD4; --lime-500: #8AD510;
+  --lime-50: #F2FFD4; --lime-100: #DDF7B7; --lime-200: #C9EF98; --lime-300: #B4E778;
+  --lime-400: #9FDE52; --lime-500: #8AD510; --lime-550: #7FD000; --lime-600: #74CC00;
+  --lime-700: #5DC200; --lime-800: #42B800; --lime-900: #1CAE00; --lime-1000: #00A400;
 
   /* RedOrange */
-  --redorange-50: #FFF5EB; --redorange-500: #FF7017;
+  --redorange-50: #FFF5EB; --redorange-100: #FFDCC7; --redorange-200: #FFC3A2; --redorange-300: #FFA97C;
+  --redorange-400: #FF8E53; --redorange-500: #FF7017; --redorange-550: #FD5F00; --redorange-600: #FA4D00;
+  --redorange-700: #F40800; --redorange-800: #EC0000; --redorange-900: #E30000; --redorange-1000: #D90000;
 }
 
 /* 4. Semantic Tokens */
@@ -60,24 +74,24 @@
   --text-strong: var(--gray-1000);
   --text-primary: var(--gray-800);
   --text-secondary: var(--gray-600);
-  --text-tertiary: var(--gray-600);
+  --text-tertiary: var(--gray-550);
   --text-disabled: var(--gray-500);
 
   /* Primary */
-  --primary-regular: var(--blue-500);
-  --primary-strong: var(--blue-600);
-  --primary-heavy: var(--blue-700);
+  --primary-regular: var(--blue-600);
+  --primary-strong: var(--blue-700);
+  --primary-heavy: var(--blue-800);
 
   /* Status */
   --status-info-light: var(--blue-50);
-  --status-info-regular: var(--blue-500);
-  --status-info-strong: var(--blue-600);
+  --status-info-regular: var(--blue-600);
+  --status-info-strong: var(--blue-700);
   --status-positive-weak: var(--green-50);
-  --status-positive-regular: var(--green-500);
-  --status-positive-strong: var(--green-600);
+  --status-positive-regular: var(--green-800);
+  --status-positive-strong: var(--green-900);
   --status-caution-weak: var(--orange-50);
-  --status-caution-regular: var(--orange-500);
-  --status-caution-strong: var(--orange-600);
+  --status-caution-regular: var(--orange-800);
+  --status-caution-strong: var(--orange-900);
   --status-negative-weak: var(--red-50);
   --status-negative-regular: var(--red-600);
   --status-negative-strong: var(--red-600);
@@ -115,7 +129,7 @@
   --notification-red: var(--red-500);
 
   /* Service */
-  --service-primary: var(--blue-500);
+  --service-primary: var(--blue-600);
   --service-business: var(--blue-900);
 
   /* Location */
@@ -138,7 +152,7 @@
   --separator-opaque: var(--gray-300);        /* 불투명 구분선 */
 
   /* Increased Contrast */
-  --text-tertiary-high-contrast: var(--gray-600);  /* 기본 text-tertiary와 동일 (이미 PASS) */
+  --text-tertiary-high-contrast: var(--gray-600);  /* high-contrast 모드: secondary 수준(4.78:1)으로 강화 */
   --text-disabled-high-contrast: var(--gray-500);  /* 기본 text-disabled와 동일 (이미 PASS) */
 }
 
@@ -176,6 +190,7 @@
   --color-gray-100: var(--gray-100);
   --color-gray-200: var(--gray-200);
   --color-gray-300: var(--gray-300);
+  --color-gray-800: var(--gray-800);
   --color-gray-900: var(--gray-900);
   --color-gray-1000: var(--gray-1000);
 
@@ -262,16 +277,23 @@
   50% { opacity: 0.6; transform: scale(0.92); }
 }
 
-/* ── Typography Tokens (Apple HIG + Korean LH) ── */
-@utility typo-large-title { font-size: 34px; line-height: 41px; letter-spacing: 0.37px; }
-@utility typo-title-1     { font-size: 28px; line-height: 34px; letter-spacing: 0.36px; }
-@utility typo-title-2     { font-size: 22px; line-height: 28px; letter-spacing: 0.35px; }
-@utility typo-title-3     { font-size: 20px; line-height: 25px; letter-spacing: 0.38px; }
-@utility typo-headline    { font-size: 17px; line-height: 26px; letter-spacing: -0.43px; }
-@utility typo-body        { font-size: 17px; line-height: 28px; letter-spacing: -0.43px; }
-@utility typo-callout     { font-size: 16px; line-height: 24px; letter-spacing: -0.32px; }
-@utility typo-subhead     { font-size: 15px; line-height: 22px; letter-spacing: -0.23px; }
-@utility typo-body-sm     { font-size: 14px; line-height: 22px; letter-spacing: -0.15px; }
-@utility typo-footnote    { font-size: 13px; line-height: 20px; letter-spacing: -0.08px; }
-@utility typo-caption-1   { font-size: 12px; line-height: 18px; letter-spacing: 0px; }
-@utility typo-caption-2   { font-size: 11px; line-height: 16px; letter-spacing: 0.06px; }
+/* ── Typography Tokens (Wanted DS 구조) ── */
+@utility typo-display1       { font-size: 56px; line-height: 72px; letter-spacing: -1.79px; }
+@utility typo-display2       { font-size: 40px; line-height: 52px; letter-spacing: -1.13px; }
+@utility typo-display3       { font-size: 36px; line-height: 48px; letter-spacing: -0.97px; }
+@utility typo-title1         { font-size: 32px; line-height: 44px; letter-spacing: -0.81px; }
+@utility typo-title2         { font-size: 28px; line-height: 38px; letter-spacing: -0.66px; }
+@utility typo-title3         { font-size: 24px; line-height: 32px; letter-spacing: -0.55px; }
+@utility typo-heading1       { font-size: 22px; line-height: 30px; letter-spacing: -0.43px; }
+@utility typo-heading2       { font-size: 20px; line-height: 28px; letter-spacing: -0.24px; }
+@utility typo-headline1      { font-size: 18px; line-height: 26px; letter-spacing: -0.04px; }
+@utility typo-headline2      { font-size: 17px; line-height: 24px; letter-spacing: 0px; }
+@utility typo-body1          { font-size: 16px; line-height: 24px; letter-spacing: 0.09px; }
+@utility typo-body1-reading  { font-size: 16px; line-height: 26px; letter-spacing: 0.09px; }
+@utility typo-body2          { font-size: 15px; line-height: 22px; letter-spacing: 0.14px; }
+@utility typo-body2-reading  { font-size: 15px; line-height: 24px; letter-spacing: 0.14px; }
+@utility typo-label1         { font-size: 14px; line-height: 20px; letter-spacing: 0.20px; }
+@utility typo-label1-reading { font-size: 14px; line-height: 22px; letter-spacing: 0.20px; }
+@utility typo-label2         { font-size: 13px; line-height: 18px; letter-spacing: 0.25px; }
+@utility typo-caption1       { font-size: 12px; line-height: 16px; letter-spacing: 0.30px; }
+@utility typo-caption2       { font-size: 11px; line-height: 14px; letter-spacing: 0.34px; }

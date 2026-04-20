@@ -5,10 +5,10 @@ import type { ChipProps, ChipSize } from './types';
 
 /* ── Size 클래스 (높이 + 폰트 사이즈) ── */
 const sizeClasses: Record<ChipSize, string> = {
-  lg: 'h-10 typo-callout',
-  md: 'h-9 typo-footnote',
-  sm: 'h-8 typo-footnote',
-  xs: 'h-7 typo-caption-1',
+  lg: 'h-10 typo-body1',
+  md: 'h-9 typo-label2',
+  sm: 'h-8 typo-label2',
+  xs: 'h-7 typo-caption1',
 };
 
 /* ── 아이콘 크기 (lg: 20px, 나머지: 16px) ── */
@@ -33,7 +33,7 @@ function getStyleClasses(
   if (selected) {
     return type === 'outlined'
       ? 'bg-surface border border-primary-strong text-primary-strong'
-      : 'bg-primary-strong text-on-primary';
+      : 'bg-gray-800 text-on-primary';
   }
   return type === 'outlined'
     ? 'bg-surface border border-border text-text-primary'
@@ -137,7 +137,7 @@ export function Chip({
             'absolute -top-1.5 -right-1.5',
             'flex items-center justify-center',
             'w-4 h-4 rounded-full',
-            'typo-caption-2 font-bold text-on-primary',
+            'typo-caption2 font-bold text-on-primary',
             'bg-notification-red',
           )}
         >

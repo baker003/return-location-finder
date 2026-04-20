@@ -48,7 +48,7 @@ export const TopAppbarInstant = forwardRef<HTMLDivElement, TopAppbarInstantProps
     if (variant === 'heading') {
       return (
         <div ref={ref} className={clsx('flex items-center h-full', className)}>
-          <h1 className="typo-headline font-semibold text-current truncate">
+          <h1 className="typo-headline2 font-semibold text-current truncate">
             {props.title}
           </h1>
         </div>
@@ -58,7 +58,7 @@ export const TopAppbarInstant = forwardRef<HTMLDivElement, TopAppbarInstantProps
     if (variant === 'label') {
       return (
         <div ref={ref} className={clsx('flex items-center h-full', className)}>
-          <span className="typo-headline font-semibold text-current truncate">
+          <span className="typo-headline2 font-semibold text-current truncate">
             {props.title}
           </span>
         </div>
@@ -81,7 +81,7 @@ export const TopAppbarInstant = forwardRef<HTMLDivElement, TopAppbarInstantProps
               'focus-visible:ring-primary-strong focus-visible:ring-offset-2',
             )}
           >
-            <span className="typo-headline font-semibold text-current">
+            <span className="typo-headline2 font-semibold text-current">
               {props.label}
             </span>
             <ChevronDownIcon />
@@ -111,7 +111,7 @@ export const TopAppbarInstant = forwardRef<HTMLDivElement, TopAppbarInstantProps
             onClick={props.onClick}
             className={clsx(
               'flex-1 bg-transparent',
-              'typo-footnote',
+              'typo-label2',
               'text-current',
               'placeholder:text-text-disabled',
               'outline-none',

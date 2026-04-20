@@ -5,11 +5,11 @@ import clsx from 'clsx';
 import type { LinkTextButtonProps, ButtonSize } from './types';
 
 const sizeClasses: Record<ButtonSize, string> = {
-  xs: 'typo-caption-1 font-medium',
-  sm: 'typo-footnote font-semibold',
-  md: 'typo-footnote font-semibold',
-  lg: 'typo-callout  font-semibold',
-  xl: 'typo-headline font-semibold',
+  xs: 'typo-caption1 font-medium',
+  sm: 'typo-label2 font-semibold',
+  md: 'typo-label2 font-semibold',
+  lg: 'typo-body1  font-semibold',
+  xl: 'typo-headline2 font-semibold',
 };
 
 const baseClasses = clsx(

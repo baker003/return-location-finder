@@ -41,14 +41,14 @@ function MoreIcon() {
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <section className="space-y-3">
-      <h2 className="typo-headline font-semibold text-text-strong">{title}</h2>
+      <h2 className="typo-headline2 font-semibold text-text-strong">{title}</h2>
       <div className="space-y-2">{children}</div>
     </section>
   );
 }
 
 function Label({ text }: { text: string }) {
-  return <p className="typo-caption-1 font-medium text-text-secondary">{text}</p>;
+  return <p className="typo-caption1 font-medium text-text-secondary">{text}</p>;
 }
 
 export default function TopAppbarPage() {
@@ -56,7 +56,7 @@ export default function TopAppbarPage() {
 
   return (
     <div className="min-h-screen bg-background p-6 space-y-8">
-      <h1 className="typo-title-1 font-bold text-text-strong">
+      <h1 className="typo-title2 font-bold text-text-strong">
         Top Appbar 프리뷰
       </h1>
 

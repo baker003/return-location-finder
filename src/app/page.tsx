@@ -294,8 +294,8 @@ function ColorSwatch({ hex, name }: { hex: string; name: string }) {
         className="w-12 h-12 rounded-lg border border-border"
         style={{ backgroundColor: hex }}
       />
-      <span className="typo-caption-2 text-text-secondary font-mono">{name}</span>
-      <span className="typo-caption-2 text-text-tertiary font-mono">{hex}</span>
+      <span className="typo-caption2 text-text-secondary font-mono">{name}</span>
+      <span className="typo-caption2 text-text-tertiary font-mono">{hex}</span>
     </div>
   );
 }
@@ -323,7 +323,7 @@ function SubSection({ title, children }: { title: string; children: React.ReactN
 function ChipSection({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <section className="space-y-3">
-      <h2 className="typo-headline font-semibold text-text-strong">{title}</h2>
+      <h2 className="typo-headline2 font-semibold text-text-strong">{title}</h2>
       {children}
     </section>
   );
@@ -332,14 +332,14 @@ function ChipSection({ title, children }: { title: string; children: React.React
 function ChipSubSection({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="space-y-2">
-      <h3 className="typo-footnote font-medium text-text-secondary">{title}</h3>
+      <h3 className="typo-label2 font-medium text-text-secondary">{title}</h3>
       {children}
     </div>
   );
 }
 
 function AppbarLabel({ text }: { text: string }) {
-  return <p className="typo-caption-1 font-medium text-text-secondary">{text}</p>;
+  return <p className="typo-caption1 font-medium text-text-secondary">{text}</p>;
 }
 
 /* ────────────────────────────────────────
@@ -485,12 +485,12 @@ export default function Home() {
                     <td className="py-3 px-4">
                       <span className="font-mono text-xs">{pair.fg}</span>
                       <br />
-                      <span className="font-mono typo-caption-2 text-text-tertiary">{pair.fgHex}</span>
+                      <span className="font-mono typo-caption2 text-text-tertiary">{pair.fgHex}</span>
                     </td>
                     <td className="py-3 px-4">
                       <span className="font-mono text-xs">{pair.bg}</span>
                       <br />
-                      <span className="font-mono typo-caption-2 text-text-tertiary">{pair.bgHex}</span>
+                      <span className="font-mono typo-caption2 text-text-tertiary">{pair.bgHex}</span>
                     </td>
                     <td className="py-3 px-4">
                       <div
@@ -725,7 +725,7 @@ export default function Home() {
           <h2 className="text-2xl font-bold text-text-strong">Top Appbar</h2>
 
           <div className="space-y-3">
-            <h3 className="typo-headline font-semibold text-text-strong">테마</h3>
+            <h3 className="typo-headline2 font-semibold text-text-strong">테마</h3>
             <div className="space-y-2">
               <AppbarLabel text="white" />
               <TopAppbar
@@ -756,7 +756,7 @@ export default function Home() {
           </div>
 
           <div className="space-y-3">
-            <h3 className="typo-headline font-semibold text-text-strong">좌측 버튼 변형</h3>
+            <h3 className="typo-headline2 font-semibold text-text-strong">좌측 버튼 변형</h3>
             <div className="space-y-2">
               <AppbarLabel text="back" />
               <TopAppbar leading={<LeadingButton variant="back" />} instant={<TopAppbarInstant variant="label" title="뒤로 가기" />} />
@@ -773,7 +773,7 @@ export default function Home() {
           </div>
 
           <div className="space-y-3">
-            <h3 className="typo-headline font-semibold text-text-strong">중앙 콘텐츠 변형</h3>
+            <h3 className="typo-headline2 font-semibold text-text-strong">중앙 콘텐츠 변형</h3>
             <div className="space-y-2">
               <AppbarLabel text="heading" />
               <TopAppbar leading={<LeadingButton variant="back" />} instant={<TopAppbarInstant variant="heading" title="페이지 타이틀" />} />
@@ -801,7 +801,7 @@ export default function Home() {
           </div>
 
           <div className="space-y-3">
-            <h3 className="typo-headline font-semibold text-text-strong">우측 버튼 변형</h3>
+            <h3 className="typo-headline2 font-semibold text-text-strong">우측 버튼 변형</h3>
             <div className="space-y-2">
               <AppbarLabel text="아이콘 버튼 (1개)" />
               <TopAppbar
@@ -839,7 +839,7 @@ export default function Home() {
           </div>
 
           <div className="space-y-3">
-            <h3 className="typo-headline font-semibold text-text-strong">로딩 상태</h3>
+            <h3 className="typo-headline2 font-semibold text-text-strong">로딩 상태</h3>
             <div className="space-y-2">
               <AppbarLabel text={`determinate (${progress}%)`} />
               <TopAppbar
@@ -866,7 +866,7 @@ export default function Home() {
           </div>
 
           <div className="space-y-3">
-            <h3 className="typo-headline font-semibold text-text-strong">전체 조합</h3>
+            <h3 className="typo-headline2 font-semibold text-text-strong">전체 조합</h3>
             <div className="space-y-2">
               <AppbarLabel text="다크 + 뒤로가기 + 헤딩 + 아이콘 버튼 3개 + 로딩" />
               <TopAppbar
@@ -919,7 +919,7 @@ export default function Home() {
                   <div className="w-12 h-12 flex items-center justify-center rounded-lg bg-background border border-border">
                     <Icon size={24} />
                   </div>
-                  <span className="typo-caption-2 text-text-tertiary text-center leading-tight">{name}</span>
+                  <span className="typo-caption2 text-text-tertiary text-center leading-tight">{name}</span>
                 </div>
               ))}
             </div>
@@ -938,7 +938,7 @@ export default function Home() {
                   <div className="w-12 h-12 flex items-center justify-center rounded-lg bg-background border border-border">
                     <Icon size={24} />
                   </div>
-                  <span className="typo-caption-2 text-text-tertiary text-center leading-tight">{name}</span>
+                  <span className="typo-caption2 text-text-tertiary text-center leading-tight">{name}</span>
                 </div>
               ))}
             </div>
@@ -955,7 +955,7 @@ export default function Home() {
                   <div className="w-12 h-12 flex items-center justify-center rounded-lg bg-background border border-border">
                     <Icon size={24} />
                   </div>
-                  <span className="typo-caption-2 text-text-tertiary text-center leading-tight">{name}</span>
+                  <span className="typo-caption2 text-text-tertiary text-center leading-tight">{name}</span>
                 </div>
               ))}
             </div>
@@ -972,7 +972,7 @@ export default function Home() {
                   <div className="w-12 h-12 flex items-center justify-center rounded-lg bg-background border border-border">
                     <Icon size={24} />
                   </div>
-                  <span className="typo-caption-2 text-text-tertiary text-center leading-tight">{name}</span>
+                  <span className="typo-caption2 text-text-tertiary text-center leading-tight">{name}</span>
                 </div>
               ))}
             </div>
@@ -990,7 +990,7 @@ export default function Home() {
                   <div className="w-12 h-12 flex items-center justify-center rounded-lg bg-background border border-border">
                     <Icon size={24} />
                   </div>
-                  <span className="typo-caption-2 text-text-tertiary text-center leading-tight">{name}</span>
+                  <span className="typo-caption2 text-text-tertiary text-center leading-tight">{name}</span>
                 </div>
               ))}
             </div>
@@ -1007,7 +1007,7 @@ export default function Home() {
                   <div className="w-12 h-12 flex items-center justify-center rounded-lg bg-background border border-border">
                     <Icon size={24} />
                   </div>
-                  <span className="typo-caption-2 text-text-tertiary text-center leading-tight">{name}</span>
+                  <span className="typo-caption2 text-text-tertiary text-center leading-tight">{name}</span>
                 </div>
               ))}
             </div>
@@ -1025,7 +1025,7 @@ export default function Home() {
                   <div className="w-12 h-12 flex items-center justify-center rounded-lg bg-background border border-border">
                     <Icon size={24} />
                   </div>
-                  <span className="typo-caption-2 text-text-tertiary text-center leading-tight">{name}</span>
+                  <span className="typo-caption2 text-text-tertiary text-center leading-tight">{name}</span>
                 </div>
               ))}
             </div>
@@ -1038,7 +1038,7 @@ export default function Home() {
               {[16, 20, 24, 32].map((s) => (
                 <div key={s} className="flex flex-col items-center gap-2">
                   <IconHeart size={s} />
-                  <span className="typo-caption-2 text-text-tertiary">{s}px</span>
+                  <span className="typo-caption2 text-text-tertiary">{s}px</span>
                 </div>
               ))}
             </div>
@@ -1066,7 +1066,7 @@ export default function Home() {
                   <div className="w-12 h-12 flex items-center justify-center rounded-lg bg-background border border-border">
                     <Icon size={24} />
                   </div>
-                  <span className="typo-caption-2 text-text-tertiary text-center leading-tight">{name}</span>
+                  <span className="typo-caption2 text-text-tertiary text-center leading-tight">{name}</span>
                 </div>
               ))}
             </div>
@@ -1085,7 +1085,7 @@ export default function Home() {
                   <div className="w-12 h-12 flex items-center justify-center rounded-lg bg-background border border-border">
                     <Icon size={24} />
                   </div>
-                  <span className="typo-caption-2 text-text-tertiary text-center leading-tight">{name}</span>
+                  <span className="typo-caption2 text-text-tertiary text-center leading-tight">{name}</span>
                 </div>
               ))}
             </div>
@@ -1102,7 +1102,7 @@ export default function Home() {
                   <div className="w-12 h-12 flex items-center justify-center rounded-lg bg-background border border-border">
                     <Icon size={24} />
                   </div>
-                  <span className="typo-caption-2 text-text-tertiary text-center leading-tight">{name}</span>
+                  <span className="typo-caption2 text-text-tertiary text-center leading-tight">{name}</span>
                 </div>
               ))}
             </div>
@@ -1119,7 +1119,7 @@ export default function Home() {
                   <div className="w-12 h-12 flex items-center justify-center rounded-lg bg-background border border-border">
                     <Icon size={24} />
                   </div>
-                  <span className="typo-caption-2 text-text-tertiary text-center leading-tight">{name}</span>
+                  <span className="typo-caption2 text-text-tertiary text-center leading-tight">{name}</span>
                 </div>
               ))}
             </div>
@@ -1137,7 +1137,7 @@ export default function Home() {
                   <div className="w-12 h-12 flex items-center justify-center rounded-lg bg-background border border-border">
                     <Icon size={24} />
                   </div>
-                  <span className="typo-caption-2 text-text-tertiary text-center leading-tight">{name}</span>
+                  <span className="typo-caption2 text-text-tertiary text-center leading-tight">{name}</span>
                 </div>
               ))}
             </div>
@@ -1154,7 +1154,7 @@ export default function Home() {
                   <div className="w-12 h-12 flex items-center justify-center rounded-lg bg-background border border-border">
                     <Icon size={24} />
                   </div>
-                  <span className="typo-caption-2 text-text-tertiary text-center leading-tight">{name}</span>
+                  <span className="typo-caption2 text-text-tertiary text-center leading-tight">{name}</span>
                 </div>
               ))}
             </div>
@@ -1172,7 +1172,7 @@ export default function Home() {
                   <div className="w-12 h-12 flex items-center justify-center rounded-lg bg-background border border-border">
                     <Icon size={24} />
                   </div>
-                  <span className="typo-caption-2 text-text-tertiary text-center leading-tight">{name}</span>
+                  <span className="typo-caption2 text-text-tertiary text-center leading-tight">{name}</span>
                 </div>
               ))}
             </div>
@@ -1185,7 +1185,7 @@ export default function Home() {
               {[16, 20, 24, 32].map((s) => (
                 <div key={s} className="flex flex-col items-center gap-2">
                   <IconHeartFill size={s} />
-                  <span className="typo-caption-2 text-text-tertiary">{s}px</span>
+                  <span className="typo-caption2 text-text-tertiary">{s}px</span>
                 </div>
               ))}
             </div>
@@ -1205,43 +1205,43 @@ export default function Home() {
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
               {/* Monochrome */}
               <div className="flex flex-col items-center gap-3 p-4 rounded-xl bg-background border border-border">
-                <span className="typo-caption-1 font-semibold text-text-secondary">Monochrome</span>
+                <span className="typo-caption1 font-semibold text-text-secondary">Monochrome</span>
                 <div className="flex gap-3">
                   <IconNotification size={32} renderingMode="monochrome" color="#0069FF" />
                   <IconError size={32} renderingMode="monochrome" color="#0069FF" />
                   <IconHome size={32} renderingMode="monochrome" color="#0069FF" />
                 </div>
-                <span className="typo-caption-2 text-text-tertiary">단일 색상</span>
+                <span className="typo-caption2 text-text-tertiary">단일 색상</span>
               </div>
               {/* Hierarchical */}
               <div className="flex flex-col items-center gap-3 p-4 rounded-xl bg-background border border-border">
-                <span className="typo-caption-1 font-semibold text-text-secondary">Hierarchical</span>
+                <span className="typo-caption1 font-semibold text-text-secondary">Hierarchical</span>
                 <div className="flex gap-3">
                   <IconNotification size={32} renderingMode="hierarchical" color="#0069FF" />
                   <IconError size={32} renderingMode="hierarchical" color="#0069FF" />
                   <IconHome size={32} renderingMode="hierarchical" color="#0069FF" />
                 </div>
-                <span className="typo-caption-2 text-text-tertiary">단일 색상 + 계층 투명도</span>
+                <span className="typo-caption2 text-text-tertiary">단일 색상 + 계층 투명도</span>
               </div>
               {/* Palette */}
               <div className="flex flex-col items-center gap-3 p-4 rounded-xl bg-background border border-border">
-                <span className="typo-caption-1 font-semibold text-text-secondary">Palette</span>
+                <span className="typo-caption1 font-semibold text-text-secondary">Palette</span>
                 <div className="flex gap-3">
                   <IconNotification size={32} renderingMode="palette" paletteColors={['#0069FF', '#FF3A5B']} />
                   <IconError size={32} renderingMode="palette" paletteColors={['#0069FF', '#FF3A5B']} />
                   <IconHome size={32} renderingMode="palette" paletteColors={['#0069FF', '#FF3A5B']} />
                 </div>
-                <span className="typo-caption-2 text-text-tertiary">레이어별 사용자 색상</span>
+                <span className="typo-caption2 text-text-tertiary">레이어별 사용자 색상</span>
               </div>
               {/* Multicolor */}
               <div className="flex flex-col items-center gap-3 p-4 rounded-xl bg-background border border-border">
-                <span className="typo-caption-1 font-semibold text-text-secondary">Multicolor</span>
+                <span className="typo-caption1 font-semibold text-text-secondary">Multicolor</span>
                 <div className="flex gap-3">
                   <IconWarning size={32} renderingMode="multicolor" multicolorMap={{ primary: '#FF8800', secondary: '#FFFFFF' }} />
                   <IconError size={32} renderingMode="multicolor" multicolorMap={{ primary: '#F51441', secondary: '#FFFFFF' }} />
                   <IconSuccess size={32} renderingMode="multicolor" multicolorMap={{ primary: '#04CA81', secondary: '#FFFFFF' }} />
                 </div>
-                <span className="typo-caption-2 text-text-tertiary">고유 색상 매핑</span>
+                <span className="typo-caption2 text-text-tertiary">고유 색상 매핑</span>
               </div>
             </div>
 
@@ -1249,7 +1249,7 @@ export default function Home() {
             <h4 className="text-xs font-semibold text-text-tertiary mt-6 mb-3">Fill 변형 렌더링 모드</h4>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
               <div className="flex flex-col items-center gap-3 p-4 rounded-xl bg-background border border-border">
-                <span className="typo-caption-1 font-semibold text-text-secondary">Monochrome</span>
+                <span className="typo-caption1 font-semibold text-text-secondary">Monochrome</span>
                 <div className="flex gap-3">
                   <IconErrorFill size={32} renderingMode="monochrome" color="#F51441" />
                   <IconSuccessFill size={32} renderingMode="monochrome" color="#04CA81" />
@@ -1257,7 +1257,7 @@ export default function Home() {
                 </div>
               </div>
               <div className="flex flex-col items-center gap-3 p-4 rounded-xl bg-background border border-border">
-                <span className="typo-caption-1 font-semibold text-text-secondary">Hierarchical</span>
+                <span className="typo-caption1 font-semibold text-text-secondary">Hierarchical</span>
                 <div className="flex gap-3">
                   <IconErrorFill size={32} renderingMode="hierarchical" color="#F51441" />
                   <IconSuccessFill size={32} renderingMode="hierarchical" color="#04CA81" />
@@ -1265,7 +1265,7 @@ export default function Home() {
                 </div>
               </div>
               <div className="flex flex-col items-center gap-3 p-4 rounded-xl bg-background border border-border">
-                <span className="typo-caption-1 font-semibold text-text-secondary">Palette</span>
+                <span className="typo-caption1 font-semibold text-text-secondary">Palette</span>
                 <div className="flex gap-3">
                   <IconErrorFill size={32} renderingMode="palette" paletteColors={['#F51441', '#FFFFFF']} />
                   <IconSuccessFill size={32} renderingMode="palette" paletteColors={['#04CA81', '#FFFFFF']} />
@@ -1273,7 +1273,7 @@ export default function Home() {
                 </div>
               </div>
               <div className="flex flex-col items-center gap-3 p-4 rounded-xl bg-background border border-border">
-                <span className="typo-caption-1 font-semibold text-text-secondary">Multicolor</span>
+                <span className="typo-caption1 font-semibold text-text-secondary">Multicolor</span>
                 <div className="flex gap-3">
                   <IconErrorFill size={32} renderingMode="multicolor" multicolorMap={{ primary: '#F51441', secondary: '#FFFFFF' }} />
                   <IconSuccessFill size={32} renderingMode="multicolor" multicolorMap={{ primary: '#04CA81', secondary: '#FFFFFF' }} />
@@ -1292,7 +1292,7 @@ export default function Home() {
                   <div className="w-14 h-14 flex items-center justify-center rounded-lg bg-background border border-border">
                     <IconHeart size={28} weight={w} />
                   </div>
-                  <span className="typo-caption-2 text-text-tertiary capitalize">{w}</span>
+                  <span className="typo-caption2 text-text-tertiary capitalize">{w}</span>
                 </div>
               ))}
             </div>
@@ -1307,11 +1307,11 @@ export default function Home() {
                   <div className="flex items-center justify-center rounded-lg bg-background border border-border p-3">
                     <IconStar size={24} scale={s} />
                   </div>
-                  <span className="typo-caption-2 text-text-tertiary capitalize">{s}</span>
+                  <span className="typo-caption2 text-text-tertiary capitalize">{s}</span>
                 </div>
               ))}
             </div>
-            <p className="typo-caption-2 text-text-tertiary mt-2">
+            <p className="typo-caption2 text-text-tertiary mt-2">
               Small: 1x &middot; Medium: 1.15x &middot; Large: 1.3x (텍스트 대비 자동 스케일)
             </p>
           </div>
@@ -1337,7 +1337,7 @@ export default function Home() {
                       <Fill size={24} />
                     </div>
                   </div>
-                  <span className="typo-caption-2 text-text-tertiary">{name}</span>
+                  <span className="typo-caption2 text-text-tertiary">{name}</span>
                 </div>
               ))}
             </div>
@@ -1346,7 +1346,7 @@ export default function Home() {
           {/* 5. Variable Color */}
           <div className="mb-10">
             <h3 className="text-sm font-semibold text-text-secondary mb-4">5. Variable Color</h3>
-            <p className="typo-caption-2 text-text-tertiary mb-3">값(0~100)에 따라 레이어별 활성화 임계치 적용</p>
+            <p className="typo-caption2 text-text-tertiary mb-3">값(0~100)에 따라 레이어별 활성화 임계치 적용</p>
             <div className="flex flex-wrap gap-4">
               {[0, 25, 50, 75, 100].map((v) => (
                 <div key={v} className="flex flex-col items-center gap-2">
@@ -1357,7 +1357,7 @@ export default function Home() {
                       variableColor={{ value: v, layers: ['secondary', 'primary'] }}
                     />
                   </div>
-                  <span className="typo-caption-2 text-text-tertiary">{v}%</span>
+                  <span className="typo-caption2 text-text-tertiary">{v}%</span>
                 </div>
               ))}
             </div>
@@ -1372,7 +1372,7 @@ export default function Home() {
                   <div className="w-14 h-14 flex items-center justify-center rounded-lg bg-background border border-border">
                     <IconNotification size={28} animation={a} color="#0069FF" />
                   </div>
-                  <span className="typo-caption-2 text-text-tertiary capitalize">{a}</span>
+                  <span className="typo-caption2 text-text-tertiary capitalize">{a}</span>
                 </div>
               ))}
             </div>
@@ -1384,23 +1384,23 @@ export default function Home() {
             <div className="flex flex-wrap gap-6">
               <div className="flex flex-col items-center gap-2 p-4 rounded-xl bg-background border border-border">
                 <IconErrorFill size={32} renderingMode="palette" paletteColors={['#F51441', '#FFFFFF']} weight="bold" scale="large" />
-                <span className="typo-caption-2 text-text-tertiary text-center">Palette + Bold<br/>+ Large</span>
+                <span className="typo-caption2 text-text-tertiary text-center">Palette + Bold<br/>+ Large</span>
               </div>
               <div className="flex flex-col items-center gap-2 p-4 rounded-xl bg-background border border-border">
                 <IconNotification size={32} renderingMode="hierarchical" color="#0069FF" weight="semibold" animation="wiggle" />
-                <span className="typo-caption-2 text-text-tertiary text-center">Hierarchical<br/>+ Wiggle</span>
+                <span className="typo-caption2 text-text-tertiary text-center">Hierarchical<br/>+ Wiggle</span>
               </div>
               <div className="flex flex-col items-center gap-2 p-4 rounded-xl bg-background border border-border">
                 <IconHeartFill size={32} renderingMode="monochrome" color="#F51441" animation="pulse" scale="large" />
-                <span className="typo-caption-2 text-text-tertiary text-center">Monochrome + Pulse<br/>+ Large</span>
+                <span className="typo-caption2 text-text-tertiary text-center">Monochrome + Pulse<br/>+ Large</span>
               </div>
               <div className="flex flex-col items-center gap-2 p-4 rounded-xl bg-background border border-border">
                 <IconHome size={32} renderingMode="palette" paletteColors={['#0069FF', '#FF8800']} weight="light" />
-                <span className="typo-caption-2 text-text-tertiary text-center">Palette + Light<br/>Weight</span>
+                <span className="typo-caption2 text-text-tertiary text-center">Palette + Light<br/>Weight</span>
               </div>
               <div className="flex flex-col items-center gap-2 p-4 rounded-xl bg-background border border-border">
                 <IconSuccessFill size={32} renderingMode="multicolor" multicolorMap={{ primary: '#04CA81', secondary: '#FFFFFF' }} animation="bounce" />
-                <span className="typo-caption-2 text-text-tertiary text-center">Multicolor<br/>+ Bounce</span>
+                <span className="typo-caption2 text-text-tertiary text-center">Multicolor<br/>+ Bounce</span>
               </div>
             </div>
           </div>
