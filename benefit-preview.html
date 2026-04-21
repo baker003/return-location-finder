@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>혜택 섹션 개선안 — DRIVE:ON Before / After</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+  <style>
+    /* ── 디자인 토큰 ── */
+    :root {
+      --brand:       #0078FF;
+      --brand-dark:  #0059BF;
+      --brand-soft:  #E6F1FF;
+      --brand-hover: #005FCC;
+
+      --ink-900: #0A0A0B;
+      --ink-700: #2E2E38;
+      --ink-500: #6B6B75;
+      --ink-300: #B0B0BC;
+      --ink-200: #E4E4E9;
+      --ink-100: #F0F0F5;
+      --ink-50:  #F8F8FA;
+
+      --radius-lg:   18px;
+      --radius-pill: 999px;
+      --radius-md:   12px;
+      --radius-sm:   8px;
+
+      --font: 'Pretendard Variable', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    /* ── 리셋 & 베이스 ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font);
+      background: #F4F5F7;
+      color: var(--ink-900);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    word-break { word-break: keep-all; }
+
+    /* ── 페이지 레이아웃 ── */
+    .page-wrapper {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 60px 80px 100px;
+    }
+
+    /* ── 섹션 레이블 (Before / After 구분) ── */
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-500);
+      margin-bottom: 16px;
+    }
+
+    .section-label .badge {
+      padding: 3px 10px;
+      border-radius: var(--radius-pill);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+    }
+
+    .section-label .badge.before {
+      background: var(--ink-200);
+      color: var(--ink-500);
+    }
+
+    .section-label .badge.after {
+      background: var(--brand);
+      color: #fff;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px dashed var(--ink-200);
+      margin: 64px 0;
+    }
+
+    /* ── 섹션 공통 ── */
+    .benefit-section {
+      background: #fff;
+      border-radius: 24px;
+      padding: 56px 64px 64px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+    }
+
+    .section-eyebrow {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--brand);
+      margin-bottom: 12px;
+    }
+
+    .section-heading {
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 1.25;
+      color: var(--ink-900);
+      margin-bottom: 48px;
+      word-break: keep-all;
+    }
+
+    /* ════════════════════════════════
+       BEFORE — 3컬럼 동일 사이즈
+    ════════════════════════════════ */
+    .before-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .before-card {
+      background: var(--ink-50);
+      border: 1px solid var(--ink-200);
+      border-radius: var(--radius-lg);
+      padding: 32px 28px;
+    }
+
+    .before-card-icon {
+      font-size: 36px;
+      margin-bottom: 16px;
+      line-height: 1;
+    }
+
+    .before-card-tag {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--brand);
+      background: var(--brand-soft);
+      border-radius: var(--radius-pill);
+      padding: 4px 12px;
+      margin-bottom: 14px;
+    }
+
+    .before-card-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--ink-900);
+      line-height: 1.35;
+      margin-bottom: 10px;
+      word-break: keep-all;
+    }
+
+    .before-card-desc {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--ink-500);
+      line-height: 1.6;
+      word-break: keep-all;
+    }
+
+    /* ════════════════════════════════
+       AFTER — Hero + 2컬럼 레이아웃
+    ════════════════════════════════ */
+    .after-layout {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* ── 히어로 카드 (집앞 배달) ── */
+    .hero-card {
+      background: #fff;
+      border: 1.5px solid var(--brand);
+      border-radius: var(--radius-lg);
+      padding: 44px 52px;
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .hero-card-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--brand);
+      background: var(--brand-soft);
+      border-radius: var(--radius-pill);
+      padding: 5px 14px;
+      letter-spacing: 0.04em;
+      margin-bottom: 20px;
+      width: fit-content;
+    }
+
+    .hero-title {
+      font-size: 36px;
+      font-weight: 800;
+      line-height: 1.2;
+      color: var(--ink-900);
+      margin-bottom: 28px;
+      word-break: keep-all;
+    }
+
+    .hero-title em {
+      font-style: normal;
+      color: var(--brand);
+    }
+
+    /* ── 아이소매트릭 지도 비주얼 ── */
+    .map-iso {
+      position: relative;
+      height: 260px;
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    /* ── 장소 예시 칩 ── */
+    .place-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .place-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--brand-dark);
+      background: var(--brand-soft);
+      border-radius: var(--radius-pill);
+      padding: 6px 14px;
+      word-break: keep-all;
+    }
+
+    .place-chip-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--brand);
+      flex-shrink: 0;
+    }
+
+    /* ── 하단 2컬럼 카드 그리드 ── */
+    .sub-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .sub-card {
+      background: var(--ink-50);
+      border: 1px solid var(--ink-200);
+      border-radius: var(--radius-lg);
+      padding: 32px 30px;
+      transition: border-color 0.18s, box-shadow 0.18s;
+    }
+
+    .sub-card:hover {
+      border-color: var(--brand);
+      box-shadow: 0 4px 16px rgba(0,120,255,0.08);
+    }
+
+    .sub-card-icon {
+      font-size: 34px;
+      margin-bottom: 14px;
+      line-height: 1;
+    }
+
+    .sub-card-tag {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--brand);
+      background: var(--brand-soft);
+      border-radius: var(--radius-pill);
+      padding: 4px 12px;
+      margin-bottom: 14px;
+    }
+
+    .sub-card-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--ink-900);
+      line-height: 1.35;
+      margin-bottom: 8px;
+      word-break: keep-all;
+    }
+
+    .sub-card-desc {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--ink-500);
+      line-height: 1.65;
+      word-break: keep-all;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+
+    <!-- ══════════════════════════════════
+         BEFORE
+    ══════════════════════════════════ -->
+    <div class="section-label">
+      <span class="badge before">BEFORE</span>
+      현재 상태 — 3컬럼 동일 사이즈
+    </div>
+
+    <section class="benefit-section">
+      <p class="section-eyebrow">DRIVE:ON 혜택</p>
+      <h2 class="section-heading">기존 시승과, 완전히 다릅니다.</h2>
+
+      <div class="before-grid">
+        <!-- 카드 1 -->
+        <div class="before-card">
+          <div class="before-card-icon">🗓</div>
+          <span class="before-card-tag">4박 5일</span>
+          <h3 class="before-card-title">하루 이틀이 아닌<br>주말 통째로</h3>
+          <p class="before-card-desc">수요일부터 일요일까지 5일 동안 일상에서 직접 내 차처럼 타볼 수 있습니다.</p>
+        </div>
+
+        <!-- 카드 2 (집앞 배달 — BEFORE 프레이밍) -->
+        <div class="before-card">
+          <div class="before-card-icon">🚚</div>
+          <span class="before-card-tag">집앞 배달</span>
+          <h3 class="before-card-title">딜러샵 방문 없이</h3>
+          <p class="before-card-desc">수도권 원하는 주소·시간으로 차량을 배달하고 같은 장소에서 회수해드립니다.</p>
+        </div>
+
+        <!-- 카드 3 -->
+        <div class="before-card">
+          <div class="before-card-icon">💳</div>
+          <span class="before-card-tag">0원</span>
+          <h3 class="before-card-title">응모부터 시승까지<br>전부 무료</h3>
+          <p class="before-card-desc">응모·당첨·배달·시승·반납 전 과정에서 추가 비용이 발생하지 않습니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-divider" />
+
+    <!-- ══════════════════════════════════
+         AFTER
+    ══════════════════════════════════ -->
+    <div class="section-label">
+      <span class="badge after">AFTER</span>
+      개선안 — 집앞 배달 히어로 강조 + 2컬럼 하단
+    </div>
+
+    <section class="benefit-section">
+      <p class="section-eyebrow">DRIVE:ON 혜택</p>
+      <h2 class="section-heading">기존 시승과, 완전히 다릅니다.</h2>
+
+      <div class="after-layout">
+
+        <!-- ── 히어로 카드: 집앞 배달 ── -->
+        <div class="hero-card">
+
+          <!-- 좌: 텍스트 -->
+          <div class="hero-card-inner">
+            <span class="hero-tag">집앞 배달</span>
+            <h3 class="hero-title">
+              원하는 곳으로,<br>
+              <em>차가 옵니다.</em>
+            </h3>
+            <div class="place-chips">
+              <span class="place-chip"><span class="place-chip-dot"></span>집 앞</span>
+              <span class="place-chip"><span class="place-chip-dot"></span>회사 앞</span>
+              <span class="place-chip"><span class="place-chip-dot"></span>카페 근처</span>
+              <span class="place-chip"><span class="place-chip-dot"></span>원하는 어디든</span>
+            </div>
+          </div>
+
+          <!-- 우: 아이소매트릭 지도 비주얼 -->
+          <div class="map-iso">
+            <svg id="iso-city" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 260" style="width:100%;height:100%;display:block"></svg>
+          </div>
+
+        </div>
+
+        <!-- ── 하단 2컬럼 카드 ── -->
+        <div class="sub-grid">
+
+          <!-- 카드: 4박 5일 -->
+          <div class="sub-card">
+            <div class="sub-card-icon">🗓</div>
+            <span class="sub-card-tag">4박 5일</span>
+            <h3 class="sub-card-title">주말 통째로,<br>내 차처럼</h3>
+            <p class="sub-card-desc">수요일부터 일요일까지 5일 동안 일상에서 직접 내 차처럼 타볼 수 있습니다.</p>
+          </div>
+
+          <!-- 카드: 0원 -->
+          <div class="sub-card">
+            <div class="sub-card-icon">💳</div>
+            <span class="sub-card-tag">0원</span>
+            <h3 class="sub-card-title">응모·시승·배달<br>전부 무료</h3>
+            <p class="sub-card-desc">응모·당첨·배달·시승·반납 전 과정에서 추가 비용이 발생하지 않습니다.</p>
+          </div>
+
+        </div>
+
+      </div><!-- /.after-layout -->
+    </section>
+
+  </div><!-- /.page-wrapper -->
+
+<script>
+(function () {
+  var NS = 'http://www.w3.org/2000/svg';
+  var svg = document.getElementById('iso-city');
+
+  var HW = 26, HH = 13;   // half tile width / height
+  var OX = 248, OY = 24;  // isometric origin (top-vertex of tile 0,0)
+  var COLS = 7, ROWS = 5;
+  var RR = 2, RC = 3;     // road row, road col
+
+  function tc(c, r) { return [OX + (c - r) * HW, OY + (c + r) * HH]; }
+
+  function mk(tag, a) {
+    var e = document.createElementNS(NS, tag);
+    for (var k in a) e.setAttribute(k, a[k]);
+    return e;
+  }
+
+  function pts(arr) { return arr.map(function(p){ return p[0]+','+p[1]; }).join(' '); }
+
+  function tilePoly(c, r, fill, stroke) {
+    var p = tc(c, r), x = p[0], y = p[1];
+    return mk('polygon', {
+      points: pts([[x,y],[x+HW,y+HH],[x,y+HH*2],[x-HW,y+HH]]),
+      fill: fill, stroke: stroke, 'stroke-width': '0.6', 'stroke-linejoin': 'round'
+    });
+  }
+
+  function bldGroup(c, r, h, pal) {
+    var p = tc(c, r), x = p[0], y = p[1];
+    var g = mk('g', {});
+    g.appendChild(mk('polygon', { // right face
+      points: pts([[x,y+HH*2-h],[x+HW,y+HH-h],[x+HW,y+HH],[x,y+HH*2]]),
+      fill: pal[2]
+    }));
+    g.appendChild(mk('polygon', { // left face
+      points: pts([[x-HW,y+HH-h],[x,y+HH*2-h],[x,y+HH*2],[x-HW,y+HH]]),
+      fill: pal[1]
+    }));
+    g.appendChild(mk('polygon', { // top face
+      points: pts([[x,y-h],[x+HW,y+HH-h],[x,y+HH*2-h],[x-HW,y+HH-h]]),
+      fill: pal[0]
+    }));
+    return g;
+  }
+
+  // [top, left-face, right-face]
+  var PALS = [
+    ['#B8CEDF','#7A9DB5','#8AAFC5'],
+    ['#AABFDC','#6A8DAF','#7DA2C2'],
+    ['#C0D2E4','#8CAABB','#9DBCCC']
+  ];
+
+  var BLDS = {
+    '0,0':42,'1,0':56,'2,0':34,'4,0':50,'5,0':62,'6,0':38,
+    '0,1':48,'1,1':30,'2,1':54,'4,1':36,'5,1':52,'6,1':28,
+    '0,3':40,'1,3':54,'2,3':28,'4,3':46,'5,3':34,'6,3':58,
+    '0,4':56,'1,4':34,'2,4':46,'4,4':30,'5,4':50,'6,4':42
+  };
+
+  // Background gradient
+  var defs = mk('defs', {});
+  var grad = mk('linearGradient', {id:'isoBg',x1:'0',y1:'0',x2:'0',y2:'1'});
+  grad.appendChild(mk('stop', {offset:'0%','stop-color':'#D8EAF8'}));
+  grad.appendChild(mk('stop', {offset:'100%','stop-color':'#C2D6EE'}));
+  defs.appendChild(grad);
+  svg.appendChild(defs);
+  svg.appendChild(mk('rect', {width:520,height:260,fill:'url(#isoBg)'}));
+
+  // Collect + painter-sort items
+  var items = [];
+  for (var r = 0; r < ROWS; r++) {
+    for (var c = 0; c < COLS; c++) {
+      var road = (r === RR || c === RC);
+      var tf = road ? '#CBD7E8' : '#B5C8DC';
+      var ts = '#A2B6CA';
+      (function(cc,rr,f,s,isRoad){
+        items.push({ k: cc+rr, fn: function(){ return tilePoly(cc,rr,f,s); }});
+        var bk = cc+','+rr;
+        if (!isRoad && BLDS[bk]) {
+          var h = BLDS[bk], pal = PALS[(cc+rr)%3];
+          items.push({ k: cc+rr+0.5, fn: (function(bc,br,bh,bp){ return function(){ return bldGroup(bc,br,bh,bp); }; })(cc,rr,h,pal) });
+        }
+      })(c, r, tf, ts, road);
+    }
+  }
+  items.sort(function(a,b){ return a.k - b.k; });
+  items.forEach(function(it){ svg.appendChild(it.fn()); });
+
+  // Route dashed line along road row
+  var sp = tc(0, RR), ep = tc(COLS-1, RR);
+  svg.appendChild(mk('line', {
+    x1:sp[0], y1:sp[1]+HH, x2:ep[0], y2:ep[1]+HH,
+    stroke:'#0078FF', 'stroke-width':'2', 'stroke-dasharray':'7 5', opacity:'0.5'
+  }));
+
+  // Origin dot
+  svg.appendChild(mk('circle', {cx:sp[0], cy:sp[1]+HH, r:5, fill:'#8AAFC5', stroke:'white', 'stroke-width':1.5}));
+
+  // Destination
+  var dcx = ep[0], dcy = ep[1]+HH;
+
+  // Pulse ring (SMIL)
+  var pulse = mk('circle', {cx:dcx, cy:dcy, r:10, fill:'#0078FF', opacity:0.18});
+  var rAnim = mk('animate', {attributeName:'r', values:'10;20;10', dur:'1.8s', repeatCount:'indefinite'});
+  var oAnim = mk('animate', {attributeName:'opacity', values:'0.18;0.04;0.18', dur:'1.8s', repeatCount:'indefinite'});
+  pulse.appendChild(rAnim); pulse.appendChild(oAnim);
+  svg.appendChild(pulse);
+
+  // Pin dot
+  svg.appendChild(mk('circle', {cx:dcx, cy:dcy, r:8, fill:'#0078FF'}));
+  svg.appendChild(mk('circle', {cx:dcx, cy:dcy, r:4, fill:'white'}));
+
+  // Pin stem
+  svg.appendChild(mk('line', {x1:dcx, y1:dcy-8, x2:dcx, y2:dcy-30, stroke:'#0078FF', 'stroke-width':2.5}));
+
+  // Label bubble
+  svg.appendChild(mk('rect', {x:dcx-24, y:dcy-50, width:48, height:18, rx:9, fill:'#0A0A0B'}));
+  var lbl = mk('text', {
+    x:dcx, y:dcy-37.5, 'text-anchor':'middle',
+    fill:'white', 'font-size':10, 'font-weight':700,
+    'font-family':'Pretendard Variable, sans-serif'
+  });
+  lbl.textContent = '내 위치';
+  svg.appendChild(lbl);
+
+  // Car (isometric box, centered at 0,0)
+  var carG = mk('g', {});
+  var cw=14, ch=7, ch3=10;
+  carG.appendChild(mk('polygon', { // right face
+    points: pts([[0,ch*2-ch3],[cw,ch-ch3],[cw,ch],[0,ch*2]]),
+    fill:'#005FC4'
+  }));
+  carG.appendChild(mk('polygon', { // left face
+    points: pts([[-cw,ch-ch3],[0,ch*2-ch3],[0,ch*2],[-cw,ch]]),
+    fill:'#006EDB'
+  }));
+  carG.appendChild(mk('polygon', { // top (car roof area lighter)
+    points: pts([[0,-ch3],[cw,ch-ch3],[0,ch*2-ch3],[-cw,ch-ch3]]),
+    fill:'#1A8AFF'
+  }));
+
+  // SMIL motion: start → end → pause → start
+  var anim = mk('animateTransform', {
+    attributeName:'transform', type:'translate',
+    values: sp[0]+' '+(sp[1]+HH)+'; '+ep[0]+' '+(ep[1]+HH)+'; '+ep[0]+' '+(ep[1]+HH)+'; '+sp[0]+' '+(sp[1]+HH),
+    keyTimes:'0;0.6;0.8;1',
+    calcMode:'spline',
+    keySplines:'0.4 0 0.6 1; 0 0 1 1; 0.6 0 1 1',
+    dur:'4.5s', repeatCount:'indefinite'
+  });
+  carG.appendChild(anim);
+  svg.appendChild(carG);
+})();
+</script>
+</body>
+</html>
