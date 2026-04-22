@@ -329,6 +329,16 @@ DS_2 타이포그래피 시스템:
 | 26px ~ 32px | 24px |
 | 32px 이상 | 32px |
 
+**예외: TextButton**
+TextButton은 공간 효율을 위해 line-height 대신 font-size 기준으로 아이콘 사이즈를 맞춤 (Figma DS_2 명세 기준).
+
+| TextButton size | font-size | 아이콘 사이즈 |
+|---|---|---|
+| 20 | 20px | 20px (w-5) |
+| 18 | 18px | 20px (w-5) |
+| 16 | 16px | 16px (w-4) |
+| 14 | 14px | 16px (w-4) |
+
 **정렬**
 - 아이콘과 텍스트는 항상 align-items: center
 - 아이콘 색상은 텍스트 색상과 동일하게 맞춤

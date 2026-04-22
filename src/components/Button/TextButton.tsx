@@ -5,21 +5,21 @@ import type { TextButtonProps, TextButtonSize } from './types';
 import { Spinner } from './Spinner';
 
 const sizeClasses: Record<TextButtonSize, { height: string; typo: string; rounded: string }> = {
-  20: { height: 'h-12', typo: 'typo-heading2',  rounded: 'rounded-xl' },
-  18: { height: 'h-10', typo: 'typo-headline2', rounded: 'rounded-[10px]' },
-  16: { height: 'h-9',  typo: 'typo-body1',  rounded: 'rounded-lg' },
-  14: { height: 'h-8',  typo: 'typo-label2', rounded: 'rounded-lg' },
+  20: { height: 'h-8',      typo: 'typo-heading2',  rounded: 'rounded-lg' },
+  18: { height: 'h-8',      typo: 'typo-headline1', rounded: 'rounded-lg' },
+  16: { height: 'h-[26px]', typo: 'typo-body1',     rounded: 'rounded-md' },
+  14: { height: 'h-[26px]', typo: 'typo-label1',    rounded: 'rounded-md' },
 };
 
 const variantClasses: Record<string, string> = {
-  primary:    'text-primary-strong',
+  primary:    'text-primary-regular',
   secondary:  'text-text-primary',
   tertiary:   'text-text-secondary',
   'on-primary': 'text-on-primary',
 };
 
 const iconSizeClasses: Record<TextButtonSize, string> = {
-  20: '[&>svg]:w-6 [&>svg]:h-6',
+  20: '[&>svg]:w-5 [&>svg]:h-5',
   18: '[&>svg]:w-5 [&>svg]:h-5',
   16: '[&>svg]:w-4 [&>svg]:h-4',
   14: '[&>svg]:w-4 [&>svg]:h-4',
