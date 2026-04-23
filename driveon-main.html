@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DRIVE:ON — 프리미엄 주말 시승 플랫폼</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    :root {
+      --brand:      #0078FF;
+      --brand-dark: #0059BF;
+      --brand-soft: #E6F1FF;
+      --ink-900: #0A0A0B;
+      --ink-700: #2E2E38;
+      --ink-600: #424249;
+      --ink-500: #6B6B75;
+      --ink-400: #646F7C;
+      --ink-300: #9A9AA3;
+      --ink-200: #C9C9D1;
+      --ink-100: #E4E4E9;
+      --ink-50:  #F8F8FA;
+      --font: 'Pretendard Variable', -apple-system, BlinkMacSystemFont, 'Noto Sans KR', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      -webkit-font-smoothing: antialiased;
+      color: var(--ink-900);
+      word-break: keep-all;
+      min-width: 1280px;
+      padding-top: 60px; /* fixed GNB 보정 */
+    }
+
+    /* ════════════ NAV ════════════ */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      background: rgba(253,253,253,0.82);
+      backdrop-filter: saturate(180%) blur(14px);
+      border-bottom: 1px solid rgba(29,29,31,0.08);
+    }
+    .nav-inner {
+      max-width: 1440px; margin: 0 auto;
+      padding: 0 100px;
+      height: 60px;
+      display: flex; align-items: center; gap: 32px;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 17px; font-weight: 800; letter-spacing: -0.02em;
+      color: var(--ink-900); text-decoration: none;
+    }
+    .nav-logo-mark {
+      width: 28px; height: 28px; border-radius: 8px;
+      background: var(--ink-900);
+      position: relative; overflow: hidden; flex-shrink: 0;
+    }
+    .nav-logo-mark::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, var(--brand) 0%, var(--brand) 50%, transparent 50%);
+    }
+    .nav-logo-mark::after {
+      content: '';
+      position: absolute; right: 5px; bottom: 5px;
+      width: 7px; height: 7px; border-radius: 50%; background: white;
+    }
+    .nav-links { display: flex; gap: 2px; flex: 1; }
+    .nav-link {
+      padding: 8px 14px; border-radius: 8px;
+      font-size: 14px; font-weight: 500; color: var(--ink-500);
+      text-decoration: none; transition: all .15s;
+    }
+    .nav-link:hover, .nav-link.active { background: var(--ink-50); color: var(--ink-900); }
+    .nav-cta { display: flex; align-items: center; gap: 8px; }
+    .btn-ghost-sm {
+      padding: 8px 16px; border-radius: 8px;
+      font-size: 14px; font-weight: 600; color: var(--ink-700);
+      background: none; border: none; cursor: pointer;
+      font-family: var(--font);
+      transition: background .15s;
+    }
+    .btn-ghost-sm:hover { background: var(--ink-50); }
+    .btn-brand-sm {
+      padding: 8px 18px; border-radius: 999px;
+      font-size: 14px; font-weight: 700; color: white;
+      background: var(--brand); border: none; cursor: pointer;
+      font-family: var(--font);
+      transition: background .15s;
+    }
+    .btn-brand-sm:hover { background: var(--brand-dark); }
+
+    /* ════════════ HERO ════════════ */
+    .hero {
+      background: #FDFDFD;
+      padding: 80px 100px;
+      max-width: 1440px; margin: 0 auto;
+      display: flex; flex-direction: column; gap: 56px; align-items: center;
+    }
+
+    .hero-top { display: flex; flex-direction: column; align-items: center; gap: 24px; width: 100%; }
+
+    .live-pill {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.7);
+      border: 1px solid rgba(29,29,31,0.08);
+      font-size: 13px; font-weight: 500;
+    }
+    .live-dot {
+      position: relative;
+      width: 7px; height: 7px; border-radius: 50%;
+      background: #22C55E;
+      flex-shrink: 0;
+    }
+    .live-dot::before,
+    .live-dot::after {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: 50%;
+      border: 1.5px solid #22C55E;
+      animation: rippleOut 2s ease-out infinite;
+    }
+    .live-dot::after {
+      animation-delay: 0.9s;
+    }
+    @keyframes rippleOut {
+      0%   { transform: scale(1);   opacity: 0.4; }
+      100% { transform: scale(2.4); opacity: 0;   }
+    }
+
+    .hero-heading {
+      font-size: 64px; font-weight: 800;
+      line-height: 1.15; letter-spacing: -0.05em;
+      text-align: center; width: 100%;
+    }
+    .hero-heading .line-plain {
+      color: var(--ink-900);
+      animation: heroReveal 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
+    }
+    .hero-heading .line-gradient {
+      background: linear-gradient(
+        90deg,
+        #0059BF 0%,
+        #0078FF 25%,
+        #66B8FF 50%,
+        #0078FF 75%,
+        #0059BF 100%
+      );
+      background-size: 200% auto;
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation:
+        heroReveal 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.26s both,
+        textShimmerLoop 3.4s linear 2.1s infinite;
+    }
+    @keyframes heroReveal {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @keyframes textShimmerLoop {
+      0%   { background-position: 200% center; }
+      100% { background-position: 0% center; }
+    }
+
+    .hero-sub {
+      font-size: 20px; font-weight: 500; color: var(--ink-500);
+      letter-spacing: -0.01em; text-align: center;
+      animation: heroReveal 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.42s both;
+    }
+
+    /* ── 차량 카드 그리드 ── */
+    .vehicle-grid {
+      display: flex; gap: 24px; width: 100%;
+    }
+
+    .vehicle-col { display: flex; flex-direction: column; gap: 8px; flex: 1; min-width: 0; }
+    .vehicle-grid .vehicle-col:nth-child(1) { animation: cardReveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) 1.06s both; }
+    .vehicle-grid .vehicle-col:nth-child(2) { animation: cardReveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) 1.20s both; }
+    .vehicle-grid .vehicle-col:nth-child(3) { animation: cardReveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) 1.34s both; }
+    @keyframes cardReveal {
+      from { opacity: 0; transform: translateY(32px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .vehicle-card-main {
+      position: relative; height: 300px; border-radius: 18px; overflow: hidden;
+      width: 100%;
+      background: rgba(255,255,255,0.75);
+      border: 1px solid rgba(29,29,31,0.1);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    }
+    .vehicle-card-main { transition: box-shadow 0.35s ease; }
+    .vehicle-card-main:hover { box-shadow: 0 12px 40px rgba(0,0,0,0.13), 0 4px 12px rgba(0,0,0,0.07); }
+    .vehicle-card-main::after {
+      content: '';
+      position: absolute; top: 0; bottom: 0;
+      left: -80%; width: 50%;
+      background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.18) 50%, transparent 100%);
+      transform: skewX(-12deg);
+      pointer-events: none; z-index: 5;
+      transition: none;
+    }
+    .vehicle-card-main:hover::after {
+      left: 160%;
+      transition: left 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .vehicle-card-img {
+      position: absolute; bottom: -1.5px; left: 50%; transform: translateX(-50%);
+      width: 125%; height: 100%; object-fit: cover; pointer-events: none;
+      transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .vehicle-card-main:hover .vehicle-card-img { transform: translateX(-50%) scale(1.06); }
+    .vehicle-card-bottom {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 24px;
+      display: flex; align-items: flex-end; gap: 6px;
+    }
+    .vehicle-card-blur {
+      position: absolute; bottom: 0; left: 0; right: 0; height: 95px;
+      background: linear-gradient(to top, rgba(255,255,255,0.15) 0%, transparent 100%);
+      backdrop-filter: blur(20px);
+      -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 40%, rgba(0,0,0,0) 100%);
+      mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.8) 40%, rgba(0,0,0,0) 100%);
+    }
+    .vehicle-info { flex: 1; position: relative; display: flex; flex-direction: column; gap: 6px; }
+    .vehicle-brand { font-size: 16px; font-weight: 600; color: white; letter-spacing: 0.04em; }
+    .vehicle-model { font-size: 28px; font-weight: 800; color: var(--ink-900); line-height: 1; }
+    .cta-pill {
+      position: relative;
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 12px 16px 12px 20px;
+      background: var(--brand);
+      border-radius: 999px; border: none; cursor: pointer;
+      font-size: 16px; font-weight: 600; color: white;
+      font-family: var(--font); white-space: nowrap;
+      box-shadow: 0 6px 18px -4px rgba(0,113,227,0.4);
+      transition: background .15s;
+      text-decoration: none;
+    }
+    .cta-pill:hover { background: var(--brand-dark); }
+    .cta-pill svg { flex-shrink: 0; }
+
+    .vehicle-card-review {
+      background: rgba(255,255,255,0.75);
+      border: 1px solid rgba(29,29,31,0.1);
+      border-radius: 18px; padding: 16px 20px;
+      display: flex; align-items: center; gap: 20px;
+      overflow: hidden; width: 100%; min-width: 0;
+    }
+    .review-info { flex: 1; min-width: 0; overflow: hidden; }
+    .review-slide { display: flex; flex-direction: column; gap: 6px; }
+    .review-score { display: flex; align-items: center; gap: 6px; }
+    .review-score-num { font-size: 20px; font-weight: 800; color: var(--ink-900); }
+    .review-star { color: #E3E3E3; font-size: 20px; }
+    .review-text {
+      font-size: 16px; font-weight: 600; color: var(--ink-400);
+      letter-spacing: 0.04em; white-space: nowrap;
+      overflow: hidden; text-overflow: ellipsis;
+    }
+    .review-arrow { color: var(--ink-300); font-size: 16px; flex-shrink: 0; }
+
+    /* ════════════ 섹션 공통 ════════════ */
+    .page-section {
+      width: 100%;
+      max-width: 1440px; margin: 0 auto;
+    }
+    .section-inner {
+      padding: 80px 100px;
+      display: flex; gap: 40px; align-items: flex-start;
+    }
+    .section-bg-light { background: var(--ink-50); }
+    .section-bg-white { background: white; }
+
+    .text-col {
+      width: 400px; flex-shrink: 0;
+      display: flex; flex-direction: column; gap: 12px;
+      padding-top: 8px;
+    }
+    .eyebrow {
+      font-size: 20px; font-weight: 700; color: var(--brand);
+      letter-spacing: 0.2em; text-transform: uppercase;
+    }
+    .section-heading {
+      font-size: 48px; font-weight: 800;
+      line-height: 1.2; letter-spacing: -0.035em;
+    }
+    .section-desc { font-size: 17px; color: var(--ink-500); line-height: 1.6; }
+
+    /* ════════════ MAP SECTION ════════════ */
+    .map-col { flex: 1; min-width: 0; }
+
+    .map-ui {
+      position: relative; height: 505px;
+      border-radius: 20px; overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.06);
+    }
+    #map { width: 100%; height: 100%; }
+
+    .map-topbar {
+      position: absolute; top: 12px; left: 12px; right: 12px;
+      z-index: 800; display: flex; gap: 8px; align-items: center;
+    }
+    .map-search {
+      flex: 1; height: 44px; background: white;
+      border-radius: 12px; border: 1.5px solid var(--ink-100);
+      display: flex; align-items: center; gap: 9px; padding: 0 14px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.10); cursor: text;
+    }
+    .map-search-placeholder { font-size: 14px; color: var(--ink-300); }
+
+    .service-badge {
+      height: 44px; padding: 0 14px;
+      background: white; border-radius: 12px;
+      border: 1.5px solid var(--ink-100);
+      display: flex; align-items: center; gap: 7px;
+      font-size: 13px; font-weight: 600;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.10); white-space: nowrap;
+    }
+    .service-dot-indicator {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--brand);
+      box-shadow: 0 0 0 3px rgba(0,120,255,0.18);
+    }
+    .service-badge-text { color: var(--ink-700); }
+    .service-badge-text em { color: var(--brand); font-style: normal; }
+
+    .map-bottom {
+      position: absolute; bottom: 12px; left: 12px; right: 12px;
+      z-index: 800;
+    }
+    .location-card {
+      background: white; border-radius: 16px;
+      padding: 12px 14px;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.14), 0 1px 4px rgba(0,0,0,0.06);
+      display: flex; align-items: center; gap: 12px;
+    }
+    .loc-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: var(--brand-soft);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; flex-shrink: 0;
+    }
+    .loc-info { flex: 1; min-width: 0; }
+    .loc-label { font-size: 11px; font-weight: 600; color: var(--ink-300); margin-bottom: 2px; }
+    .loc-address { font-size: 14px; font-weight: 600; color: var(--ink-900); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .loc-address.placeholder { color: var(--ink-300); font-weight: 400; }
+
+    .set-btn {
+      height: 40px; padding: 0 20px;
+      background: var(--brand); color: white;
+      border-radius: 8px; border: none; cursor: pointer;
+      font-size: 13px; font-weight: 700; font-family: var(--font);
+      white-space: nowrap; opacity: 0.4;
+      transition: background .15s, opacity .15s;
+    }
+    .set-btn.ready { opacity: 1; }
+    .set-btn.ready:hover { background: var(--brand-dark); }
+    .set-btn.done { background: #1B9E5A; opacity: 1; }
+
+    .oos-toast {
+      position: absolute; bottom: 86px; left: 50%; transform: translateX(-50%);
+      z-index: 900; background: var(--ink-900); color: white;
+      font-size: 13px; font-weight: 600; font-family: var(--font);
+      padding: 9px 18px; border-radius: 999px; white-space: nowrap;
+      opacity: 0; pointer-events: none; transition: opacity 0.25s;
+    }
+    .oos-toast.show { opacity: 1; }
+
+    .map-hint {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      z-index: 700; background: rgba(10,10,11,0.68); color: white;
+      font-size: 13px; font-weight: 600; font-family: var(--font);
+      padding: 10px 20px; border-radius: 999px;
+      pointer-events: none; transition: opacity 0.4s;
+    }
+    .map-hint.hidden { opacity: 0; }
+
+    .leaflet-control-attribution { display: none !important; }
+    .leaflet-control-zoom { margin-right: 12px !important; margin-bottom: 80px !important; }
+
+    /* ════════════ 이용 방법 ════════════ */
+    .steps-col { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
+
+    .step-card {
+      background: white; border: 1px solid var(--ink-100);
+      border-radius: 14px; padding: 20px 28px;
+      display: flex; gap: 24px; align-items: center;
+    }
+    .step-num {
+      font-size: 24px; font-weight: 800; color: var(--brand);
+      letter-spacing: -0.05em; white-space: nowrap; flex-shrink: 0;
+    }
+    .step-content { flex: 1; display: flex; flex-direction: column; gap: 5px; }
+    .step-title { font-size: 18px; font-weight: 700; color: var(--ink-900); letter-spacing: -0.02em; }
+    .step-desc { font-size: 18px; font-weight: 400; color: var(--ink-500); line-height: 1.5; }
+
+    /* ════════════ 차량 검색 ════════════ */
+    .search-section-inner {
+      padding: 80px 100px;
+      display: flex; flex-direction: column; align-items: center; gap: 0;
+      text-align: center;
+    }
+    .search-eyebrow {
+      font-size: 12px; font-weight: 700; color: var(--brand);
+      letter-spacing: 0.33em; text-transform: uppercase; margin-bottom: 28px;
+    }
+    .search-heading {
+      font-size: 48px; font-weight: 800;
+      line-height: 1.25; letter-spacing: -0.035em;
+      margin-bottom: 24px;
+    }
+    .search-desc {
+      font-size: 17px; color: var(--ink-500); line-height: 1.6; margin-bottom: 48px;
+    }
+
+    .search-box {
+      width: 720px; height: 60px;
+      background: var(--ink-50); border: 1px solid var(--ink-100);
+      border-radius: 999px; position: relative;
+      display: flex; align-items: center;
+      padding: 0 7px 0 22px;
+      margin-bottom: 20px;
+      transition: border-color .15s, box-shadow .15s;
+    }
+    .search-box:focus-within { border-color: var(--brand); box-shadow: 0 0 0 3px rgba(0,120,255,0.12); }
+    .search-icon-text { font-size: 22px; color: var(--ink-300); margin-right: 10px; }
+    .search-input {
+      flex: 1; border: none; background: none; outline: none;
+      font-size: 17px; font-family: var(--font); color: var(--ink-900);
+    }
+    .search-input::placeholder { color: var(--ink-300); }
+    .search-submit {
+      height: 44px; padding: 0 24px;
+      background: var(--brand); color: white;
+      border-radius: 999px; border: none; cursor: pointer;
+      font-size: 15px; font-weight: 500; font-family: var(--font);
+      transition: background .15s; flex-shrink: 0;
+    }
+    .search-submit:hover { background: var(--brand-dark); }
+
+    .popular-row {
+      display: flex; align-items: center; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; justify-content: center;
+    }
+    .popular-label { font-size: 13px; color: var(--ink-300); white-space: nowrap; }
+    .popular-chip {
+      height: 34px; padding: 0 16px;
+      background: white; border: 1px solid var(--ink-200);
+      border-radius: 999px; cursor: pointer;
+      font-size: 13px; font-weight: 500; color: var(--ink-600);
+      font-family: var(--font); transition: border-color .15s, color .15s;
+    }
+    .popular-chip:hover { border-color: var(--brand); color: var(--brand); }
+
+    .search-notice { font-size: 14px; color: var(--ink-300); margin-top: 4px; }
+
+    /* ════════════ STICKY BAR ════════════ */
+    .sticky-bar {
+      position: fixed;
+      top: 60px;
+      left: 0; right: 0;
+      z-index: 199;
+      background: transparent;
+      transform: translateY(-100%);
+      pointer-events: none;
+    }
+
+    .sticky-bar-inner {
+      max-width: 1440px; margin: 0 auto;
+      padding: 12px 100px;
+      display: flex; gap: 24px;
+    }
+    .sticky-card {
+      flex: 1; min-width: 0;
+      background: rgba(255,255,255,0.4);
+      backdrop-filter: blur(40px);
+      -webkit-backdrop-filter: blur(40px);
+      border: 1px solid rgba(29,29,31,0.1);
+      border-radius: 18px;
+      padding: 14px 20px;
+      display: flex; align-items: center; gap: 14px;
+      cursor: pointer;
+    }
+    .sticky-card:hover { background: rgba(255,255,255,0.55); }
+    .sticky-thumb {
+      width: 72px; height: 60px;
+      border-radius: 10px; overflow: hidden; flex-shrink: 0;
+      background: var(--ink-100);
+    }
+    .sticky-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .sticky-info { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+    .sticky-brand { font-size: 13px; font-weight: 600; color: #929292; letter-spacing: 0.04em; }
+    .sticky-model { font-size: 24px; font-weight: 800; color: var(--ink-900); letter-spacing: -0.03em; line-height: 1; }
+    .sticky-cta {
+      width: 40px; height: 40px; flex-shrink: 0;
+      background: var(--brand); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 6px 18px -4px rgba(0,113,227,0.4);
+      text-decoration: none; border: none; cursor: pointer;
+      transition: background 0.15s;
+    }
+    .sticky-cta:hover { background: var(--brand-dark); }
+
+    /* ════════════ SCROLL REVEAL ════════════ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition:
+        opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-d1 { transition-delay: 0.10s; }
+    .reveal-d2 { transition-delay: 0.20s; }
+    .reveal-d3 { transition-delay: 0.30s; }
+    .reveal-d4 { transition-delay: 0.40s; }
+    .reveal-d5 { transition-delay: 0.50s; }
+
+    /* ════════════ FOOTER ════════════ */
+    footer {
+      background: var(--ink-900); color: rgba(255,255,255,0.5);
+      padding: 40px 100px;
+    }
+    .footer-inner { max-width: 1440px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+    .footer-logo { font-size: 15px; font-weight: 800; color: rgba(255,255,255,0.7); letter-spacing: -0.02em; }
+    .footer-copy { font-size: 13px; }
+  </style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<header>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="nav-logo" href="#">
+        <span class="nav-logo-mark"></span>
+        DRIVE:ON
+      </a>
+      <div class="nav-links">
+        <a class="nav-link active" href="#">시승 차량</a>
+        <a class="nav-link" href="#">이용 방법</a>
+        <a class="nav-link" href="#">당첨 혜택</a>
+        <a class="nav-link" href="#">자주 묻는 질문</a>
+      </div>
+      <div class="nav-cta">
+        <button class="btn-ghost-sm">로그인</button>
+        <button class="btn-brand-sm">응모하기</button>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- ══ STICKY VEHICLE BAR ══ -->
+<div class="sticky-bar" id="sticky-bar">
+  <div class="sticky-bar-inner">
+    <div class="sticky-card">
+      <div class="sticky-thumb">
+        <img src="https://www.figma.com/api/mcp/asset/a1529992-816f-4a6c-bd6a-f9296bea39e3" alt="Volvo XC40" />
+      </div>
+      <div class="sticky-info">
+        <div class="sticky-brand">VOLVO</div>
+        <div class="sticky-model">XC40</div>
+      </div>
+      <a class="sticky-cta" href="#">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M6 4l4 4-4 4" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+    <div class="sticky-card">
+      <div class="sticky-thumb">
+        <img src="https://www.figma.com/api/mcp/asset/a1529992-816f-4a6c-bd6a-f9296bea39e3" alt="Range Rover Velar" />
+      </div>
+      <div class="sticky-info">
+        <div class="sticky-brand">RANGE ROVER</div>
+        <div class="sticky-model">Velar</div>
+      </div>
+      <a class="sticky-cta" href="#">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M6 4l4 4-4 4" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+    <div class="sticky-card">
+      <div class="sticky-thumb">
+        <img src="https://www.figma.com/api/mcp/asset/a1529992-816f-4a6c-bd6a-f9296bea39e3" alt="Range Rover Evoque" />
+      </div>
+      <div class="sticky-info">
+        <div class="sticky-brand">RANGE ROVER</div>
+        <div class="sticky-model">Evoque</div>
+      </div>
+      <a class="sticky-cta" href="#">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M6 4l4 4-4 4" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ══ HERO ══ -->
+<div class="page-section" style="background:#FDFDFD">
+  <div class="hero">
+    <div class="hero-top">
+      <div class="live-pill">
+        <span class="live-dot"></span>
+        이번 주 응모 진행중
+      </div>
+      <div class="hero-heading">
+        <div class="line-plain">내 집에서 시작하는</div>
+        <div class="line-gradient">4박 5일간의 무료 시승</div>
+      </div>
+      <p class="hero-sub">원하는 시간과 장소로 시승 차를 배달해드립니다.</p>
+    </div>
+
+    <!-- 차량 카드 3종 -->
+    <div class="vehicle-grid">
+      <!-- XC40 -->
+      <div class="vehicle-col">
+        <div class="vehicle-card-main">
+          <img class="vehicle-card-img" src="https://www.figma.com/api/mcp/asset/a1529992-816f-4a6c-bd6a-f9296bea39e3" alt="Volvo XC40" />
+          <div class="vehicle-card-blur"></div>
+          <div class="vehicle-card-bottom">
+            <div class="vehicle-info">
+              <div class="vehicle-brand">VOLVO</div>
+              <div class="vehicle-model">XC40</div>
+            </div>
+            <a class="cta-pill" href="#">
+              시승신청
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 4l4 4-4 4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="vehicle-card-review" data-car="xc40">
+          <div class="review-info">
+            <div class="review-slide">
+              <div class="review-score">
+                <span class="review-star">★</span>
+                <span class="review-score-num">8.33</span>
+              </div>
+              <div class="review-text">꾸준한 관심과 관리가 필요! 품질 이슈에 비해 괜찮음 서비스가 소문보다 잘 처리됨</div>
+            </div>
+          </div>
+          <span class="review-arrow">›</span>
+        </div>
+      </div>
+
+      <!-- Range Rover Velar -->
+      <div class="vehicle-col">
+        <div class="vehicle-card-main">
+          <img class="vehicle-card-img" src="https://www.figma.com/api/mcp/asset/a1529992-816f-4a6c-bd6a-f9296bea39e3" alt="Range Rover Velar" />
+          <div class="vehicle-card-blur"></div>
+          <div class="vehicle-card-bottom">
+            <div class="vehicle-info">
+              <div class="vehicle-brand">RANGE ROVER</div>
+              <div class="vehicle-model">Velar</div>
+            </div>
+            <a class="cta-pill" href="#">
+              시승신청
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 4l4 4-4 4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="vehicle-card-review" data-car="velar">
+          <div class="review-info">
+            <div class="review-slide">
+              <div class="review-score">
+                <span class="review-star">★</span>
+                <span class="review-score-num">9.12</span>
+              </div>
+              <div class="review-text">디자인이 압도적으로 아름다운 차. 에어 서스펜션이 제공하는 승차감은 타의 추종 불허</div>
+            </div>
+          </div>
+          <span class="review-arrow">›</span>
+        </div>
+      </div>
+
+      <!-- Range Rover Evoque -->
+      <div class="vehicle-col">
+        <div class="vehicle-card-main">
+          <img class="vehicle-card-img" src="https://www.figma.com/api/mcp/asset/a1529992-816f-4a6c-bd6a-f9296bea39e3" alt="Range Rover Evoque" />
+          <div class="vehicle-card-blur"></div>
+          <div class="vehicle-card-bottom">
+            <div class="vehicle-info">
+              <div class="vehicle-brand">RANGE ROVER</div>
+              <div class="vehicle-model">Evoque</div>
+            </div>
+            <a class="cta-pill" href="#">
+              시승신청
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 4l4 4-4 4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="vehicle-card-review" data-car="evoque">
+          <div class="review-info">
+            <div class="review-slide">
+              <div class="review-score">
+                <span class="review-star">★</span>
+                <span class="review-score-num">8.76</span>
+              </div>
+              <div class="review-text">콤팩트한 사이즈에 럭셔리함을 잘 담았고, 도심 주행에서 특히 빛을 발하는 모델</div>
+            </div>
+          </div>
+          <span class="review-arrow">›</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ 왜 DRIVE:ON인가 (지도) ══ -->
+<div class="page-section section-bg-light">
+  <div class="section-inner">
+    <div class="text-col reveal">
+      <p class="eyebrow">왜 DRIVE:ON인가</p>
+      <h2 class="section-heading">원하는 곳에서,<br>원하는 시간에</h2>
+      <p class="section-desc">시승을 시작할 위치와 시간을 정하면,<br>그곳으로 차량을 배달해 드려요.</p>
+    </div>
+
+    <div class="map-col reveal reveal-d2">
+      <div class="map-ui">
+        <!-- 상단: 검색 + 서비스 뱃지 -->
+        <div class="map-topbar">
+          <div class="map-search">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <circle cx="6.5" cy="6.5" r="4.5" stroke="#B0B0BC" stroke-width="1.5"/>
+              <path d="M10 10L13.5 13.5" stroke="#B0B0BC" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <span class="map-search-placeholder">주소 또는 장소 검색</span>
+          </div>
+          <div class="service-badge">
+            <span class="service-dot-indicator"></span>
+            <span class="service-badge-text">서울 <em>전 지역</em> 서비스 중</span>
+          </div>
+        </div>
+
+        <!-- 지도 -->
+        <div id="map"></div>
+
+        <!-- 클릭 안내 -->
+        <div class="map-hint" id="hint">지도를 클릭해 배달 위치를 설정하세요</div>
+
+        <!-- 서비스 불가 토스트 -->
+        <div class="oos-toast" id="oos-toast">서울 외 지역은 아직 서비스되지 않아요 😅</div>
+
+        <!-- 하단 위치 카드 -->
+        <div class="map-bottom">
+          <div class="location-card">
+            <div class="loc-icon">📍</div>
+            <div class="loc-info">
+              <div class="loc-label">배달 위치</div>
+              <div class="loc-address placeholder" id="address-text">위치를 선택해 주세요</div>
+            </div>
+            <button class="set-btn" id="set-btn" disabled>이 위치로 설정</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ 이용 방법 ══ -->
+<div class="page-section section-bg-light">
+  <div class="section-inner" style="border-top: 1px solid var(--ink-100);">
+    <div class="text-col reveal">
+      <p class="eyebrow">이용 방법</p>
+      <h2 class="section-heading">5단계로<br>간단하게</h2>
+      <p class="section-desc">누구나 쉽게 준비 없이 바로 시작할 수 있어요.</p>
+    </div>
+    <div class="steps-col">
+      <div class="step-card reveal reveal-d1">
+        <span class="step-num">01</span>
+        <div class="step-content">
+          <p class="step-title">시승 차량 선택</p>
+          <p class="step-desc">원하는 차량을 선택해 주세요.</p>
+        </div>
+      </div>
+      <div class="step-card reveal reveal-d2">
+        <span class="step-num">02</span>
+        <div class="step-content">
+          <p class="step-title">응모 및 발표 일정</p>
+          <p class="step-desc">이번 주까지 응모할 수 있으며, 당첨자는 다음 주 수요일에 발표돼요.</p>
+        </div>
+      </div>
+      <div class="step-card reveal reveal-d3">
+        <span class="step-num">03</span>
+        <div class="step-content">
+          <p class="step-title">시승 정보 입력</p>
+          <p class="step-desc">시승을 시작할 위치와 시간을 입력해 주세요. 입력한 곳으로 차량을 배달해 드려요.</p>
+        </div>
+      </div>
+      <div class="step-card reveal reveal-d4">
+        <span class="step-num">04</span>
+        <div class="step-content">
+          <p class="step-title">차 받기</p>
+          <p class="step-desc">배달 기사님에게 차를 받고, 5일 동안 무료로 드라이브를 즐겨 보세요.</p>
+        </div>
+      </div>
+      <div class="step-card reveal reveal-d5">
+        <span class="step-num">05</span>
+        <div class="step-content">
+          <p class="step-title">반납</p>
+          <p class="step-desc">차를 받은 곳에서 배달 기사님에게 차량을 반납해 주세요.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ 차량 검색 ══ -->
+<div class="page-section section-bg-white">
+  <div class="search-section-inner">
+    <p class="search-eyebrow reveal">더 많은 차량</p>
+    <h2 class="search-heading reveal reveal-d1">찾으시는 차가<br>여기 없나요?</h2>
+    <p class="search-desc reveal reveal-d2">이번 회차 외에도 다양한 차종이 순차적으로 시승 라인업에 등록됩니다.<br>관심 차량을 검색해 알림을 받아보세요.</p>
+    <div class="search-box reveal reveal-d3">
+      <span class="search-icon-text">⌕</span>
+      <input class="search-input" type="text" placeholder="예: 볼보 XC60, BMW X3, 제네시스 GV70" />
+      <button class="search-submit">검색</button>
+    </div>
+    <div class="popular-row">
+      <span class="popular-label">인기 검색:</span>
+      <button class="popular-chip">볼보 XC60</button>
+      <button class="popular-chip">BMW X3</button>
+      <button class="popular-chip">제네시스 GV70</button>
+      <button class="popular-chip">포르쉐 마칸</button>
+      <button class="popular-chip">벤츠 GLC</button>
+      <button class="popular-chip">테슬라 모델Y</button>
+    </div>
+    <p class="search-notice">원하시는 차량이 시승 라인업에 등록되면 이메일·알림톡으로 알려드려요.</p>
+  </div>
+</div>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-inner">
+    <span class="footer-logo">DRIVE:ON</span>
+    <span class="footer-copy">© 2026 DRIVE:ON. All rights reserved.</span>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+(function () {
+  var SEOUL = [37.5665, 126.9780];
+  var RADIUS_M = 22500;
+
+  var map = L.map('map', {
+    center: SEOUL, zoom: 11,
+    zoomControl: true, attributionControl: false
+  });
+
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    maxZoom: 19, subdomains: 'abcd'
+  }).addTo(map);
+
+  /* 서울 경계 계산 */
+  function circlePts(center, r, n) {
+    var pts = [];
+    for (var i = 0; i < n; i++) {
+      var a = (i / n) * 2 * Math.PI;
+      pts.push([
+        center[0] + (r * Math.cos(a)) / 111320,
+        center[1] + (r * Math.sin(a)) / (111320 * Math.cos(center[0] * Math.PI / 180))
+      ]);
+    }
+    return pts;
+  }
+
+  var seoulPts = circlePts(SEOUL, RADIUS_M, 96);
+
+  /* 외부 마스크 */
+  L.polygon([[[-90,-180],[-90,180],[90,180],[90,-180]], seoulPts], {
+    fillColor: '#0A0A0B', fillOpacity: 0.28,
+    stroke: false, interactive: false
+  }).addTo(map);
+
+  /* 서울 경계선 */
+  L.polygon([seoulPts], {
+    fillOpacity: 0, color: '#0078FF', weight: 2, opacity: 0.5,
+    dashArray: '6 5', interactive: false
+  }).addTo(map);
+
+  /* 커스텀 핀 */
+  var PIN = '<svg width="36" height="48" viewBox="0 0 36 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 0C8.059 0 0 8.059 0 18C0 30.5 18 48 18 48s18-17.5 18-30C36 8.059 27.941 0 18 0z" fill="#0078FF"/><circle cx="18" cy="18" r="8" fill="white"/><circle cx="18" cy="18" r="4" fill="#0078FF"/></svg>';
+  var pinIcon = L.divIcon({
+    html: '<div style="filter:drop-shadow(0 4px 12px rgba(0,120,255,0.45))">' + PIN + '</div>',
+    className: '', iconSize: [36, 48], iconAnchor: [18, 48]
+  });
+
+  var marker = null;
+  var lastPos = null;
+  var addrEl = document.getElementById('address-text');
+  var setBtn = document.getElementById('set-btn');
+  var hint   = document.getElementById('hint');
+  var toast  = document.getElementById('oos-toast');
+  var toastTimer;
+
+  function inSeoul(ll) { return map.distance(ll, L.latLng(SEOUL)) <= RADIUS_M; }
+
+  function showToast() {
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { toast.classList.remove('show'); }, 2800);
+  }
+
+  function fetchAddr(ll) {
+    addrEl.textContent = '주소 불러오는 중…';
+    addrEl.classList.remove('placeholder');
+    fetch('https://nominatim.openstreetmap.org/reverse?format=json&lat=' + ll.lat + '&lon=' + ll.lng + '&accept-language=ko')
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        var a = d.address || {};
+        var parts = [];
+        if (a.city_district || a.borough) parts.push(a.city_district || a.borough);
+        if (a.suburb || a.neighbourhood) parts.push(a.suburb || a.neighbourhood);
+        if (a.road) parts.push(a.road);
+        addrEl.textContent = parts.join(' ') || (d.display_name || '').split(',')[0];
+      })
+      .catch(function () { addrEl.textContent = '서울시'; });
+  }
+
+  function place(ll) {
+    hint.classList.add('hidden');
+    if (marker) { marker.setLatLng(ll); }
+    else {
+      marker = L.marker(ll, { icon: pinIcon, draggable: true }).addTo(map);
+      marker.on('dragend', function () {
+        var p = marker.getLatLng();
+        if (!inSeoul(p)) { showToast(); marker.setLatLng(lastPos); return; }
+        lastPos = p; fetchAddr(p);
+      });
+    }
+    lastPos = ll;
+    setBtn.disabled = false;
+    setBtn.classList.add('ready');
+    setBtn.classList.remove('done');
+    setBtn.textContent = '이 위치로 설정';
+    fetchAddr(ll);
+  }
+
+  map.on('click', function (e) {
+    if (!inSeoul(e.latlng)) { showToast(); return; }
+    place(e.latlng);
+  });
+
+  setBtn.addEventListener('click', function () {
+    if (!marker || setBtn.disabled) return;
+    setBtn.classList.add('done');
+    setBtn.textContent = '✓ 설정 완료';
+  });
+
+  map.fitBounds(L.circle(SEOUL, { radius: RADIUS_M }).getBounds().pad(0.06));
+
+  /* 인기 검색 칩 */
+  document.querySelectorAll('.popular-chip').forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      document.querySelector('.search-input').value = chip.textContent.trim();
+      document.querySelector('.search-input').focus();
+    });
+  });
+})();
+</script>
+
+<script>
+/* ── 컴팩트 바: 스크롤 연동 + 썸네일 이동 ── */
+(function () {
+  var bar  = document.getElementById('sticky-bar');
+  var grid = document.querySelector('.vehicle-grid');
+  if (!bar || !grid) return;
+
+  var srcCards  = Array.prototype.slice.call(grid.querySelectorAll('.vehicle-card-main'));
+  var srcImgs   = Array.prototype.slice.call(grid.querySelectorAll('.vehicle-card-img'));
+  var tgtThumbs = Array.prototype.slice.call(bar.querySelectorAll('.sticky-thumb'));
+  var NAV_H     = 60;
+
+  /* 썸네일 고스트 엘리먼트 생성 (풀카드↔컴팩트 바 사이 이동) */
+  var ghosts = srcImgs.map(function (img) {
+    var g  = document.createElement('div');
+    g.style.cssText = 'position:fixed;z-index:201;pointer-events:none;overflow:hidden;opacity:0;';
+    var gi = document.createElement('img');
+    gi.src = img.src;
+    gi.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;';
+    g.appendChild(gi);
+    document.body.appendChild(g);
+    return g;
+  });
+
+  function lerp(a, b, t) { return a + (b - a) * t; }
+
+  function update() {
+    var rect    = grid.getBoundingClientRect();
+    var overlap = NAV_H - rect.top;
+    var barH    = bar.offsetHeight || 112;
+    var p       = Math.max(0, Math.min(1, overlap / barH)); /* 0→1 */
+
+    /* 컴팩트 바 전체 */
+    bar.style.transform     = 'translateY(' + (-100 * (1 - p)) + '%)';
+    bar.style.pointerEvents = p > 0 ? 'auto' : 'none';
+
+    /* 풀 카드: 축소·페이드 */
+    grid.style.transformOrigin = 'top center';
+    grid.style.transform       = 'scale(' + (1 - 0.08 * p) + ')';
+    grid.style.opacity         = (1 - p).toString();
+
+    /* 원본 썸네일은 고스트가 대체하는 동안 숨김 */
+    srcImgs.forEach(function (img) {
+      img.style.opacity = p > 0 ? '0' : '';
+    });
+
+    /* 고스트: 풀카드 이미지 → 컴팩트 썸네일로 이동 */
+    ghosts.forEach(function (ghost, i) {
+      if (p <= 0 || !srcCards[i] || !tgtThumbs[i]) {
+        ghost.style.opacity = '0';
+        return;
+      }
+
+      var src = srcCards[i].getBoundingClientRect();
+      var tgt = tgtThumbs[i].getBoundingClientRect();
+
+      ghost.style.left         = lerp(src.left,   tgt.left,   p) + 'px';
+      ghost.style.top          = lerp(src.top,    tgt.top,    p) + 'px';
+      ghost.style.width        = lerp(src.width,  tgt.width,  p) + 'px';
+      ghost.style.height       = lerp(src.height, tgt.height, p) + 'px';
+      ghost.style.borderRadius = lerp(18,         10,         p) + 'px';
+      ghost.style.opacity      = '1';
+    });
+  }
+
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+})();
+
+/* ── 리뷰 자동 순환 (3초) ── */
+(function () {
+  var reviews = {
+    xc40: [
+      { score: '8.33', text: '꾸준한 관심과 관리가 필요! 품질 이슈에 비해 괜찮음 서비스가 소문보다 잘 처리됨' },
+      { score: '7.90', text: '실용성과 안전 사양이 훌륭해요. 다만 실내 소음은 개선이 필요한 부분' },
+      { score: '8.60', text: '북유럽 감성이 느껴지는 인테리어, 전기 모터의 부드러운 가속이 인상적' },
+      { score: '8.10', text: '4박 5일 시승 내내 ADAS가 빛을 발했어요. 고속도로 주행 보조는 정말 편함' },
+    ],
+    velar: [
+      { score: '9.12', text: '디자인이 압도적으로 아름다운 차. 에어 서스펜션이 제공하는 승차감은 타의 추종 불허' },
+      { score: '9.40', text: '터치스크린 인터페이스가 처음엔 낯설지만 이틀 후엔 완전히 적응됐어요' },
+      { score: '8.80', text: '오프로드 세팅까지 갖춘 SUV가 이렇게 우아할 수 있다니, 매일 출근길이 설렘' },
+      { score: '9.20', text: '연비가 걱정됐는데 시가지 주행에서도 생각보다 훨씬 효율적이었습니다' },
+    ],
+    evoque: [
+      { score: '8.76', text: '콤팩트한 사이즈에 럭셔리함을 잘 담았고, 도심 주행에서 특히 빛을 발하는 모델' },
+      { score: '8.50', text: '후면 카메라 화질이 아쉽지만, 주차 어시스트가 좁은 골목에서 큰 도움이 됨' },
+      { score: '9.00', text: '파노라믹 선루프와 메리디안 사운드 시스템 조합이 완벽한 드라이브 경험을 만들어줌' },
+      { score: '8.30', text: '뒷좌석이 생각보다 좁지만, 혼자 또는 둘이서 장거리 여행엔 더없이 만족스러운 차' },
+    ],
+  };
+
+  var indices = { xc40: 0, velar: 0, evoque: 0 };
+
+  function rotate(car) {
+    var cards = document.querySelectorAll('[data-car="' + car + '"]');
+    cards.forEach(function (card) {
+      var slide = card.querySelector('.review-slide');
+      /* 1) 현재 콘텐츠 위로 슬라이드 아웃 */
+      slide.style.transition = 'transform 0.36s cubic-bezier(0.4, 0, 0.2, 1)';
+      slide.style.transform  = 'translateY(-110%)';
+
+      setTimeout(function () {
+        /* 2) 내용 교체 후 아래에서 대기 (즉시) */
+        indices[car] = (indices[car] + 1) % reviews[car].length;
+        var r = reviews[car][indices[car]];
+        card.querySelector('.review-score-num').textContent = r.score;
+        card.querySelector('.review-text').textContent      = r.text;
+
+        slide.style.transition = 'none';
+        slide.style.transform  = 'translateY(110%)';
+
+        /* 3) 한 프레임 후 위로 슬라이드 인 */
+        requestAnimationFrame(function () {
+          requestAnimationFrame(function () {
+            slide.style.transition = 'transform 0.36s cubic-bezier(0.4, 0, 0.2, 1)';
+            slide.style.transform  = 'translateY(0)';
+          });
+        });
+      }, 380);
+    });
+  }
+
+  setInterval(function () { rotate('xc40');   }, 3000);
+  setInterval(function () { rotate('velar');  }, 3000 + 100);
+  setInterval(function () { rotate('evoque'); }, 3000 + 200);
+})();
+
+/* ── Scroll reveal ── */
+(function () {
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(function (el) {
+    io.observe(el);
+  });
+})();
+</script>
+</body>
+</html>
