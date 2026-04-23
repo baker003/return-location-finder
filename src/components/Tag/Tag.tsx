@@ -54,10 +54,10 @@ const fontWeight: Record<TagSize, Record<'regular' | 'bold', string>> = {
 
 /* ── Padding: size x showIcon ── */
 const paddingClasses: Record<TagSize, Record<'icon' | 'text', string>> = {
-  xs: { icon: 'pl-[6px] pr-2', text: 'pl-2 pr-2' },
-  sm: { icon: 'pl-2 pr-[10px]', text: 'pl-[10px] pr-[10px]' },
-  md: { icon: 'pl-[10px] pr-3', text: 'pl-3 pr-3' },
-  lg: { icon: 'pl-3 pr-[14px]', text: 'pl-[14px] pr-[14px]' },
+  xs: { icon: 'pl-1 pr-[6px]', text: 'pl-[6px] pr-[6px]' },
+  sm: { icon: 'pl-[6px] pr-2', text: 'pl-2 pr-2' },
+  md: { icon: 'pl-2 pr-[10px]', text: 'pl-[10px] pr-[10px]' },
+  lg: { icon: 'pl-[10px] pr-3', text: 'pl-3 pr-3' },
 };
 
 /* ── Icon size (line-height 기준: ~20px→16, 20~26→20, 26~32→24, 32+→32) ── */
