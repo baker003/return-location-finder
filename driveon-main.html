@@ -725,6 +725,74 @@
     .footer-logo { font-size: 15px; font-weight: 800; color: rgba(255,255,255,0.7); letter-spacing: -0.02em; }
     .footer-copy { font-size: 13px; }
 
+    /* ════════════ 시승 차량 리스트 ════════════ */
+    #view-vehicles { background: #fdfdfd; min-height: 100vh; }
+    .vl-wrap { max-width: 1280px; margin: 0 auto; padding: 48px 100px 80px; }
+    .vl-filter-bar {
+      display: flex; align-items: center; gap: 8px;
+      margin-bottom: 40px; flex-wrap: wrap;
+    }
+    .vl-filter-label {
+      font-size: 13px; font-weight: 600; color: var(--ink-500);
+      margin-right: 4px; white-space: nowrap;
+    }
+    .vl-chip {
+      display: inline-flex; align-items: center; height: 34px;
+      padding: 0 16px; border-radius: 999px;
+      font-size: 13px; font-weight: 600; cursor: pointer;
+      border: 1.5px solid var(--ink-200); background: white;
+      color: var(--ink-600, var(--ink-500)); transition: all .15s;
+    }
+    .vl-chip:hover { border-color: var(--ink-400); color: var(--ink-900); }
+    .vl-chip.active { background: var(--ink-900); border-color: var(--ink-900); color: white; }
+    .vl-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .vl-card {
+      border-radius: 18px; overflow: hidden;
+      background: white; cursor: pointer;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .vl-card:hover { transform: translateY(-4px); }
+    .vl-card-img {
+      width: 100%; height: 178px; overflow: hidden;
+      position: relative; border-radius: 18px;
+    }
+    .vl-card-img img {
+      width: 100%; height: 100%; object-fit: cover;
+      display: block; transition: transform .35s ease;
+    }
+    .vl-card:hover .vl-card-img img { transform: scale(1.06); }
+    .vl-card-info {
+      padding: 12px 12px 16px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .vl-card-text { flex: 1; min-width: 0; }
+    .vl-card-brand {
+      font-size: 13px; font-weight: 600; letter-spacing: 0.05em;
+      color: var(--ink-400); text-transform: uppercase; margin-bottom: 4px;
+    }
+    .vl-card-model {
+      font-size: 22px; font-weight: 700; color: var(--ink-900);
+      letter-spacing: -0.02em;
+    }
+    .vl-card-cta {
+      flex-shrink: 0;
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 10px 16px 10px 18px;
+      background: var(--brand); color: white;
+      border-radius: 999px; border: none; cursor: pointer;
+      font-size: 14px; font-weight: 600; font-family: var(--font);
+      box-shadow: 0 6px 18px -4px rgba(0,113,227,0.4);
+      white-space: nowrap;
+      opacity: 0; transform: translateX(6px);
+      transition: opacity .2s ease, transform .2s ease, background .15s;
+    }
+    .vl-card-cta:hover { background: var(--brand-dark); }
+    .vl-card:hover .vl-card-cta { opacity: 1; transform: translateX(0); }
+
     /* ════════════ 상세 페이지 ════════════ */
     #view-detail { background: #fdfdfd; min-width: 1280px; }
 
@@ -897,14 +965,12 @@
         DRIVE:ON
       </a>
       <div class="nav-links">
-        <a class="nav-link active" href="#">시승 차량</a>
-        <a class="nav-link" href="#">이용 방법</a>
-        <a class="nav-link" href="#">당첨 혜택</a>
+        <a class="nav-link" href="#" data-view="vehicles">시승 차량</a>
         <a class="nav-link" href="#">자주 묻는 질문</a>
       </div>
       <div class="nav-cta">
         <button class="btn-ghost-sm">로그인</button>
-        <button class="btn-brand-sm">응모하기</button>
+        <button class="btn-ghost-sm">회원가입</button>
       </div>
     </div>
   </nav>
@@ -1400,6 +1466,18 @@
 
 </div><!-- /#view-detail -->
 
+<!-- ══ 시승 차량 리스트 뷰 ══ -->
+<div id="view-vehicles" style="display:none;">
+  <div class="vl-wrap">
+    <div class="vl-filter-bar">
+      <button class="vl-chip active" data-brand="all">전체</button>
+      <button class="vl-chip" data-brand="VOLVO">VOLVO</button>
+      <button class="vl-chip" data-brand="RANGE ROVER">RANGE ROVER</button>
+    </div>
+    <div class="vl-grid" id="vl-grid"></div>
+  </div>
+</div><!-- /#view-vehicles -->
+
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
 (function () {
@@ -1556,6 +1634,10 @@
   function lerp(a, b, t) { return a + (b - a) * t; }
 
   function update() {
+    if (document.getElementById('view-main').style.display === 'none') {
+      ghosts.forEach(function (g) { g.style.opacity = '0'; });
+      return;
+    }
     var rect    = grid.getBoundingClientRect();
     var overlap = NAV_H - rect.top;
     var barH    = bar.offsetHeight || 112;
@@ -1900,6 +1982,7 @@
   var PAGE_SIZE = 20;
 
   var savedScrollY = 0;
+  var previousView = 'main';
 
   /* ── 리뷰 렌더링 ── */
   function renderMoreReviews() {
@@ -1982,7 +2065,10 @@
 
     /* 뷰 전환 */
     savedScrollY = window.scrollY;
+    previousView = document.getElementById('view-vehicles').style.display !== 'none' ? 'vehicles' : 'main';
+    history.pushState({ view: 'detail', vehicleId: vehicleId }, '');
     document.getElementById('view-main').style.display = 'none';
+    document.getElementById('view-vehicles').style.display = 'none';
     document.getElementById('view-detail').style.display = 'block';
     window.scrollTo(0, 0);
 
@@ -1994,13 +2080,25 @@
   /* ── 뷰 닫기 ── */
   window.closeDetail = function () {
     document.getElementById('view-detail').style.display = 'none';
-    document.getElementById('view-main').style.display = 'block';
+    if (previousView === 'vehicles') {
+      document.getElementById('view-vehicles').style.display = 'block';
+    } else {
+      document.getElementById('view-main').style.display = 'block';
+    }
     window.scrollTo(0, savedScrollY);
     document.body.classList.remove('detail-open');
   };
 
   document.querySelector('.detail-back-btn').addEventListener('click', function () {
-    window.closeDetail();
+    history.back();
+  });
+
+  window.addEventListener('popstate', function (e) {
+    if (document.getElementById('view-detail').style.display !== 'none') {
+      window.closeDetail();
+    } else if (document.getElementById('view-vehicles').style.display !== 'none') {
+      window.closeVehicles();
+    }
   });
 
   /* ── 탭 인터랙션 ── */
@@ -2099,8 +2197,7 @@
     }, 1500);
   });
 
-  /* ── 기존 CTA 버튼 연결 ── */
-  /* .cta-pill: vehicle-card 내부 */
+  /* ── 차량 카드 클릭: 상세 뷰 진입 ── */
   document.querySelectorAll('.vehicle-card-main').forEach(function (card, idx) {
     var carIds = ['xc40', 'velar', 'evoque'];
     var pill = card.querySelector('.cta-pill');
@@ -2110,9 +2207,13 @@
         window.openDetail(carIds[idx]);
       });
     }
+    card.addEventListener('click', function (e) {
+      if (!e.target.closest('.cta-pill')) {
+        window.openDetail(carIds[idx]);
+      }
+    });
   });
 
-  /* .vehicle-card-review: 리뷰 카드 클릭 */
   document.querySelectorAll('.vehicle-card-review[data-car]').forEach(function (card) {
     card.style.cursor = 'pointer';
     card.addEventListener('click', function () {
@@ -2120,7 +2221,6 @@
     });
   });
 
-  /* sticky-bar 시승신청 버튼 */
   var stickyCards = document.querySelectorAll('.sticky-card');
   var carIds = ['xc40', 'velar', 'evoque'];
   stickyCards.forEach(function (card, idx) {
@@ -2138,11 +2238,9 @@
     });
   });
 
-  /* mq-popup CTA */
   document.addEventListener('click', function (e) {
     if (e.target.classList.contains('mq-popup-cta')) {
       e.preventDefault();
-      /* 팝업에 표시된 모델명으로 vehicleId 추정 */
       var modelEl = document.querySelector('.mq-popup-model');
       var model = modelEl ? modelEl.textContent.toLowerCase() : '';
       var vid = model.indexOf('xc40') !== -1 ? 'xc40'
@@ -2150,6 +2248,164 @@
               : model.indexOf('evoque') !== -1 ? 'evoque'
               : 'xc40';
       window.openDetail(vid);
+    }
+  });
+
+  /* ── 시승 차량 리스트 뷰 ── */
+  var VL_VEHICLES = [
+    /* HYUNDAI */
+    { id: 'hyundai-ioniq6',    brand: 'HYUNDAI',        model: 'IONIQ 6' },
+    { id: 'hyundai-ioniq5',    brand: 'HYUNDAI',        model: 'IONIQ 5' },
+    { id: 'hyundai-palisade',  brand: 'HYUNDAI',        model: 'Palisade' },
+    { id: 'hyundai-santafe',   brand: 'HYUNDAI',        model: 'Santa Fe' },
+    { id: 'hyundai-grandeur',  brand: 'HYUNDAI',        model: 'Grandeur' },
+    { id: 'hyundai-sonata',    brand: 'HYUNDAI',        model: 'Sonata' },
+    { id: 'hyundai-nexo',      brand: 'HYUNDAI',        model: 'Nexo' },
+    /* KIA */
+    { id: 'kia-ev6',           brand: 'KIA',            model: 'EV6' },
+    { id: 'kia-ev9',           brand: 'KIA',            model: 'EV9' },
+    { id: 'kia-sportage',      brand: 'KIA',            model: 'Sportage' },
+    { id: 'kia-sorento',       brand: 'KIA',            model: 'Sorento' },
+    { id: 'kia-carnival',      brand: 'KIA',            model: 'Carnival' },
+    { id: 'kia-k8',            brand: 'KIA',            model: 'K8' },
+    { id: 'kia-k5',            brand: 'KIA',            model: 'K5' },
+    { id: 'kia-niro',          brand: 'KIA',            model: 'Niro EV' },
+    /* GENESIS */
+    { id: 'genesis-gv80',      brand: 'GENESIS',        model: 'GV80' },
+    { id: 'genesis-gv70',      brand: 'GENESIS',        model: 'GV70' },
+    { id: 'genesis-gv60',      brand: 'GENESIS',        model: 'GV60' },
+    { id: 'genesis-g90',       brand: 'GENESIS',        model: 'G90' },
+    { id: 'genesis-g80',       brand: 'GENESIS',        model: 'G80' },
+    { id: 'genesis-g70',       brand: 'GENESIS',        model: 'G70' },
+    /* BMW */
+    { id: 'bmw-5series',       brand: 'BMW',            model: '5 Series' },
+    { id: 'bmw-3series',       brand: 'BMW',            model: '3 Series' },
+    { id: 'bmw-x5',            brand: 'BMW',            model: 'X5' },
+    { id: 'bmw-x3',            brand: 'BMW',            model: 'X3' },
+    { id: 'bmw-7series',       brand: 'BMW',            model: '7 Series' },
+    { id: 'bmw-ix',            brand: 'BMW',            model: 'iX' },
+    /* MERCEDES-BENZ */
+    { id: 'mb-eclass',         brand: 'MERCEDES-BENZ',  model: 'E-Class' },
+    { id: 'mb-cclass',         brand: 'MERCEDES-BENZ',  model: 'C-Class' },
+    { id: 'mb-gle',            brand: 'MERCEDES-BENZ',  model: 'GLE' },
+    { id: 'mb-glc',            brand: 'MERCEDES-BENZ',  model: 'GLC' },
+    { id: 'mb-sclass',         brand: 'MERCEDES-BENZ',  model: 'S-Class' },
+    { id: 'mb-eqs',            brand: 'MERCEDES-BENZ',  model: 'EQS' },
+    /* AUDI */
+    { id: 'audi-a6',           brand: 'AUDI',           model: 'A6' },
+    { id: 'audi-q5',           brand: 'AUDI',           model: 'Q5' },
+    { id: 'audi-q7',           brand: 'AUDI',           model: 'Q7' },
+    { id: 'audi-etrongt',      brand: 'AUDI',           model: 'e-tron GT' },
+    { id: 'audi-a4',           brand: 'AUDI',           model: 'A4' },
+    /* VOLVO */
+    { id: 'xc40',              brand: 'VOLVO',          model: 'XC40' },
+    { id: 'volvo-xc60',        brand: 'VOLVO',          model: 'XC60' },
+    { id: 'volvo-xc90',        brand: 'VOLVO',          model: 'XC90' },
+    { id: 'volvo-c40',         brand: 'VOLVO',          model: 'C40 Recharge' },
+    /* RANGE ROVER */
+    { id: 'velar',             brand: 'RANGE ROVER',    model: 'Velar' },
+    { id: 'evoque',            brand: 'RANGE ROVER',    model: 'Evoque' },
+    { id: 'rr-sport',          brand: 'RANGE ROVER',    model: 'Sport' },
+    { id: 'rr-defender',       brand: 'RANGE ROVER',    model: 'Defender' },
+    /* PORSCHE */
+    { id: 'porsche-cayenne',   brand: 'PORSCHE',        model: 'Cayenne' },
+    { id: 'porsche-macan',     brand: 'PORSCHE',        model: 'Macan' },
+    /* TESLA */
+    { id: 'tesla-model3',      brand: 'TESLA',          model: 'Model 3' },
+    { id: 'tesla-modely',      brand: 'TESLA',          model: 'Model Y' },
+  ];
+
+  function renderVehicleList(brandFilter) {
+    var grid = document.getElementById('vl-grid');
+    grid.innerHTML = '';
+    VL_VEHICLES.filter(function (v) {
+      return brandFilter === 'all' || v.brand === brandFilter;
+    }).forEach(function (v) {
+      var card = document.createElement('div');
+      card.className = 'vl-card';
+      card.innerHTML =
+        '<div class="vl-card-img"><img src="' + imgXC40 + '" alt="' + v.model + '"></div>' +
+        '<div class="vl-card-info">' +
+          '<div class="vl-card-text">' +
+            '<div class="vl-card-brand">' + v.brand + '</div>' +
+            '<div class="vl-card-model">' + v.model + '</div>' +
+          '</div>' +
+          '<button class="vl-card-cta">시승신청</button>' +
+        '</div>';
+      card.addEventListener('click', function () { window.openDetail(v.id); });
+      grid.appendChild(card);
+    });
+  }
+
+  function buildFilterChips() {
+    var bar = document.querySelector('.vl-filter-bar');
+    bar.querySelectorAll('.vl-chip:not([data-brand="all"])').forEach(function (c) { c.remove(); });
+    var brands = [];
+    VL_VEHICLES.forEach(function (v) {
+      if (brands.indexOf(v.brand) === -1) brands.push(v.brand);
+    });
+    brands.forEach(function (brand) {
+      var chip = document.createElement('button');
+      chip.className = 'vl-chip';
+      chip.dataset.brand = brand;
+      chip.textContent = brand;
+      bar.appendChild(chip);
+    });
+    bar.querySelectorAll('.vl-chip').forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        bar.querySelectorAll('.vl-chip').forEach(function (c) { c.classList.remove('active'); });
+        chip.classList.add('active');
+        renderVehicleList(chip.dataset.brand);
+      });
+    });
+  }
+
+  window.openVehicles = function () {
+    savedScrollY = window.scrollY;
+    history.pushState({ view: 'vehicles' }, '');
+    document.getElementById('view-main').style.display = 'none';
+    document.getElementById('view-vehicles').style.display = 'block';
+    setNavActive('vehicles');
+    buildFilterChips();
+    renderVehicleList('all');
+    window.scrollTo(0, 0);
+  };
+
+  window.closeVehicles = function () {
+    document.getElementById('view-vehicles').style.display = 'none';
+    document.getElementById('view-main').style.display = 'block';
+    setNavActive('main');
+    window.scrollTo(0, savedScrollY);
+  };
+
+  function setNavActive(view) {
+    document.querySelectorAll('.nav-link').forEach(function (a) { a.classList.remove('active'); });
+  }
+
+  /* 필터 칩 (전체 버튼 초기 바인딩) */
+  document.querySelectorAll('.vl-chip').forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      document.querySelectorAll('.vl-chip').forEach(function (c) { c.classList.remove('active'); });
+      chip.classList.add('active');
+      renderVehicleList(chip.dataset.brand);
+    });
+  });
+
+  /* 시승 차량 nav 링크 */
+  document.querySelector('.nav-link[data-view="vehicles"]').addEventListener('click', function (e) {
+    e.preventDefault();
+    window.openVehicles();
+  });
+
+  /* ── 로고 클릭: 메인으로 복귀 ── */
+  document.querySelector('.nav-logo').addEventListener('click', function (e) {
+    e.preventDefault();
+    var inDetail = document.getElementById('view-detail').style.display !== 'none';
+    var inVehicles = document.getElementById('view-vehicles').style.display !== 'none';
+    if (inDetail || inVehicles) {
+      history.back();
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   });
 
