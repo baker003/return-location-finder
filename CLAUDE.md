@@ -76,6 +76,20 @@ PM -> (승인) -> Designer -> (승인) -> Frontend -> Reviewer -> Figma 반영
 - 파일을 저장했다는 이유만으로 완료 보고 금지 — 파일을 다시 읽어 의도한 결과와 일치하는지 확인 후 보고
 - 사용자가 "다시"를 반복하는 동안에는 완료 보고 금지 — "다시"는 이전 시도가 실패했다는 신호다
 
+## DRIVE:ON 작업 규칙 (driveon-platform-v2)
+
+driveon-main.html을 수정하는 작업은 아래 순서를 반드시 따른다.
+
+### 완료 순서
+1. 코드 수정
+2. `driveon-verifier` 에이전트로 검증 — JS 체인·CSS 셀렉터·transition·Git 상태 확인
+3. ISSUES_FOUND → 수정 후 재검증
+4. VERIFIED → 사용자에게 결과 보고
+5. **git commit + push** — 검증 통과 후 반드시 push까지 완료해야 "완료"
+
+### push 없이 완료 보고 금지
+로컬 파일 저장만으로는 사용자가 사이트에서 변경을 볼 수 없다. push가 완료되어야 진짜 완료다.
+
 ## 참조
 - 디자인 토큰 규칙: `.claude/shared/design-tokens.md`
 - 디자인 시스템 상세: `.claude/doc/design-system.md`
