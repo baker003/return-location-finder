@@ -45,8 +45,9 @@ function HeartIcon() {
 }
 
 const sizes = ['xs', 'sm', 'md', 'lg', 'xl'] as const;
-const actionTypes = ['fill', 'outline', 'ghost'] as const;
-const actionVariants = ['primary', 'secondary', 'tertiary', 'destructive'] as const;
+const actionSizes = ['large', 'medium', 'small'] as const;
+const actionStyles = ['fill', 'outline'] as const;
+const actionVariants = ['primary', 'secondary', 'tertiary'] as const;
 const textVariants = ['primary', 'secondary', 'tertiary'] as const;
 const iconTypes = ['fill', 'outline', 'ghost'] as const;
 
@@ -82,16 +83,16 @@ export default function ButtonPage() {
 
       {/* ── ActionButton ── */}
       <Section title="1. ActionButton">
-        {actionTypes.map((type) => (
+        {actionStyles.map((type) => (
           <div key={type} className="mb-8">
             <h3 className="text-base font-semibold text-text-primary mb-4 capitalize">
               타입: {type}
             </h3>
             {actionVariants.map((variant) => (
               <SubSection key={variant} title={`${type} / ${variant}`}>
-                {sizes.map((size) => (
-                  <ActionButton key={size} type={type} variant={variant} size={size}>
-                    {size.toUpperCase()}
+                {actionSizes.map((size) => (
+                  <ActionButton key={size} style={type}variant={variant} size={size}>
+                    {size}
                   </ActionButton>
                 ))}
               </SubSection>
@@ -114,17 +115,17 @@ export default function ButtonPage() {
         </SubSection>
 
         <SubSection title="로딩 상태">
-          {actionTypes.map((type) => (
-            <ActionButton key={type} type={type} loading>
+          {actionStyles.map((type) => (
+            <ActionButton key={type} style={type}loading>
               로딩
             </ActionButton>
           ))}
         </SubSection>
 
         <SubSection title="비활성 상태">
-          {actionTypes.map((type) =>
+          {actionStyles.map((type) =>
             actionVariants.map((variant) => (
-              <ActionButton key={`${type}-${variant}`} type={type} variant={variant} disabled>
+              <ActionButton key={`${type}-${variant}`} style={type}variant={variant} disabled>
                 비활성
               </ActionButton>
             )),
@@ -136,9 +137,9 @@ export default function ButtonPage() {
       <Section title="2. TextButton">
         {textVariants.map((variant) => (
           <SubSection key={variant} title={`변형: ${variant}`}>
-            {sizes.map((size) => (
+            {([14, 16, 18, 20] as const).map((size) => (
               <TextButton key={size} variant={variant} size={size}>
-                {size.toUpperCase()}
+                {size}px
               </TextButton>
             ))}
           </SubSection>

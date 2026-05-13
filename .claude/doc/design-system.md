@@ -18,6 +18,20 @@
 | TopAppbarInstant | `@/components/TopAppbar` | 중앙 콘텐츠 슬롯 (Heading, Label, TextButton, Input, Image) | variant, title, label, placeholder, src |
 | ProgressBar | `@/components/TopAppbar` | 프로그래스 바 (determinate / indeterminate) | progress |
 | InputField | `@/components/Input` | 텍스트 입력 필드 (폼, 검색, 필터) | size(lg/md/sm), variant(outline/fill), label, placeholder, helperText, errorMessage, error, disabled, readOnly, clearable, leadingIcon, trailingIcon, fullWidth, showCharCount, maxLength, success, required, trailingButton |
+| BottomSheet | `@/components/BottomSheet` | 하단 시트 (closed/peek/full 상태, 드래그 dismiss) | open, onClose, state, onStateChange, peekHeight, maxHeightVh, showHandle, title, subtitle, showCloseButton, closeOnBackdropClick, scrollable |
+| SearchBar | `@/components/SearchBar` | 검색 입력 바 (포커스 테두리, Clear 버튼, 취소 버튼) | value, onChange, onSearch, onCancel, placeholder, cancelLabel, showCancel(focus/always/never), disabled, autoFocus |
+| FAB | `@/components/FAB` | 플로팅 액션 버튼 (고정/인라인 배치, Extended 모드) | icon, label, size(small/medium/large), variant(primary/surface/secondary), position(bottom-right/bottom-left/bottom-center/custom), disabled, aria-label |
+| Tabs | `@/components/Tabs` | 탭 네비게이션 (primary 언더라인 / secondary 슬라이딩 pill) | items, activeKey, onChange, variant(primary/secondary), size(lg/md/sm), fullWidth, scrollable |
+| TabPanel | `@/components/Tabs` | 탭 패널 콘텐츠 영역 | id, activeKey, children |
+| SegmentedControl | `@/components/SegmentedControl` | 세그먼트 선택 컨트롤 (슬라이딩 인디케이터) | items, value, onChange, size(lg/md/sm), fullWidth, disabled |
+| Slider | `@/components/Slider` | 슬라이더 (single/range, 드래그 툴팁, marks) | mode(single/range), min, max, step, value, rangeValue, onChange, onRangeChange, showTooltip, showMarks, marks, disabled |
+| Tooltip | `@/components/Tooltip` | 호버/클릭/포커스 트리거 툴팁 (4방향, flip, portal) | content, placement(top/bottom/left/right), trigger(hover/click/focus/배열), delay, hideDelay, disabled, maxWidth, children |
+| DatePicker | `@/components/DatePicker` | 날짜/기간 선택 (single/range, inline, min/max/disabled 제약) | mode(single/range), value, rangeValue, onChange, onRangeChange, minDate, maxDate, disabledDates, placeholder, locale, inline, disabled |
+| Calendar | `@/components/DatePicker` | 달력 그리드 (DatePicker 내부 또는 단독 사용) | year, month, mode, value, rangeValue, hoverDate, onDateClick, onDateHover, onMonthChange, minDate, maxDate, disabledDates, locale |
+| Stepper | `@/components/Stepper` | 단계 진행 표시기 (horizontal/vertical, clickable, error 상태) | steps, activeStep, orientation(horizontal/vertical), clickable, onStepClick |
+| PageControl | `@/components/PageControl` | 페이지/캐러셀 인디케이터 (dot/bar/number, 슬라이딩 윈도우) | total, current, onChange, variant(dot/bar/number), clickable, maxVisible |
+| ActionSheet | `@/components/ActionSheet` | iOS 패턴 바텀 액션 시트 (Main Card + Cancel Card 분리) | open, onClose, title, description, items, cancelLabel, hideCancel, closeOnBackdropClick |
+| Accordion | `@/components/Accordion` | 확장/축소 콘텐츠 패널 (single/multiple 모드, CSS Grid 애니메이션) | items, mode(single/multiple), value, onChange, showDivider, bordered |
 
 > 새 위젯을 만들기 전에 이 표를 먼저 확인하세요.
 > 새로 만든 재사용 위젯은 반드시 여기에 등록하세요.
